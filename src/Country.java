@@ -34,10 +34,7 @@ public class Country extends Region
 	 */
 	public Country(String name, String pop, String area, String continent)
 	{
-		this.name = name;
-		this.pop = pop;
-		this.area = area;
-		this.continent = continent;
+		
 	}
 	/**
 	 * these methods will get the different variables of
@@ -46,7 +43,7 @@ public class Country extends Region
 	
 	public String getContinent()
 	{
-		return continent;
+		return "";
 	}
 
 	/**
@@ -56,12 +53,12 @@ public class Country extends Region
 	 */
 	public void addCity(String name, City city)
 	{
-		cities.put(name.toLowerCase(), city);
+
 	}
 	
 	public String toString()
 	{
-		return name;
+		return "";
 	}
 	
 

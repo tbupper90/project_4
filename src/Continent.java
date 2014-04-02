@@ -24,9 +24,7 @@ public class Continent extends Region
 	 */
 	public Continent(String name, String pop, String area)
 	{
-		this.name = name;
-		this.pop = pop;
-		this.area = area;
+
 	}
 
 
@@ -37,17 +35,17 @@ public class Continent extends Region
 	 */
 	public void addCountry(String name, Country country)
 	{
-		countries.put(name, country);
+
 	}
 	
 	public LinkedHashMap<String, Country> getCountries()
 	{
-		return countries;
+		return null;
 	}
 	
 	public String toString()
 	{
-		return name;
+		return "";
 	}
 	
 	

@@ -17,17 +17,17 @@ abstract class Region implements Serializable
 	
 	public String getName()
 	{
-		return name;
+		return "";
 	}
 	
 	public String getPop()
 	{
-		return pop;
+		return "";
 	}
 	
 	public String getArea()
 	{
-		return area;
+		return "";
 	}
 	
 	/**
@@ -41,20 +41,7 @@ abstract class Region implements Serializable
 			@Override
 			public int compare(Region o1, Region o2)
 			{
-				int o1area = Integer.parseInt(o1.getArea());
-				int o2area = Integer.parseInt(o2.getArea());
-				
-				if(o2area < o1area)
-				{
-					return -1;
-				}
-				
-				else if(o2area > o1area)
-				{
-					return 1;
-				}
-				
-				else return 0;
+				return 0;
 			}
 		};
 		
@@ -64,18 +51,7 @@ abstract class Region implements Serializable
 			public int compare(Region o1, Region o2)
 			{
 				//convert to float because some populations are too big for ints
-				float o1pop = (float) Float.parseFloat(o1.getPop());
-				float o2pop = (float) Float.parseFloat(o2.getPop());
-				
-				if(o2pop < o1pop)
-				{
-					return -1;
-				}
-				else if(o2pop > o1pop)
-				{
-					return 1;
-				}
-				else return 0;
+				return 0;
 			}
 		 };
 		 
@@ -84,15 +60,7 @@ abstract class Region implements Serializable
 			@Override
 			public int compare(Region o1, Region o2)
 			{
-				if(o1.getName().compareTo(o2.getName()) < 0)
-				{
-					return -1;
-				}
-				else if(o1.getName().compareTo(o2.getName()) > 0)
-				{
-					return 1;
-				}
-				else return 0;
+				return 0;
 			}
 		 };
 		 

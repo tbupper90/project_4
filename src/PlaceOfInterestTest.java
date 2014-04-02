@@ -24,7 +24,7 @@ public class PlaceOfInterestTest {
         assertEquals(testPlace.getName(), "Name");
         assertEquals(testPlace.getArea(), "Area");
         assertEquals(testPlace.getDescription(), "Description");
-        assertEquals(testPlace.getCountry(), assertion);
+        assertEquals(testPlace.getLocation(), assertion);
     }
 
 }

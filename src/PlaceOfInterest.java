@@ -14,22 +14,19 @@ public class PlaceOfInterest extends Region
 	
 
 	private String description;
-	private LinkedHashMap<String,String> countries;
+	private LinkedHashMap<String,String> location;
 	
 	/**
 	 * This is the constructor for the PlaceOfInterest object.
 	 * @param name Name of the place
 	 * @param area Area of the place
 	 * @param description Description of the place
-	 * @param country Country the place belongs to
+	 * @param location Countries or continent the place belongs to
 	 */
 	public PlaceOfInterest(String name, String area, 
-			String description, LinkedHashMap<String, String> countries)
+			String description, LinkedHashMap<String, String> location)
 	{
-		this.name = name;
-		this.area = area;
-		this.description = description;
-		this.countries = countries;
+
 	}
 	
 	/**
@@ -37,7 +34,7 @@ public class PlaceOfInterest extends Region
 	 */
 	public String getName()
 	{
-		return name;
+		return "";
 	}
 	
 	/**
@@ -45,7 +42,7 @@ public class PlaceOfInterest extends Region
 	 */
 	public String getArea()
 	{
-		return area;
+		return "";
 	}
 	
 	/**
@@ -53,19 +50,19 @@ public class PlaceOfInterest extends Region
 	 */
 	public String getDescription()
 	{
-		return description;
+		return "";
 	}
 	
 	/**
-	 * @return The country the place belongs to
+	 * @return The location the place belongs to
 	 */
-	public LinkedHashMap<String, String> getCountry()
+	public LinkedHashMap<String, String> getLocation()
 	{
-		return countries;
+		return null;
 	}
 	
 	public String toString()
 	{
-		return name;
+		return "";
 	}
 }

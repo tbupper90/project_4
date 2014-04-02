@@ -27,6 +27,8 @@ public class Driver
 	private static String placesFile;
 	private static String binaryFile;
 	
+	private static GeoView mainView = new GeoView();
+	private static GeoController mainController = new GeoController();
 
 	/**
 	 * This is the main method

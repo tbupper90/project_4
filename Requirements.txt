@@ -1,0 +1,30 @@
+*Places of interest can belong to a continent, one/many countries, or even a city.
+
+*Points of interest have a name, description, latitude, longitude, elevation, and location. Location can be any of the other Region types, including another Point of Interest (but only one, from what I can tell, unlike a place of interest).
+
+*It might be helpful to replace the String that refers to each region's "parent" (e.g. the country that a city belongs to) with an actual object of that type.
+
+*Quote: "With points of interest, you'll want to consider having a list of points of interest within each region class and allowing a point of interest to refer to an enclosing region of any region classes."
+
+*Each of the five region lists will be empty on start. Entries can be added via:
+  -"Add" button: User inputs data manually
+  -"Load" menu option: Read in using object I/O
+  -"Import" menu option: Read in using .csv file
+
+*If the user tries to load or import on a list with unsaved data, they'll be asked what to do about it.
+
+*When the user deletes a region, all its child regions go with it. This could get messy for places of interest, which can belong to more than one.
+
+*Buttons and menu items are only enabled when appropriate. For example, you can't "add" countries if there's no continent to add them to. This makes me wonder what should happen if you "load" countries.csv when there's only a single manually-added continent. Maybe a message telling the user which countries were not imported due to lack of parent continent.
+
+*The population of all the child regions added together can't exceed the population of their parent. Not sure if we should keep a running total, or if we should just find the sum every time the user tries to add a child.
+
+*Likewise for area. Also, a place of interest can't have an area larger than the continent, country(s), or city it belongs to.
+
+*A point of interest has to match the latitude, longitude, and elevation of the city or other point of interest to which it belongs. I'm assuming this isn't checked for points of interest that belong to a continent, country, or city without any lat/lon/elev data.
+
+*Regarding the three above, these would be trivial to implement if we only had Add and Delete buttons. However, it's also possible to edit, meaning we also need to make sure the parent region's data can't be changed to conflict with its children.
+
+*The graphs and map no longer hijack program control, so it will be possible to have multiple instances open (e.g. a bar chart of continents sorted by area, a bar chart of countries sorted by population, and a map of places of interest all showing simultaneously). They will automatically close themselves if all their plotted regions get deleted.
+
+*The user can be a lot more selective on what to display on the charts. For example, instead of "chart of all countries," they can pick and choose which countries.

@@ -1,7 +1,3 @@
-/GeoModel.class
-/GeoView$listPanel.class
-/GeoViewTest.class
-/GeoView$BtnPanel.class
-/GeoView$ListPanel.class
-/BtnPanel.class
-/ListPanel.class
+/PointOfInterest.class
+/PointOfInterestTest.class
+/GeoModelTest.class

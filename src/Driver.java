@@ -95,7 +95,7 @@ public class Driver
 		        "GeoGrapher", JOptionPane.INFORMATION_MESSAGE);
 		System.exit(0);
 	}
-	
+	 
 	// For the unresolvable cast from object to linkedhashmap
 	@SuppressWarnings("unchecked")
 	private static void readBinary(String file) throws IOException, ClassNotFoundException

@@ -12,8 +12,24 @@ abstract class Region implements Serializable
 	protected String name;
 	protected String pop;
 	protected String area;
-	
+	LinkedHashMap<String,PlaceOfInterest> places = new LinkedHashMap<String,PlaceOfInterest>();
+	LinkedHashMap<String,PointOfInterest> points = new LinkedHashMap<String,PointOfInterest>();
 
+	
+	public Region()
+	{
+		
+	}
+	
+	public void addPlace(String name, PlaceOfInterest place)
+	{
+		places.put(name,place);
+	}
+	
+	public void addPoint(String name, PointOfInterest point)
+	{
+		points.put(name,point);
+	}
 	
 	public String getName()
 	{

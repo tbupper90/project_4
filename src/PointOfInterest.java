@@ -1,3 +1,5 @@
+import java.util.LinkedHashMap;
+
 
 /**
  * 
@@ -11,9 +13,8 @@ public class PointOfInterest extends Region
      */
     private static final long serialVersionUID = -5566762757484533693L;
 
-
     private String description;
-    private String location;
+    private LinkedHashMap<String,Region> locations;
     private String lat;
     private String lon;
     private String elev;
@@ -27,10 +28,15 @@ public class PointOfInterest extends Region
      * @param lon Longitude of the point
      * @param elev Elevation of the point
      */
-    public PointOfInterest(String name, String description, String location,
-            String lat, String lon, String elev)
+    public PointOfInterest(String name, String description, 
+            String lat, String lon, String elev, LinkedHashMap<String,Region> locations)
     {
-
+    	this.name = name;
+    	this.description = description;
+    	this.locations = locations;
+    	this.lat = lat;
+    	this.lon = lon;
+    	this.elev = elev;
     }
 
     /**
@@ -38,7 +44,7 @@ public class PointOfInterest extends Region
      */
     public String getName()
     {
-        return "";
+        return name;
     }
 
     /**
@@ -46,15 +52,15 @@ public class PointOfInterest extends Region
      */
     public String getDescription()
     {
-        return "";
+        return description;
     }
 
     /**
      * @return The place's location
      */
-    public String getLocation()
+    public LinkedHashMap<String,Region> getLocation()
     {
-        return "";
+        return locations;
     }
 
     /**
@@ -62,7 +68,7 @@ public class PointOfInterest extends Region
      */
     public String getLat()
     {
-        return "";
+        return lat;
     }
 
     /**
@@ -70,7 +76,7 @@ public class PointOfInterest extends Region
      */
     public String getLon()
     {
-        return "";
+        return lon;
     }
 
     /**
@@ -78,11 +84,11 @@ public class PointOfInterest extends Region
      */
     public String getElev()
     {
-        return "";
+        return elev;
     }
 
     public String toString()
     {
-        return "";
+        return name;
     }
 }

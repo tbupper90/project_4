@@ -40,14 +40,30 @@ public class Continent extends Region
 		countries.put(name, country);
 	}
 	
+	
 	public LinkedHashMap<String, Country> getCountries()
 	{
 		return countries;
 	}
 	
+	public boolean dataQC()
+	{
+		double runningSum = 0;
+		for(String country : countries.keySet())
+		{
+			runningSum += Double.parseDouble(countries.get(country).area);
+		}
+		
+		if(runningSum > Double.parseDouble(area))
+		{
+			return false;
+		}
+		else return true;
+	}
+	
 	public String toString()
 	{
-		return name;
+		return name + " " + countries + "\n";
 	}
 	
 	

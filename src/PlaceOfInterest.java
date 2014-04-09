@@ -14,7 +14,7 @@ public class PlaceOfInterest extends Region
 	
 
 	private String description;
-	private LinkedHashMap<String,String> countries;
+	private LinkedHashMap<String,Region> locations;
 	
 	/**
 	 * This is the constructor for the PlaceOfInterest object.
@@ -24,12 +24,12 @@ public class PlaceOfInterest extends Region
 	 * @param country Country the place belongs to
 	 */
 	public PlaceOfInterest(String name, String area, 
-			String description, LinkedHashMap<String, String> countries)
+			String description, LinkedHashMap<String, Region> locations)
 	{
 		this.name = name;
 		this.area = area;
 		this.description = description;
-		this.countries = countries;
+		this.locations = locations;
 	}
 	
 	/**
@@ -56,12 +56,27 @@ public class PlaceOfInterest extends Region
 		return description;
 	}
 	
+	public boolean dataQC()
+	{
+		double runningSum = 0;
+		for(String location : locations.keySet())
+		{
+			runningSum += Double.parseDouble(locations.get(location).area);
+		}
+		
+		if(runningSum > Double.parseDouble(area))
+		{
+			return false;
+		}
+		else return true;
+	}
+	
 	/**
 	 * @return The country the place belongs to
 	 */
-	public LinkedHashMap<String, String> getCountry()
+	public LinkedHashMap<String, Region> getLocations()
 	{
-		return countries;
+		return locations;
 	}
 	
 	public String toString()

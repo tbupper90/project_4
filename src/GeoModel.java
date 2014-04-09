@@ -13,11 +13,11 @@ import java.util.LinkedHashMap;
 
 public class GeoModel {
     
-    private static LinkedHashMap<String, Continent> continents;
-    private static LinkedHashMap<String, Country> countries;
-    private static LinkedHashMap<String, City> cities;
-    private static LinkedHashMap<String, PlaceOfInterest> places;
-    private static LinkedHashMap<String, PointOfInterest> points;
+    private static LinkedHashMap<String, Continent> continents = new LinkedHashMap<String,Continent>();
+    private static LinkedHashMap<String, Country> countries = new LinkedHashMap<String,Country>();
+    private static LinkedHashMap<String, City> cities = new LinkedHashMap<String,City>();
+    private static LinkedHashMap<String, PlaceOfInterest> places = new LinkedHashMap<String,PlaceOfInterest>();
+    private static LinkedHashMap<String, PointOfInterest> points = new LinkedHashMap<String,PointOfInterest>();
     
     public void add(Region r) {
         // The getName used here returns the name of the class type,
@@ -94,7 +94,7 @@ public class GeoModel {
 	 * @param file File to be read in 
 	 * @throws IOException
 	 */
-	public static void readTextFile(String file) throws IOException
+	public void readTextFile(String file, String type) throws IOException
 	{
 		//opens and reads the file 
 		FileReader fr = new FileReader(file);
@@ -111,7 +111,7 @@ public class GeoModel {
 			line = br.readLine();
 			if(line != null)
 			{
-				parseLine(line, file);
+				parseLine(line, file, type);
 			}
 			else
 			{
@@ -129,108 +129,143 @@ public class GeoModel {
 	 * @param line Line to be parsed
 	 * @param file Filename
 	 */
-	private static void parseLine(String line, String file)
+	private static void parseLine(String line, String file, String type)
 	{
 		String[] array = line.split(", ");
 		
-		assignVariables(array, file);
+		assignVariables(array, file, type);
 	}
 
 	/**
-	 * This method will assign variable to their repective values	
+	 * This method will assign variable to their respective values	
 	 * @param array Array that contains values
 	 * @param file Name of the file
-	 * @param fileType What kin
+	 * @param type What kind of data the file contains
 	 */
-	private static void assignVariables(String[] array, String file)
-	{		
-		if(file.equals("continentsFile"))
+	private static void assignVariables(String[] array, String file, String type)
+	{	
+//		System.out.println(array[0] + " " +  array[1] + " " + array[2]);
+		switch(type)
 		{
-			continents.put(array[0], new Continent(array[0],array[1],array[2]));	
-		}
+			case "continents":
+//				System.out.println("added " + array[0]);
+				continents.put(array[0], new Continent(array[0],array[1],array[2]));
+				break;
+
 		
-		else if(file.equals("countriesFile"))
-		{
-			Country country = new Country(array[0],array[1],array[2],array[3]);
-			
-			for(String continent : continents.keySet())
-			{
-				if(continent.equals(country.getContinent()))
-				{
-					continents.get(continent).countries.put(country.getName(), country);
-					break;
-				}
-			}
-			
-		}//end else if
-		
-		else if(file.equals("citiesFile"))
-		{
-			
-			if(array.length == 7)
-			{
-				City city = new City(array[0],array[1],array[2],array[3],array[4],array[5],array[6]);
-				
+			case "countries":
 				for(String continent : continents.keySet())
 				{
-					for(String country : continents.get(continent).countries.keySet())
+					if(continent.equals(array[3]))
 					{
-						if(country.equals(city.getCountry()))
-						{	
-							continents.get(continent).countries.get(country).cities.put(city.getName(), city);
-							System.out.println(city.getName() + " added to " + continents.get(continent).countries.get(country));
-						}
-					}//end country for
-				}//end continent for
-			}//end if 
-			
-			else
-			{
-				City city = new City(array[0],array[1],array[2],array[3]);
-				
-				for(String continent : continents.keySet())
-				{
-					for(String country : continents.get(continent).countries.keySet())
-					{
-						if(country.equals(city.getCountry()))
-						{
-							continents.get(continent).countries.get(country).cities.put(city.getName(), city);
-							System.out.println(city.getName() + " added to " + continents.get(continent).countries.get(country));
-						}
-					}//end country for
-				}//end continent for
-			}//end else
-			
-		}
-		
-		else if(file.equals("placesFile"))
-		{
-			LinkedHashMap<String,String> countries = new LinkedHashMap<String,String>();
-			PlaceOfInterest place;
-			for(int i = 3; i < array.length; i++)
-			{
-				countries.put(array[i],array[i]);
-			}
-			
-			place = new PlaceOfInterest(array[0], array[1],array[2],countries);
-			
-			for(int i = 3; i < array.length; i++)
-			{			
-				for(String continent : continents.keySet())
-				{
-					if(continents.get(continent).countries.containsKey(array[i]))
-					{
-						continents.get(continent).countries.get(array[i]).places.put(place.getName(), place);
-						System.out.println(place + " added to " + continents.get(continent).countries.get(array[i]));
+						Country country = new Country(array[0],array[1],array[2],continents.get(continent));	
+						continents.get(continent).countries.put(country.getName(), country);
+						countries.put(country.getName(), country);
+						break;
 					}//end if
 				}//end for
-			}//end for
-			
-			
-		}
 		
+			case "cities":
+			
+				if(array.length == 7)
+				{
+					
+					
+					for(String continent : continents.keySet())
+					{
+						for(String country : continents.get(continent).countries.keySet())
+						{
+							if(country.equals(array[3]))
+							{	
+								City city = new City(array[0],array[1],array[2],continents.get(continent).countries.get(country),
+										array[4],array[5],array[6]);
+								continents.get(continent).countries.get(country).cities.put(city.getName(), city);
+								cities.put(city.getName(),city);
+//								System.out.println(city.getName() + " added to " + continents.get(continent).countries.get(country));
+							}
+						}//end country for
+					}//end continent for
+				}//end if 
+				
+				else
+				{
+					
+					for(String continent : continents.keySet())
+					{
+						for(String country : continents.get(continent).countries.keySet())
+						{
+							if(country.equals(array[3]))
+							{
+								City city = new City(array[0],array[1],array[2],continents.get(continent).countries.get(country));
+								continents.get(continent).countries.get(country).cities.put(city.getName(), city);
+								cities.put(city.getName(),city);
+//								System.out.println(city.getName() + " added to " + continents.get(continent).countries.get(country));
+							}
+						}//end country for
+					}//end continent for
+				}//end else	
+				break;
+				
+			case "places":
+				LinkedHashMap<String,Region> regions = new LinkedHashMap<String,Region>();
+				PlaceOfInterest place;
+				for(int i = 3; i < array.length; i++)
+				{
+					if(searchAllData(array[i]) != null) regions.put(array[i],searchAllData(array[i]));
+				}
+				
+				place = new PlaceOfInterest(array[0],array[1],array[2], regions);
+				
+				for(String region : regions.keySet())
+				{
+//					System.out.println(regions.get(region));
+					regions.get(region).addPlace(place.getName(), place);
+				}
+				
+				places.put(place.getName(), place);
+				
+				break;
+				
+			case "points":
+				LinkedHashMap<String,Region> regions1 = new LinkedHashMap<String,Region>();
+				PointOfInterest point;
+				for(int i = 5; i < array.length; i++)
+				{
+					if(searchAllData(array[i]) != null) regions1.put(array[i],searchAllData(array[i]));
+				}
+				
+				point = new PointOfInterest(array[0],array[1],array[2],array[3], array[4], regions1);
+				
+				for(String region : regions1.keySet())
+				{
+					regions1.get(region).addPoint(point.getName(), point);
+				}
+				points.put(point.getName(), point);
+				
+				break;
+				
+			default: System.out.println("The type entered does not exist!!");
+			
+			
+		}//end switch
+			
 	}//end Assign
     
+	/**
+	 * Searches all the data in GeoModel for the desired Region and returns a reference to it
+	 * @param name Name of the desired Region
+	 * @return Desired reference of the Region
+	 */
+	private static Region searchAllData(String name)
+	{
+		if(continents.containsKey(name)) return continents.get(name);
+		else if(countries.containsKey(name)) return countries.get(name);
+		else if(cities.containsKey(name)) return cities.get(name);
+		else if(places.containsKey(name)) return places.get(name);
+		else if(points.containsKey(name)) return points.get(name);
+ 		else return null;
+	}
+	
 	/**
 	 * This method reads in 5 linked hash maps from a binary file and assigns
 	 * them to the appropriate lists in the model
@@ -239,7 +274,6 @@ public class GeoModel {
 	 * @throws ClassNotFoundException
 	 */
     // For the unresolvable cast from object to linkedhashmap
-	@SuppressWarnings("unchecked")
 	public static void readBinary(String file) throws IOException, ClassNotFoundException
 	{
 		FileInputStream fileInputStream = new FileInputStream(file); 

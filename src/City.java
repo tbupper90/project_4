@@ -14,11 +14,11 @@ public class City extends Region
 	 * 
 	 */
 	private static final long serialVersionUID = -7124684400952080970L;
-	private String country;
+	private Country country;
 	private String lat;
 	private String lon;
 	private String elev;
-	
+
 
 	/**
 	 * This method creates a city object without lat, lon, or elevation
@@ -27,7 +27,7 @@ public class City extends Region
 	 * @param area Area of the city
 	 * @param country Country the city is in
 	 */
-	public City(String name, String pop, String area, String country)
+	public City(String name, String pop, String area, Country country)
 	{
 		this.name = name;
 		this.pop = pop;
@@ -49,7 +49,7 @@ public class City extends Region
 	 * @param lon Longitude
 	 * @param elev Elevation
 	 */
-	public City(String name, String pop, String area, String country, String lat, String lon, String elev)
+	public City(String name, String pop, String area, Country country, String lat, String lon, String elev)
 	{
 		this.name = name;
 		this.pop = pop;
@@ -63,7 +63,7 @@ public class City extends Region
 	 * These methods will get the different variables of the City
 	 */
 	
-	public String getCountry()
+	public Country getCountry()
 	{
 		return country;
 	}
@@ -88,14 +88,14 @@ public class City extends Region
 		return name;
 	}
 	
-	
+
 	/**
 	 * This class contains the comparators for a city object that aren't 
 	 * inherited from a Region 
 	 * 
 	 *
 	 */
-	public static class Comparators
+	static class Comparators
 	{
 		public static Comparator<City> LAT = new Comparator<City>()
 		{

@@ -18,9 +18,9 @@ public class Country extends Region
 	 */
 //	ArrayList<City> cities = new ArrayList<City>();
 	LinkedHashMap<String,City> cities = new LinkedHashMap<String, City>();
-	LinkedHashMap<String,PlaceOfInterest> places = new LinkedHashMap<String,PlaceOfInterest>();
 
-	private String continent;
+
+	private Continent continent;
 	
 	/**
 	 * creates a Country object
@@ -32,19 +32,20 @@ public class Country extends Region
 	 * @param area Area of the country
 	 * @param continent Continent the country belongs to
 	 */
-	public Country(String name, String pop, String area, String continent)
+	public Country(String name, String pop, String area, Continent continent)
 	{
 		this.name = name;
 		this.pop = pop;
 		this.area = area;
 		this.continent = continent;
 	}
+	
 	/**
 	 * these methods will get the different variables of
 	 * the City object
 	 */
 	
-	public String getContinent()
+	public Continent getContinent()
 	{
 		return continent;
 	}
@@ -59,9 +60,27 @@ public class Country extends Region
 		cities.put(name.toLowerCase(), city);
 	}
 	
+
+	
+	public boolean dataQC()
+	{
+		double runningSum = 0;
+		
+		for(String city : cities.keySet())
+		{
+			runningSum += Double.parseDouble(cities.get(city).area);
+		}
+		
+		if(runningSum > Double.parseDouble(area))
+		{
+			return false;
+		}
+		else return true;
+	}
+	
 	public String toString()
 	{
-		return name;
+		return name + " " + cities;
 	}
 	
 

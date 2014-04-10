@@ -65,7 +65,7 @@ public class Country extends Region
 	public boolean dataQC()
 	{
 		double runningSum = 0;
-		
+		//Checks areas
 		for(String city : cities.keySet())
 		{
 			runningSum += Double.parseDouble(cities.get(city).area);
@@ -75,7 +75,22 @@ public class Country extends Region
 		{
 			return false;
 		}
-		else return true;
+		
+		//reset running sum to check population 
+		runningSum = 0;
+		
+		//checks population
+		for(String city : cities.keySet())
+		{
+			runningSum += Double.parseDouble(cities.get(city).pop);
+		}
+		
+		if(runningSum > Double.parseDouble(pop))
+		{
+			return false;
+		}
+		
+		return true;
 	}
 	
 	public String toString()

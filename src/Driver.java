@@ -42,11 +42,50 @@ public class Driver
 		citiesFile = args[2];
 		placesFile = args[3];
 		
-		model.readTextFile(continentsFile, "continents");
-		model.readTextFile(countriesFile, "countries");
-		model.readTextFile(citiesFile, "cities");
-		model.readTextFile(placesFile, "places");
+//		model.readTextFile(continentsFile, "continents");
+//		model.readTextFile(countriesFile, "countries");
+//		model.readTextFile(citiesFile, "cities");
+//		model.readTextFile(placesFile, "places");
+		
+		Continent cont = new Continent("continent",null,null);
+		Country count = new Country("country",null,null,cont);
+		City city = new City("city",null,null,count);
+		LinkedHashMap<String,Region> locations = new LinkedHashMap();
+		locations.put(cont.getName(), cont);
+		locations.put(count.getName(), count);
+		PlaceOfInterest place = new PlaceOfInterest("Place",null,null, locations);
+		PointOfInterest point = new PointOfInterest("Point",null,null,null,null,locations);
+		
+		
+		model.add(cont);
+		model.add(count);
+		model.add(city);
+		model.add(place);
+		model.add(point);
+		
+		
+		
+		
 		System.out.println(model.getContinents());
+		System.out.println(model.getCountries());
+		System.out.println(model.getCities());
+		System.out.println(model.getPlaces());
+		System.out.println(model.getPoints());
+		
+		model.removeRegion(count);
+		
+		System.out.println();
+		System.out.println(model.getContinents());
+		
+		System.out.println(model.getCountries());
+		System.out.println(model.getCities());
+		System.out.println(model.getPlaces());
+		System.out.println(model.getPoints());
+		
+//		model.readBinary("binaryTest");
+//		model.writeFile("binaryTest", "Text");
+//		System.out.println(model.getContinents());
+		
 		
 //		boolean continueTest = true;
 //		String dataType;

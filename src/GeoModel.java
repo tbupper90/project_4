@@ -12,6 +12,7 @@ import java.util.LinkedHashMap;
 
 
 public class GeoModel {
+	
     
     private static LinkedHashMap<String, Continent> continents = new LinkedHashMap<String,Continent>();
     private static LinkedHashMap<String, Country> countries = new LinkedHashMap<String,Country>();
@@ -28,16 +29,47 @@ public class GeoModel {
             continents.put(r.toString(), (Continent)r);
             break;
         case ("Country"):
-            countries.put(r.toString(), (Country)r);
+        	
+        	Country tempCountry = (Country) r;
+        	
+            countries.put(tempCountry.getName(), tempCountry);
+        	
+        	//add r to the countries list in the continent that is contained in the Country r. Confusing right?
+        	continents.get(tempCountry.getContinent().toString()).countries.put(tempCountry.getName(), tempCountry);
+        	
             break;
         case ("City"):
-            cities.put(r.toString(), (City)r);
-            break;
+        	City tempCity = (City) r;
+        	
+            cities.put(tempCity.getName(), tempCity);
+        	//add r to the cities list in the city that is contained in the City r. So confusing!
+        	countries.get(tempCity.getCountry().toString()).cities.put(tempCity.getName(), tempCity);
+            
+        	break;
         case ("PlaceOfInterest"):
-            places.put(r.toString(), (PlaceOfInterest)r);
-            break;
+        	PlaceOfInterest tempPlace = (PlaceOfInterest) r;
+        	
+            places.put(tempPlace.toString(), tempPlace);
+            
+            //Add place to each Region it is contained in
+        	for(String region : tempPlace.getLocations().keySet())
+        	{
+        		searchAllData(region).addPlace(tempPlace.getName(), tempPlace);
+        	}
+        
+        	break;
         case ("PointOfInterest"):
-            points.put(r.toString(), (PointOfInterest)r);
+        	PointOfInterest tempPoint = (PointOfInterest) r;
+        	
+            points.put(tempPoint.getName(), tempPoint);
+            
+            //Add Point to each region it is contained in.
+            for(String region : tempPoint.getLocations().keySet())
+            {
+            	searchAllData(region).addPoint(tempPoint.getName(), tempPoint);
+            }
+            	
+        
             break;
         }
         // Notify the listener
@@ -45,23 +77,158 @@ public class GeoModel {
                 new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add " + type));
     }
     
-    public void remove(Region r) {
+    public void removeRegion(Region r) {
         String type = r.getClass().getName();
         switch (type) {
+       
+        
         case ("Continent"):
-            continents.remove(r.toString());
+        	//Remove countries
+        	for(String country : continents.get(r.toString()).countries.keySet())
+        	{
+        		this.removeRegion(continents.get(r.toString()).countries.get(country));       		
+        	}
+        	
+        	//remove continent from places
+        	for(String place : continents.get(r.toString()).places.keySet())
+        	{
+        		continents.get(r.toString()).places.get(place).locations.remove(r.toString());
+        		
+        		//if there are no more locations in this Place, remove it.
+        		if(continents.get(r.toString()).places.get(place).locations.isEmpty())
+        		{
+        			removeRegion(continents.get(r.toString()).places.get(place));
+        		}
+        	}
+        	
+        	//remove continent from points
+        	for(String point : continents.get(r.toString()).points.keySet())
+        	{
+        		continents.get(r.toString()).points.get(point).locations.remove(r.toString());
+        		
+        		//if there are no more locations in this Place, remove it.
+        		if(continents.get(r.toString()).points.get(point).locations.isEmpty())
+        		{
+        			removeRegion(continents.get(r.toString()).points.get(point));
+        		}
+        	}
+        	
+        	continents.remove(r.toString());
             break;
+           
+            
+            
         case ("Country"):
+        	
+        	//remove cities
+        	for(String city : countries.get(r.toString()).cities.keySet())
+        	{
+        		this.removeRegion(countries.get(r.toString()).cities.get(city));
+        	}
+        
+        	//remove from places
+	    	for(String place : countries.get(r.toString()).places.keySet())
+	    	{
+	    		countries.get(r.toString()).places.get(place).locations.remove(r.toString());
+	    		
+	    		//if there are no more locations in this Place, remove it.
+	    		if(countries.get(r.toString()).places.get(place).locations.isEmpty())
+	    		{
+	    			removeRegion(countries.get(r.toString()).places.get(place));
+	    		}
+	    	}
+	    	
+	    	//remove from points
+        	for(String point : countries.get(r.toString()).points.keySet())
+        	{
+        		countries.get(r.toString()).points.get(point).locations.remove(r.toString());
+        		
+        		//if there are no more locations in this Place, remove it.
+        		if(countries.get(r.toString()).points.get(point).locations.isEmpty())
+        		{
+        			removeRegion(countries.get(r.toString()).points.get(point));
+        		}
+        	}
+	    	
+	    	
             countries.remove(r.toString());
             break;
+      
+        
         case ("City"):
+        	
+        	//remove from places
+	    	for(String place : cities.get(r.toString()).places.keySet())
+	    	{
+	    		cities.get(r.toString()).places.get(place).locations.remove(r.toString());
+	    		
+	    		//if there are no more locations in this Place, remove it.
+	    		if(cities.get(r.toString()).places.get(place).locations.isEmpty())
+	    		{
+	    			removeRegion(cities.get(r.toString()).places.get(place));
+	    		}
+	    	}
+	    	
+	    	//remove from points
+        	for(String point : cities.get(r.toString()).points.keySet())
+        	{
+        		cities.get(r.toString()).points.get(point).locations.remove(r.toString());
+        		
+        		//if there are no more locations in this Place, remove it.
+        		if(cities.get(r.toString()).points.get(point).locations.isEmpty())
+        		{
+        			removeRegion(cities.get(r.toString()).points.get(point));
+        		}
+        	}
+        	
             cities.remove(r.toString());
             break;
+        
+        
+        
         case ("PlaceOfInterest"):
-            places.remove(r.toString());
+        	if(places.get(r.toString()).locations.isEmpty())
+        	{
+        		places.remove(r.toString());
+        	}
+        	
+        	else
+        	{
+        		for(String location : places.get(r.toString()).locations.keySet())
+        		{
+        			//for each location in Place r, remove this Place from the places list in each location.
+        			places.get(r.toString()).locations.get(location).places.remove(r.toString());
+        		}
+        		
+        		places.remove(r.toString());
+        	}
+        	
             break;
+        
+        
         case ("PointOfInterest"):
-            points.remove(r.toString());
+        	
+        	for(String point : points.get(r.toString()).points.keySet())
+        	{
+        		this.removeRegion(points.get(r.toString()).points.get(point));       		
+        	}
+        
+        	if(points.get(r.toString()).locations.isEmpty())
+        	{
+        		points.remove(r.toString());
+        	}
+        	
+        	else
+        	{
+        		for(String location : points.get(r.toString()).locations.keySet())
+        		{
+        			//for each location in Place r, remove this Place from the places list in each location.
+        			points.get(r.toString()).locations.get(location).points.remove(r.toString());
+        		}
+        		
+        		points.remove(r.toString());
+        	}
+        
             break;
         }
         // Notify the listener
@@ -87,6 +254,66 @@ public class GeoModel {
 
     public LinkedHashMap<String, PointOfInterest> getPoints() {
         return points;
+    }
+    
+    public static boolean qcAllData()
+    {
+    	for(String region : continents.keySet())
+    	{
+//    		System.out.println(continents.get(region).name);
+    		if(continents.get(region).dataQC() == false)
+    		{
+    			System.out.println("Error in " + continents.get(region).getName());
+
+    			return false;
+    		}
+    			
+    		
+    	}
+    	
+    	for(String region : countries.keySet())
+    	{
+    		if(countries.get(region).dataQC() == false)
+    		{
+    			System.out.println("Error in countries: " + countries.get(region));
+    			return false;
+    		}
+    			
+    	}
+    	
+
+    	
+    	for(String region : cities.keySet())
+    	{
+    		if(cities.get(region).dataQC() == false)
+    		{
+    			System.out.println("Error in cities");
+//    			return false;
+    		}
+    			
+    	}
+    	
+    	for(String region : places.keySet())
+    	{
+    		if(places.get(region).dataQC() == false)
+    		{
+    			System.out.println("Error in places");
+//    			return false;
+    		}
+    			
+    	}
+    	
+    	for(String region : points.keySet())
+    	{
+    		if(points.get(region).dataQC() == false)
+    		{
+    			System.out.println("Error in poinst");
+//    			return false;
+    		}
+    			
+    	}
+    	
+    	return true;
     }
 
 	/**
@@ -160,6 +387,16 @@ public class GeoModel {
 					{
 						Country country = new Country(array[0],array[1],array[2],continents.get(continent));	
 						continents.get(continent).countries.put(country.getName(), country);
+						
+						//QC
+						if(continents.get(continent).dataQC() == false)
+						{
+							System.out.println("There is a problem with your data. Specifically " + continents.get(continent));
+							
+//							break;
+							
+						}
+						
 						countries.put(country.getName(), country);
 						break;
 					}//end if
@@ -180,9 +417,20 @@ public class GeoModel {
 								City city = new City(array[0],array[1],array[2],continents.get(continent).countries.get(country),
 										array[4],array[5],array[6]);
 								continents.get(continent).countries.get(country).cities.put(city.getName(), city);
+								
+								//QC
+								if(continents.get(continent).countries.get(country).dataQC() == false)
+								{
+									System.out.println("There is a problem with your data. Specifically " + 
+											continents.get(continent).countries.get(country));
+									
+//									break;
+									
+								}
+								
 								cities.put(city.getName(),city);
-//								System.out.println(city.getName() + " added to " + continents.get(continent).countries.get(country));
-							}
+								
+							}//end if
 						}//end country for
 					}//end continent for
 				}//end if 
@@ -198,6 +446,17 @@ public class GeoModel {
 							{
 								City city = new City(array[0],array[1],array[2],continents.get(continent).countries.get(country));
 								continents.get(continent).countries.get(country).cities.put(city.getName(), city);
+								
+								//QC
+								if(continents.get(continent).countries.get(country).dataQC() == false)
+								{
+									System.out.println("There is a problem with your data. Specifically " + 
+											continents.get(continent).countries.get(country));
+									
+//									break;
+									
+								}
+								
 								cities.put(city.getName(),city);
 //								System.out.println(city.getName() + " added to " + continents.get(continent).countries.get(country));
 							}
@@ -216,11 +475,27 @@ public class GeoModel {
 				
 				place = new PlaceOfInterest(array[0],array[1],array[2], regions);
 				
+//				System.out.println(regions);
+				
 				for(String region : regions.keySet())
 				{
 //					System.out.println(regions.get(region));
 					regions.get(region).addPlace(place.getName(), place);
+					
+					//QC
+					if(regions.get(region).dataQC() == false)
+					{
+						System.out.println("There is a problem with your data. Specifically " + 
+								regions.get(region))
+								;
+						
+//						break;
+						
+					}
+					
 				}
+				
+				
 				
 				places.put(place.getName(), place);
 				
@@ -239,7 +514,17 @@ public class GeoModel {
 				for(String region : regions1.keySet())
 				{
 					regions1.get(region).addPoint(point.getName(), point);
-				}
+					
+					//QC
+					if(regions1.get(region).dataQC() == false)
+					{
+						System.out.println("There is a problem with your data. Specifically " + 
+								regions1.get(region));
+						
+//						break;
+						
+					}//end if QC
+				}//end for
 				points.put(point.getName(), point);
 				
 				break;
@@ -274,7 +559,7 @@ public class GeoModel {
 	 * @throws ClassNotFoundException
 	 */
     // For the unresolvable cast from object to linkedhashmap
-	public static void readBinary(String file) throws IOException, ClassNotFoundException
+	public void readBinary(String file) throws IOException, ClassNotFoundException
 	{
 		FileInputStream fileInputStream = new FileInputStream(file); 
 		ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream); 
@@ -284,6 +569,13 @@ public class GeoModel {
 		places = (LinkedHashMap<String,PlaceOfInterest>) objectInputStream.readObject();
 		points = (LinkedHashMap<String,PointOfInterest>) objectInputStream.readObject();
 		objectInputStream.close(); 
+		
+		if(qcAllData() == false)
+		{
+			System.out.println("Your data doesn't make sense! Exiting the program");
+		}
+		
+		
 	}
 	
 	/**
@@ -293,7 +585,7 @@ public class GeoModel {
 	 * @param fileType	Type of file to be written (Text or Binary)
 	 * @throws IOException
 	 */
-	public static void fileWriter (LinkedHashMap<String,Region> list, String filename, String fileType)
+	public void writeFile (String filename, String fileType)
 	        throws IOException
 	{
 		switch(fileType)
@@ -301,16 +593,65 @@ public class GeoModel {
 		
 		
 			case "Text":
-				FileWriter outfile = new FileWriter(filename);
-				BufferedWriter bw = new BufferedWriter(outfile);
+				//continents.txt
+				FileWriter continent = new FileWriter("continents.txt");
+				BufferedWriter continentbw = new BufferedWriter(continent);
 				String line = null;
-				for(String key : list.keySet())
+				for(String region : continents.keySet())
 				{
-					line = list.get(key).toString();
-					bw.write(line);
-					bw.newLine();
+					line = continents.get(region).toString();
+					continentbw.write(line);
+					continentbw.newLine();
 				}
-				bw.close();
+				continentbw.close();
+				
+				//countries.txt
+				FileWriter country = new FileWriter("countries.txt");
+				BufferedWriter countrybw = new BufferedWriter(country);
+				line = null;
+				for(String region : countries.keySet())
+				{
+					line = countries.get(region).toString();
+					countrybw.write(line);
+					countrybw.newLine();
+				}
+				
+				countrybw.close();
+				
+				//cities.txt
+				FileWriter city = new FileWriter("cities.txt");
+				BufferedWriter citybw = new BufferedWriter(city);
+				line = null;
+				for(String region : cities.keySet())
+				{
+					line = cities.get(region).toString();
+					citybw.write(line);
+					citybw.newLine();
+				}
+				citybw.close();
+				
+				FileWriter place = new FileWriter("places.txt");
+				BufferedWriter placebw = new BufferedWriter(place);
+				line = null;
+				for(String region : places.keySet())
+				{
+					line = places.get(region).toString();
+					placebw.write(line);
+					placebw.newLine();
+				}
+				placebw.close();
+				
+				FileWriter point = new FileWriter("points.txt");
+				BufferedWriter pointbw = new BufferedWriter(point);
+				line = null;
+				for(String region : points.keySet())
+				{
+					line = points.get(region).toString();
+					pointbw.write(line);
+					pointbw.newLine();
+				}
+				pointbw.close();
+				
 			case "Binary":
 				FileOutputStream fileOutputStream = new FileOutputStream(filename); 
 				ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream); 

@@ -63,6 +63,11 @@ public class City extends Region
 	 * These methods will get the different variables of the City
 	 */
 	
+	public boolean dataQC()
+	{
+		return true;
+	}
+	
 	public Country getCountry()
 	{
 		return country;

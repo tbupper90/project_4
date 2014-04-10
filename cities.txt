@@ -1,0 +1,448 @@
+Abuja
+Accra
+Adana
+Addis Ababa
+Adelaide
+Agra
+Ahmedabad
+Ahvaz
+Aleppo
+Alexandria
+Algiers
+Allahabad
+Almaty
+Amman
+Amritsar
+Amsterdam
+Ankara
+Anshan
+Antananarivo
+Anyang
+Asansol
+Asuncion
+Athens
+Atlanta
+Auckland
+Aurangabad
+Austin
+Baghdad
+Baku
+Baltimore
+Bamako
+Bandung
+Bangkok
+Baoding
+Baotou
+Barcelona
+Bareilly
+Barquisimeto
+Barranquilla
+Beijing
+Beirut
+Belem
+Belgrade
+Belo Horizonte
+Bengaluru
+Benin City
+Berlin
+Bhopal
+Birmingham
+Bogota
+Boston
+Braslia
+Brazzaville
+Brisbane
+Brussels
+Bucaramanga
+Bucharest
+Budapest
+Buenos Aires
+Bursa
+Busan
+Calgary
+Cali
+Campinas
+Cape Town
+Caracas
+Cartagena
+Casablanca
+Cebu City
+Chandigarh
+Changchun
+Changsha
+Changshu
+Changwon
+Changzhou
+Chaoyang/Chaonan
+Charlotte
+Chelyabinsk
+Chengdu
+Chennai
+Chicago
+Chifeng
+Chittagong
+Chongqing
+Cincinnati
+Ciudad Juarez
+Cixi City
+Cleveland
+Coimbatore
+Cologne/Bonn
+Colombo
+Columbus
+Conakry
+Copenhagen
+Cordoba
+Curitiba
+Daegu
+Daejeon
+Dakar
+Dalian
+Dallas/Fort Worth
+Damascus
+Dar es Salaam
+Datong
+Davao City
+Delhi
+Denver
+Detroit
+Dhaka
+Dhanbad
+Dnipropetrovsk
+Dongguan
+Dongying
+Douala
+Dubai
+Dublin
+Durban (eThekwini)
+Durg-Bhilai
+Erbil
+Essen/Dusseldorf
+Faisalabad
+Fes
+Florianopolis
+Fortaleza
+Frankfurt
+Fukuoka
+Fushun
+Fuzhou
+Gaziantep
+Glasgow
+Goiania
+Greater Cairo
+Guadalajara
+Guangzhou
+Guatemala City
+Guayaquil
+Guiyang
+Gujranwala
+Guwahati
+Gwalior
+Gwangju
+Haifa
+Haikou
+Hamamatsu
+Hamburg
+Handan
+Hangzhou
+Hanoi
+Harare
+Harbin
+Havana
+Hefei
+Helsinki
+Hiroshima
+Ho Chi Minh City (Saigon)
+Hohhot
+Houston
+Huai'an
+Huaibei
+Huainan
+Huambo
+Huizhou
+Hyderabad
+Ibadan
+Indianapolis
+Indore
+Isfahan
+Istanbul
+Izmir
+Jabalpur
+Jacksonville
+Jaipur
+Jakarta
+Jamshedpur
+Jeddah
+Jiamusi
+Jiaxing
+Jilin
+Jinan
+Jodhpur
+Johannesburg/East Rand
+Johor Bahru
+Joinville
+Joo Pessoa
+Kabul
+Kaduna
+Kalyan
+Kampala
+Kannur
+Kano
+Kanpur
+Kansas City
+Kaohsiung
+Karachi
+Kathmandu
+Katowice/Gliwice/Tychy (Silesian Metropolis)
+Kazan
+Kharkiv
+Khartoum
+Khulna
+Kiev
+Kigali
+Kinshasa
+Kitakysh
+Kochi (Cochin)
+Kolkata
+Kollam
+Konya
+Kota
+Kozhikode (Calicut)
+Kuala Lumpur
+Kumasi
+Kunming
+Kunshan
+Kuwait City
+La Paz
+Lagos
+Lahore
+Lanzhou
+Las Vegas
+Leeds-Bradford
+Leon
+Lille
+Lima
+Linyi
+Lisbon
+Liuzhou
+Lome
+London
+Los Angeles
+Luanda
+Lubumbashi
+Lucknow
+Ludhiana
+Luoyang
+Lusaka
+Lyon
+Maceio
+Madrid
+Madurai
+Makassar
+Malappuram
+Manaus
+Manchester
+Manila
+Maputo
+Maracaibo
+Maracay
+Marseille
+Mashhad
+Mbuji-Mayi
+Mecca
+Medan
+Medelln
+Medina
+Meerut
+Melbourne
+Memphis
+Merida
+Mexico City
+Miami
+Milan
+Milwaukee
+Minneapolis/Saint Paul
+Minsk
+Mogadishu
+Mombasa
+Monrovia
+Monterrey
+Montevideo
+Montreal
+Moscow
+Mosul
+Multan
+Mumbai
+Munich
+Mysore
+N'Djamena
+Nagoya
+Nagpur
+Nairobi
+Nanchang
+Nanjing
+Nanning
+Nantong
+Naples
+Nashik
+Nashville
+Natal
+New York City
+Niamey
+Ningbo
+Nizhny Novgorod
+Novosibirsk
+Nuremberg
+Odessa
+Omsk
+Orlando
+Osaka/Kobe/Kyoto
+Ouagadougou
+Palembang
+Panama City
+Paris
+Patna
+Penang
+Perth
+Peshawar
+Philadelphia
+Phnom Penh
+Phoenix
+Pittsburgh
+Port Elizabeth
+Port Harcourt
+Port-au-Prince
+Portland
+Porto
+Porto Alegre
+Prague
+Pretoria (Tshwane)
+Providence
+Puebla
+Pune
+Putian
+Pyongyang
+Qingdao
+Qiqihar
+Qom
+Quanzhou
+Queretaro
+Quito
+Rabat
+Raipur
+Rajkot
+Ranchi
+Rawalpindi/Islamabad
+Recife
+Rio de Janeiro
+Riyadh
+Rome
+Rosario
+Rostov-on-Don
+Rotterdam/The Hague
+Sacramento
+Saint Petersburg
+Salt Lake City
+Salvador
+Samara
+San Antonio
+San Diego
+San Francisco/San Jose
+San Jose
+San Luis Potosi
+San Salvador
+Sana'a
+Santa Cruz de la Sierra
+Santiago
+Santo Domingo
+Santos
+Sao Luis
+Sao Paulo
+Sapporo
+Seattle
+Semarang
+Sendai
+Seoul
+Shanghai
+Shantou
+Shaoxing
+Shenyang
+Shenzhen
+Shijiazhuang
+Shiraz
+Singapore
+Sofia
+Srinagar
+St. Louis
+Stockholm
+Stuttgart
+Surabaya
+Surat
+Suzhou
+Sydney
+Tabriz
+Taichung
+Tainan
+Taipei
+Taiyuan
+Tampa/St. Petersburg
+Tangshan
+Tashkent
+Tbilisi
+Tegucigalpa
+Tehran
+Tel Aviv
+Thiruvananthapuram
+Thrissur
+Tianjin
+Tijuana
+Tiruchirappalli
+Tokyo/Yokohama
+Toluca
+Toronto
+Torreon
+Tripoli
+Tunis
+Turin
+Ufa
+Ulan Bator
+Ulsan
+Urumqi
+Vadodara
+Valencia
+Vancouver
+Varanasi
+Vasai-Virar
+Vienna
+Vijayawada
+Virginia Beach-Norfolk
+Visakhapatnam
+Vitoria
+Warsaw
+Washington
+Weifang
+Wenzhou
+Wuhan
+Wuhu
+Wuxi
+Xi'an
+Xiamen
+Xiangyang
+Xining
+Xinxiang
+Xuzhou
+Yangzhou
+Yantai
+Yaounde
+Yekaterinburg
+Yerevan
+Yinchuan
+Yogyakarta
+Zaria
+Zhangjiagang/Jiangyin
+Zhangjiakou
+Zhangzhou
+Zhengzhou
+Zhongshan
+Zhuhai
+Zibo

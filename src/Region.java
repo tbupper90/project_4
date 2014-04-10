@@ -21,6 +21,8 @@ abstract class Region implements Serializable
 		
 	}
 	
+	abstract boolean dataQC();
+	
 	public void addPlace(String name, PlaceOfInterest place)
 	{
 		places.put(name,place);
@@ -44,6 +46,12 @@ abstract class Region implements Serializable
 	public String getArea()
 	{
 		return area;
+	}
+	
+	public String toString()
+	{
+		return name;
+		
 	}
 	
 	/**

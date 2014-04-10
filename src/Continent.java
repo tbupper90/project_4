@@ -52,13 +52,31 @@ public class Continent extends Region
 		for(String country : countries.keySet())
 		{
 			runningSum += Double.parseDouble(countries.get(country).area);
+//			System.out.println(runningSum + " compared to " + area);
 		}
+		
 		
 		if(runningSum > Double.parseDouble(area))
 		{
 			return false;
 		}
-		else return true;
+		
+		//reset running sum to check population 
+		runningSum = 0;
+		
+		//checks population
+		for(String country : countries.keySet())
+		{
+			runningSum += Double.parseDouble(countries.get(country).pop);
+		}
+		
+		if(runningSum > Double.parseDouble(pop))
+		{
+//			System.out.println(runningSum + " compared to " + pop);
+			return false;
+		}
+		
+		return true;
 	}
 	
 	public String toString()

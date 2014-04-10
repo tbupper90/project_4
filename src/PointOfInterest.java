@@ -14,7 +14,7 @@ public class PointOfInterest extends Region
     private static final long serialVersionUID = -5566762757484533693L;
 
     private String description;
-    private LinkedHashMap<String,Region> locations;
+    LinkedHashMap<String,Region> locations;
     private String lat;
     private String lon;
     private String elev;
@@ -58,7 +58,7 @@ public class PointOfInterest extends Region
     /**
      * @return The place's location
      */
-    public LinkedHashMap<String,Region> getLocation()
+    public LinkedHashMap<String,Region> getLocations()
     {
         return locations;
     }
@@ -86,7 +86,29 @@ public class PointOfInterest extends Region
     {
         return elev;
     }
-
+    
+    public boolean dataQC()
+    {
+    	for(String point : points.keySet())
+    	{
+    		if(this.elev.equals(points.get(point).getElev()) || this.lat.equals(points.get(point).getLat()) 
+    				|| this.lon.equals(points.get(point).getLon()))
+    			{
+    				return false; 
+    			}//end if
+    	}//end for
+    	
+    	for(String location : locations.keySet())
+    	{
+    		if(this.area.equals(locations.get(location).area) == false)
+    		{
+    			return false;
+    		}//end if
+    	}//end for
+    	
+    	return true;
+    }
+    
     public String toString()
     {
         return name;

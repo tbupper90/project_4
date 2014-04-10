@@ -13,8 +13,8 @@ public class PlaceOfInterest extends Region
 	private static final long serialVersionUID = -5566762757484533693L;
 	
 
-	private String description;
-	private LinkedHashMap<String,Region> locations;
+	 String description;
+	 LinkedHashMap<String,Region> locations;
 	
 	/**
 	 * This is the constructor for the PlaceOfInterest object.
@@ -62,9 +62,10 @@ public class PlaceOfInterest extends Region
 		for(String location : locations.keySet())
 		{
 			runningSum += Double.parseDouble(locations.get(location).area);
+//			System.out.println(location + ":" + runningSum + " compared to " + area) ;
 		}
 		
-		if(runningSum > Double.parseDouble(area))
+		if(runningSum < Double.parseDouble(area))
 		{
 			return false;
 		}

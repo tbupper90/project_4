@@ -51,10 +51,10 @@ public class GeoView extends JFrame
 
     class ListPanel extends JPanel {
         private JPanel btnPanel = new JPanel();
-        private JButton addBtn = new JButton("Add");
-        private JButton editBtn = new JButton("Edit");
-        private JButton delBtn = new JButton("Delete");
-        private JButton sortBtn = new JButton("Sort");
+        JButton addBtn = new JButton("Add");
+        JButton editBtn = new JButton("Edit");
+        JButton delBtn = new JButton("Delete");
+        JButton sortBtn = new JButton("Sort");
         private JList<String> list = new JList<String>();
         
         public ListPanel(String title) {

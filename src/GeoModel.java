@@ -1,13 +1,7 @@
 import java.awt.event.ActionEvent;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.awt.event.ActionListener;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 
@@ -19,6 +13,14 @@ public class GeoModel {
     private static LinkedHashMap<String, City> cities = new LinkedHashMap<String,City>();
     private static LinkedHashMap<String, PlaceOfInterest> places = new LinkedHashMap<String,PlaceOfInterest>();
     private static LinkedHashMap<String, PointOfInterest> points = new LinkedHashMap<String,PointOfInterest>();
+    
+	/** Utility field used by event firing mechanism. */
+	private ArrayList<ActionListener> actionListenerList;
+	
+	public GeoModel()
+	{
+		//blank
+	}
     
     public void add(Region r) {
         // The getName used here returns the name of the class type,
@@ -576,6 +578,7 @@ public class GeoModel {
 			System.out.println("Your data doesn't make sense! Exiting the program");
 		}
 		
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "load binary"));
 		
 	}
 	
@@ -666,9 +669,36 @@ public class GeoModel {
 		
 	}
 	
+	/** Register an action event listener */
+	public synchronized void addActionListener(ActionListener l) {
+		if (actionListenerList == null)
+			actionListenerList = new ArrayList<ActionListener>();
+
+		actionListenerList.add(l);
+	}
+
+	/** Remove an action event listener */
+	public synchronized void removeActionListener(ActionListener l) {
+		if (actionListenerList != null && actionListenerList.contains(l))
+			actionListenerList.remove(l);
+	}
+
+	/** Fire Event */
 	private void processEvent(ActionEvent e) {
-        // Fire appropriate events so that GeoView knows to update its lists
-    }
+		ArrayList<ActionListener> list;
+
+		synchronized (this) {
+			if (actionListenerList == null) return;
+			list = (ArrayList<ActionListener>)actionListenerList.clone();
+		}
+
+		for (int i = 0; i < list.size(); i++) {
+			ActionListener listener = list.get(i);
+			listener.actionPerformed(e);
+		}
+	}
+	
+
     
     
 }

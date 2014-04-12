@@ -2,6 +2,7 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.LinkedHashMap;
 
 public class GeoView extends JFrame implements ActionListener
 {
@@ -27,7 +28,7 @@ public class GeoView extends JFrame implements ActionListener
         add(placePanel);
         add(pointPanel);
         
-        continentPanel.getAddBtn().setEnabled(true);
+        continentPanel.addBtn.setEnabled(true);
         
         setVisible(true);
 		
@@ -59,7 +60,7 @@ public class GeoView extends JFrame implements ActionListener
         JButton editBtn = new JButton("Edit");
         JButton delBtn = new JButton("Delete");
         JButton sortBtn = new JButton("Sort");
-        private JList<String> list = new JList<String>();
+        JList<String> list = new JList<String>();
         
         public ListPanel(String title) {
             setLayout(new BorderLayout(0, 10));
@@ -87,29 +88,36 @@ public class GeoView extends JFrame implements ActionListener
             
             add(btnPanel, BorderLayout.SOUTH);
         }
-
-        public JButton getAddBtn() {
-            return addBtn;
-        }
         
-        public JButton getEditBtn() {
-            return editBtn;
+        public void refreshList(LinkedHashMap<String, ?> map) {
+        	// Converts the key names of the hashmap to a string array
+        	String[] newList = map.keySet().toArray(new String[map.size()]);
+        	list.setListData(newList);
         }
-        
-        public JButton getDelBtn() {
-            return delBtn;
-        }
-        
-        public JButton getSortBtn() {
-            return sortBtn;
-        }
-        
-        // Method to return JList contents
         
     }
     
-    public void actionPerformed(ActionEvent actionEvent) {
-    	repaint();
+    public void actionPerformed(ActionEvent e) {
+    	String command = e.getActionCommand();
+    	if (command.contains("Continent")) {
+    		continentPanel.refreshList(model.getContinents());
+    		boolean thing = (continentPanel.list.getModel().getSize() > 0);
+    		continentPanel.editBtn.setEnabled(thing);
+    		continentPanel.delBtn.setEnabled(thing);
+    		countryPanel.addBtn.setEnabled(thing);
+    		placePanel.addBtn.setEnabled(thing);
+    		pointPanel.addBtn.setEnabled(thing);
+    	}
+    	
+    	if (command.contains("Country"))
+    		countryPanel.refreshList(model.getCountries());
+    	if (command.contains("City"))
+    		countryPanel.refreshList(model.getCountries());
+    	if (command.contains("PlaceOfInterest"))
+    		countryPanel.refreshList(model.getCountries());
+    	if (command.contains("PointOfInterest"))
+    		countryPanel.refreshList(model.getCountries());
+    		
     }
     
     public void setModel(GeoModel newModel) {
@@ -118,7 +126,7 @@ public class GeoView extends JFrame implements ActionListener
     	if (model != null)
     		model.addActionListener(this);
     	
-    	repaint();
+    	//repaint();
     }
     
     public GeoModel getModel() {

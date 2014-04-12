@@ -22,14 +22,14 @@ public class GeoModel {
 		//blank
 	}
     
-    public void add(Region r) {
+    public void addRegion(Region r) {
         // The getName used here returns the name of the class type,
         // not to be confused with the getName method in Region
         String type = r.getClass().getName();
         switch (type) {
         case ("Continent"):
             continents.put(r.toString(), (Continent)r);
-        
+        	
 	        processEvent(
 	        		new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add " + type));
             break;

@@ -29,6 +29,9 @@ public class GeoModel {
         switch (type) {
         case ("Continent"):
             continents.put(r.toString(), (Continent)r);
+        
+	        processEvent(
+	        		new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add " + type));
             break;
         case ("Country"):
         	
@@ -39,6 +42,9 @@ public class GeoModel {
         	//add r to the countries list in the continent that is contained in the Country r. Confusing right?
         	continents.get(tempCountry.getContinent().toString()).countries.put(tempCountry.getName(), tempCountry);
         	
+            processEvent(
+                    new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add " + type));
+        	
             break;
         case ("City"):
         	City tempCity = (City) r;
@@ -47,6 +53,9 @@ public class GeoModel {
         	//add r to the cities list in the city that is contained in the City r. So confusing!
         	countries.get(tempCity.getCountry().toString()).cities.put(tempCity.getName(), tempCity);
             
+            processEvent(
+                    new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add " + type));
+        	
         	break;
         case ("PlaceOfInterest"):
         	PlaceOfInterest tempPlace = (PlaceOfInterest) r;
@@ -59,6 +68,9 @@ public class GeoModel {
         		searchAllData(region).addPlace(tempPlace.getName(), tempPlace);
         	}
         
+            processEvent(
+                    new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add " + type));
+        	
         	break;
         case ("PointOfInterest"):
         	PointOfInterest tempPoint = (PointOfInterest) r;
@@ -71,6 +83,8 @@ public class GeoModel {
             	searchAllData(region).addPoint(tempPoint.getName(), tempPoint);
             }
             	
+            processEvent(
+                    new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add " + type));
         
             break;
         }
@@ -117,6 +131,9 @@ public class GeoModel {
         	}
         	
         	continents.remove(rName);
+        	
+        	processEvent(
+                    new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove " + type));
             break;
            
             
@@ -155,6 +172,9 @@ public class GeoModel {
 	    	
 	    	
             countries.remove(rName);
+            
+            processEvent(
+                    new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove " + type));
             break;
       
         
@@ -185,6 +205,9 @@ public class GeoModel {
         	}
         	
             cities.remove(rName);
+            
+            processEvent(
+                    new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove " + type));
             break;
         
         
@@ -205,6 +228,9 @@ public class GeoModel {
         		
         		places.remove(rName);
         	}
+        
+        	processEvent(
+                new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove " + type));
         	
             break;
         
@@ -231,7 +257,10 @@ public class GeoModel {
         		
         		points.remove(rName);
         	}
-        
+        	
+        	processEvent(
+                    new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove " + type));
+        	
             break;
         }
         // Notify the listener
@@ -351,6 +380,9 @@ public class GeoModel {
 		
 		//closes the file 		
 		br.close();
+		
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "load text"));
+		
 	}
 	
 
@@ -359,7 +391,7 @@ public class GeoModel {
 	 * @param line Line to be parsed
 	 * @param file Filename
 	 */
-	private static void parseLine(String line, String file, String type)
+	private void parseLine(String line, String file, String type)
 	{
 		String[] array = line.split(", ");
 		
@@ -372,7 +404,7 @@ public class GeoModel {
 	 * @param file Name of the file
 	 * @param type What kind of data the file contains
 	 */
-	private static void assignVariables(String[] array, String file, String type)
+	private void assignVariables(String[] array, String file, String type)
 	{	
 //		System.out.println(array[0] + " " +  array[1] + " " + array[2]);
 		switch(type)
@@ -380,6 +412,9 @@ public class GeoModel {
 			case "continents":
 //				System.out.println("added " + array[0]);
 				continents.put(array[0], new Continent(array[0],array[1],array[2]));
+				
+//				processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "continent added"));
+				
 				break;
 
 		
@@ -401,6 +436,9 @@ public class GeoModel {
 						}
 						
 						countries.put(country.getName(), country);
+						
+//						processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "country added"));
+						
 						break;
 					}//end if
 				}//end for
@@ -433,6 +471,10 @@ public class GeoModel {
 								
 								cities.put(city.getName(),city);
 								
+//								processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "city added"));
+								
+								break;
+								
 							}//end if
 						}//end country for
 					}//end continent for
@@ -461,6 +503,8 @@ public class GeoModel {
 								}
 								
 								cities.put(city.getName(),city);
+								
+//								processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "city added"));
 //								System.out.println(city.getName() + " added to " + continents.get(continent).countries.get(country));
 							}
 						}//end country for
@@ -502,6 +546,8 @@ public class GeoModel {
 				
 				places.put(place.getName(), place);
 				
+//				processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "place added"));
+				
 				break;
 				
 			case "points":
@@ -529,6 +575,8 @@ public class GeoModel {
 					}//end if QC
 				}//end for
 				points.put(point.getName(), point);
+				
+//				processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "point added"));
 				
 				break;
 				
@@ -656,6 +704,10 @@ public class GeoModel {
 				}
 				pointbw.close();
 				
+				processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "export text"));
+				
+				break;
+				
 			case "Binary":
 				FileOutputStream fileOutputStream = new FileOutputStream(filename); 
 				ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream); 
@@ -665,6 +717,10 @@ public class GeoModel {
 				objectOutputStream.writeObject(places);
 				objectOutputStream.writeObject(points);
 				objectOutputStream.close();
+				
+				processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "save binary"));
+				
+				break;
 		}
 		
 	}

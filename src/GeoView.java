@@ -1,7 +1,9 @@
 import javax.swing.*;
-import java.awt.*;
 
-public class GeoView extends JFrame
+import java.awt.*;
+import java.awt.event.*;
+
+public class GeoView extends JFrame implements ActionListener
 {
 	private ListPanel continentPanel = new ListPanel("Continents");
     private ListPanel countryPanel = new ListPanel("Countries");
@@ -9,6 +11,8 @@ public class GeoView extends JFrame
     private ListPanel placePanel = new ListPanel("Places of Interest");
     private ListPanel pointPanel = new ListPanel("Points of Interest");
 	
+    private GeoModel model;
+    
     public GeoView() {
 		setLayout(new GridLayout(1, 0));
 		setMinimumSize(new Dimension(1000, 400));
@@ -102,5 +106,22 @@ public class GeoView extends JFrame
         
         // Method to return JList contents
         
+    }
+    
+    public void actionPerformed(ActionEvent actionEvent) {
+    	repaint();
+    }
+    
+    public void setModel(GeoModel newModel) {
+    	model = newModel;
+    	
+    	if (model != null)
+    		model.addActionListener(this);
+    	
+    	repaint();
+    }
+    
+    public GeoModel getModel() {
+    	return model;
     }
 }

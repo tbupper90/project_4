@@ -35,6 +35,8 @@ public class Driver
 	 * @throws IOException
 	 * @throws ClassNotFoundException 
 	 */
+	
+	/*
 	public static void main(String[] args) throws IOException, ClassNotFoundException
 	{
 		continentsFile = args[0];
@@ -146,7 +148,8 @@ public class Driver
 //		        "GeoGrapher", JOptionPane.INFORMATION_MESSAGE);
 //		System.exit(0);
 	}
-	 
+	 */
+	
 //	// For the unresolvable cast from object to linkedhashmap
 //	@SuppressWarnings("unchecked")
 //	private static void readBinary(String file) throws IOException, ClassNotFoundException

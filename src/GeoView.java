@@ -99,25 +99,53 @@ public class GeoView extends JFrame implements ActionListener
     
     public void actionPerformed(ActionEvent e) {
     	String command = e.getActionCommand();
+    	boolean hasEntry;
+    	
     	if (command.contains("Continent")) {
-    		continentPanel.refreshList(model.getContinents());
-    		boolean thing = (continentPanel.list.getModel().getSize() > 0);
-    		continentPanel.editBtn.setEnabled(thing);
-    		continentPanel.delBtn.setEnabled(thing);
-    		countryPanel.addBtn.setEnabled(thing);
-    		placePanel.addBtn.setEnabled(thing);
-    		pointPanel.addBtn.setEnabled(thing);
+    		continentPanel.refreshList(model.getContinents());   		
+            // Enable/disable buttons based on whether there are any continents
+            hasEntry = (continentPanel.list.getModel().getSize() > 0);
+            continentPanel.editBtn.setEnabled(hasEntry);
+            continentPanel.delBtn.setEnabled(hasEntry);
+            countryPanel.addBtn.setEnabled(hasEntry);
+            placePanel.addBtn.setEnabled(hasEntry);
+            pointPanel.addBtn.setEnabled(hasEntry);
     	}
     	
-    	if (command.contains("Country"))
+    	if (command.contains("Country")) {
     		countryPanel.refreshList(model.getCountries());
-    	if (command.contains("City"))
-    		countryPanel.refreshList(model.getCountries());
-    	if (command.contains("PlaceOfInterest"))
-    		countryPanel.refreshList(model.getCountries());
-    	if (command.contains("PointOfInterest"))
-    		countryPanel.refreshList(model.getCountries());
-    		
+            // Enable/disable buttons based on whether there are any countries
+            hasEntry = (countryPanel.list.getModel().getSize() > 0);
+            countryPanel.editBtn.setEnabled(hasEntry);
+            countryPanel.delBtn.setEnabled(hasEntry);
+            cityPanel.addBtn.setEnabled(hasEntry);
+    	}
+
+    	if (command.contains("City")) {
+    		cityPanel.refreshList(model.getCities());
+            // Enable/disable buttons based on whether there are any cities
+            hasEntry = (cityPanel.list.getModel().getSize() > 0);
+            cityPanel.editBtn.setEnabled(hasEntry);
+            cityPanel.delBtn.setEnabled(hasEntry);
+    	}
+
+    	if (command.contains("PlaceOfInterest")) {
+    		placePanel.refreshList(model.getPlaces());
+            // Enable/disable buttons based on whether there are any places
+            hasEntry = (placePanel.list.getModel().getSize() > 0);
+            placePanel.editBtn.setEnabled(hasEntry);
+            placePanel.delBtn.setEnabled(hasEntry);
+    	}
+
+    	if (command.contains("PointOfInterest")) {
+    		pointPanel.refreshList(model.getPoints());
+            // Enable/disable buttons based on whether there are any places
+            hasEntry = (placePanel.list.getModel().getSize() > 0);
+            pointPanel.editBtn.setEnabled(hasEntry);
+            pointPanel.delBtn.setEnabled(hasEntry);
+    	}
+
+
     }
     
     public void setModel(GeoModel newModel) {

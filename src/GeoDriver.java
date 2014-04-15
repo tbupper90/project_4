@@ -4,12 +4,16 @@ import java.util.LinkedHashMap;
 public class GeoDriver {
 	private GeoModel model = new GeoModel();
 	private GeoView view = new GeoView();
-	AddEditView add = new AddEditView(null);
+	private GeoController controller = new GeoController();
+	
 
 	
 	public GeoDriver() {
+//		System.out.println(model);
 		view.setModel(model);
-		add.setModel(model);
+		controller.setModel(model);
+		controller.setView(view);
+		
 
 		Continent cont = new Continent("ContinentName", null, null);
 		Country count = new Country("CountryName", null, null, cont);
@@ -32,6 +36,7 @@ public class GeoDriver {
         model.addRegion(place);
         model.addRegion(point);
       
+//        System.out.println(model.getContinents());
 		
 	}
 	

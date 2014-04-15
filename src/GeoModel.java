@@ -754,6 +754,12 @@ public class GeoModel {
 		}
 	}
 	
+	
+	public String toString()
+	{
+		return "I am a model";
+		
+	}
 
     
     

@@ -157,7 +157,7 @@ public class GeoView extends JFrame implements ActionListener
     	if (command.contains("PointOfInterest")) {
     		pointPanel.refreshList(model.getPoints());
             // Enable/disable buttons based on whether there are any places
-            hasEntry = (placePanel.list.getModel().getSize() > 0);
+            hasEntry = (pointPanel.list.getModel().getSize() > 0);
             pointPanel.editBtn.setEnabled(hasEntry);
             pointPanel.delBtn.setEnabled(hasEntry);
     	}

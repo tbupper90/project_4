@@ -92,7 +92,24 @@ public class GeoView extends JFrame implements ActionListener
         public void refreshList(LinkedHashMap<String, ?> map) {
         	// Converts the key names of the hashmap to a string array
         	String[] newList = map.keySet().toArray(new String[map.size()]);
+        	
+//        	String[] newList = new String[map.size()];
+//        	
+//        	LinkedHashMap<String, Region> newMap = (LinkedHashMap<String, Region>) map;
+//        	
+//        	int i=0;
+//        	for(String region : newMap.keySet())
+//        	{
+//        		newList[i] = newMap.get(region).name;
+//        		System.out.println(newMap.get(region).name);
+//        		i++;
+//        	}
+        	
         	list.setListData(newList);
+        	
+        	
+        	
+        	
         }
         
     }
@@ -154,7 +171,6 @@ public class GeoView extends JFrame implements ActionListener
     	if (model != null)
     		model.addActionListener(this);
     	
-    	//repaint();
     }
     
     public GeoModel getModel() {

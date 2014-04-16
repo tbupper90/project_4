@@ -15,7 +15,10 @@ public class AddEditView extends JFrame implements ActionListener {
 	
 	GeoModel model;
 	String type;
+	String region;
 	ArrayList<Component> components = new ArrayList<Component>();
+	
+	Region toEdit;
 	
 	JPanel btnPanel = new JPanel();
 	JPanel jtfPanel = new JPanel();
@@ -35,10 +38,12 @@ public class AddEditView extends JFrame implements ActionListener {
 	JLabel continentJl = new JLabel("Location:");
 	
 	
-	public AddEditView(String type, GeoModel model) 
+	public AddEditView(String region, String type, Region toEdit, GeoModel model) 
 	{
+		this.region = region;
 		this.type = type;
 		this.model = model;
+		this.toEdit = toEdit;
 		
 		setLayout(new BorderLayout());
 		setMinimumSize(new Dimension(400, 200));
@@ -50,9 +55,8 @@ public class AddEditView extends JFrame implements ActionListener {
 		
 		
 		
-		jtfPanel.setLayout(new GridLayout(4,4));
-		setComponents(type);
-		addComponents(jtfPanel);
+		setComponents();
+		addComponents();
 		
 		
 //		jtfPanel.add(nameJl);
@@ -67,7 +71,8 @@ public class AddEditView extends JFrame implements ActionListener {
 		
 		
 		btnPanel.setLayout(new GridLayout(1,2));
-		btnPanel.add(addBtn);
+		if(type.equals("Add")) btnPanel.add(addBtn);
+		if(type.equals("Edit")) btnPanel.add(editBtn);
 		btnPanel.add(cancelBtn);
 		
 		add(btnPanel, BorderLayout.SOUTH);
@@ -81,7 +86,8 @@ public class AddEditView extends JFrame implements ActionListener {
 	
 	public String getEditType()
 	{
-		return type;
+		return region
+				;
 	}
 	
 	public void setModel(GeoModel model)
@@ -89,9 +95,9 @@ public class AddEditView extends JFrame implements ActionListener {
 		this.model = model;
 	}
 	
-	private void setComponents(String type)
+	private void setComponents()
 	{
-		switch(type)
+		switch(region)
 		{
 		case "Continent":
 			
@@ -100,7 +106,6 @@ public class AddEditView extends JFrame implements ActionListener {
 //			{
 //				parentRegionsJcb.addItem(continent);
 //			}
-			
 			components.add(nameJl);
 			components.add(nameJtf);
 			components.add(areaJl);
@@ -112,11 +117,13 @@ public class AddEditView extends JFrame implements ActionListener {
 		}
 	}
 	
-	private void addComponents(JPanel panel)
+	private void addComponents()
 	{
+		jtfPanel.setLayout(new GridLayout(components.size() / 2, components.size() /2 ));
+
 		for(Component component : components)
 		{
-			panel.add(component);
+			jtfPanel.add(component);
 		}
 	}
 	

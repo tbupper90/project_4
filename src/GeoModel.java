@@ -93,6 +93,12 @@ public class GeoModel {
                 new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add " + type));
     }
     
+    public void regionEdited()
+    {
+    	processEvent(
+        		new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "region edited"));
+    }
+    
     public void removeRegion(Region r) {
         String rName = r.toString();
     	String type = r.getClass().getName();
@@ -755,11 +761,11 @@ public class GeoModel {
 	}
 	
 	
-	public String toString()
-	{
-		return "I am a model";
-		
-	}
+//	public String toString()
+//	{
+//		return "I am a model";
+//		
+//	}
 
     
     

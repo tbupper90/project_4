@@ -14,20 +14,66 @@ public class GeoController
 			
 	}
 	
+	private class CancelListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			aeView.setVisible(false);
+		}
+		
+	}
+	
 	private class AddListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
 		{
 			if(model == null) return;
 			
-			String name = aeView.nameJtf.getText();
-			String area = aeView.areaJtf.getText();
-			String pop = aeView.popJtf.getText();
+			String region = aeView.getEditType();
+//			System.out.println(type);
+			switch(region)
+			{
+				case "Continent": 
+					String name = aeView.nameJtf.getText();
+					String area = aeView.areaJtf.getText();
+					String pop = aeView.popJtf.getText();
+				
+					model.addRegion(new Continent(name,pop,area));
+				
+					aeView.setVisible(false);
+			}//end switch
+		}//end actionPerformed
+	}//end class
+	
+	private class EditListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			if(model == null) return;
 			
-			model.addRegion(new Continent(name,pop,area));
-			
-			aeView.setVisible(false);
-		
+			String region = aeView.getEditType();
+			switch(region)
+			{
+				case "Continent": 
+					String name = aeView.nameJtf.getText();
+					String area = aeView.areaJtf.getText();
+					String pop = aeView.popJtf.getText();
+					
+					aeView.toEdit.name = name;
+					aeView.toEdit.area = area;
+					aeView.toEdit.pop = pop;
+					Continent tmpContinent = (Continent) aeView.toEdit;
+//					model.addRegion(tmpContinent);
+//					model.removeRegion(aeView.toEdit);
+					
+					model.regionEdited();
+					
+					aeView.setVisible(false);
+					
+					
+			}
 		}
 	}
 	
@@ -55,11 +101,39 @@ public class GeoController
 		public void actionPerformed(ActionEvent e) {
 			if(model == null) return;
 			
-			aeView = new AddEditView("Continent", model);
+			aeView = new AddEditView("Continent", "Add", null, model);
 			
 			setAddEditView(aeView);
 			
 			
+		}
+		
+	}
+	
+	public class EditContinentListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			
+			if(model == null) return;
+			
+			int[] i = geoView.getContinentPanel().list.getSelectedIndices();
+			ListModel<String> list = geoView.getContinentPanel().list.getModel();
+			
+			for(int index : i)
+			{
+				Continent tmpCont = model.getContinents().get(list.getElementAt(index));
+				aeView = new AddEditView("Continent", "Edit", tmpCont, model);
+				setAddEditView(aeView);
+				aeView.nameJtf.setText(tmpCont.name);
+				aeView.areaJtf.setText(tmpCont.area);
+				aeView.popJtf.setText(tmpCont.pop);
+				
+			}
+			
+
 		}
 		
 	}
@@ -73,15 +147,25 @@ public class GeoController
 		
 		ActionListener deleteContinentListener = new DeleteContinentListener();
 		geoView.getContinentPanel().delBtn.addActionListener(deleteContinentListener);
+		
+		ActionListener editContinentListener = new EditContinentListener();
+		geoView.getContinentPanel().editBtn.addActionListener(editContinentListener);
 	}
 	
-	public void setAddEditView(AddEditView  newView)
+	public void setAddEditView(AddEditView newView)
 	{
 		aeView = newView;
 		aeView.setModel(model);
 		
+		ActionListener cancelListener = new CancelListener();
+		aeView.cancelBtn.addActionListener(cancelListener);
+		
 		ActionListener addListener = new AddListener();
 		aeView.addBtn.addActionListener(addListener);
+		
+		ActionListener editListener = new EditListener();
+		aeView.editBtn.addActionListener(editListener);
+		
 		
 	}
 

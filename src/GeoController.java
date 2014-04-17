@@ -284,7 +284,64 @@ public class GeoController
 	}//end Class
 	
 	
+	private class ImportListener implements ActionListener
+	{
+		boolean hasData = false; //Need to see if there is saved data on the system
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (model==null)
+			{
+				return;
+			}
+			if (hasData)
+			{
+				//Do stuff with the data
+			}
+		}
+		
+	}
 	
+	private class ExportListener implements ActionListener
+	{
+		 
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			if (model==null)
+			{
+				return;
+			}
+			
+		}
+		
+	}
+	
+	private class LoadListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (model==null)
+			{
+				return;
+			}
+			
+		}
+		
+	}
+	
+	private class SaveListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (model==null)
+			{
+				return;
+			}
+			
+		}
+		
+	}
 	
 	public void setView(GeoView newView)
 	{
@@ -308,6 +365,15 @@ public class GeoController
 		geoView.getCountryPanel().editBtn.addActionListener(editListener);
 		geoView.getCityPanel().editBtn.addActionListener(editListener);
 
+		/**Action Listeners for the menu items*/
+		
+		geoView.loadGeography.addActionListener(new LoadListener());
+		
+		geoView.importGeography.addActionListener(new ImportListener());
+		
+		geoView.exportGeography.addActionListener(new ExportListener());
+		
+		geoView.saveGeography.addActionListener(new SaveListener());
 	}
 	
 	public void setAddEditView(AddEditView newView)

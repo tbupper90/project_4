@@ -14,13 +14,13 @@ public class GeoView extends JFrame implements ActionListener
     private ListPanel pointPanel = new ListPanel("Points of Interest");
     
     /**File menu*/
-    private JMenuBar menuBar = new JMenuBar();
-    private JMenu menu = new JMenu("Menu");
-    private JMenuItem loadGeography = new JMenuItem("Load Geography");
-    private JMenuItem saveGeography = new JMenuItem("Save Geography");
-    private JMenuItem importGeography = new JMenuItem("Import Geography");
-    private JMenuItem exportGeography = new JMenuItem("Export Geography");
-    private JMenuItem exit = new JMenuItem("Exit Program");
+    JMenuBar menuBar = new JMenuBar();
+    JMenu menu = new JMenu("Menu");
+    JMenuItem loadGeography = new JMenuItem("Load Geography");
+    JMenuItem saveGeography = new JMenuItem("Save Geography");
+    JMenuItem importGeography = new JMenuItem("Import Geography");
+    JMenuItem exportGeography = new JMenuItem("Export Geography");
+    JMenuItem exit = new JMenuItem("Exit Program");
 	
     private GeoModel model;
     
@@ -87,6 +87,7 @@ public class GeoView extends JFrame implements ActionListener
     public ListPanel getPointPanel() {
         return pointPanel;
     }
+    
 
     class ListPanel extends JPanel {
         private JPanel btnPanel = new JPanel();
@@ -167,6 +168,8 @@ public class GeoView extends JFrame implements ActionListener
             countryPanel.addBtn.setEnabled(hasEntry);
             placePanel.addBtn.setEnabled(hasEntry);
             pointPanel.addBtn.setEnabled(hasEntry);
+            saveGeography.setEnabled(hasEntry);
+            exportGeography.setEnabled(hasEntry);
     	}
     	
     	if (command.contains("Country")) {

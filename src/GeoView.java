@@ -6,31 +6,65 @@ import java.util.LinkedHashMap;
 
 public class GeoView extends JFrame implements ActionListener
 {
+	/**This is the panels for the things*/
 	private ListPanel continentPanel = new ListPanel("Continents");
     private ListPanel countryPanel = new ListPanel("Countries");
     private ListPanel cityPanel = new ListPanel("Cities");
     private ListPanel placePanel = new ListPanel("Places of Interest");
     private ListPanel pointPanel = new ListPanel("Points of Interest");
+    
+    /**File menu*/
+    private JMenuBar menuBar = new JMenuBar();
+    private JMenu menu = new JMenu("Menu");
+    private JMenuItem loadGeography = new JMenuItem("Load Geography");
+    private JMenuItem saveGeography = new JMenuItem("Save Geography");
+    private JMenuItem importGeography = new JMenuItem("Import Geography");
+    private JMenuItem exportGeography = new JMenuItem("Export Geography");
+    private JMenuItem exit = new JMenuItem("Exit Program");
 	
     private GeoModel model;
     
     public GeoView() {
-		setLayout(new GridLayout(1, 0));
+    	JPanel panel = new JPanel(new GridLayout(1, 0));
 		setMinimumSize(new Dimension(1000, 400));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		setTitle("GeoGrapher");
 				
-		add(continentPanel);
-        add(countryPanel);
-        add(cityPanel);
-        add(placePanel);
-        add(pointPanel);
+		panel.add(continentPanel);
+		panel.add(countryPanel);
+		panel.add(cityPanel);
+		panel.add(placePanel);
+		panel.add(pointPanel);
         
         continentPanel.addBtn.setEnabled(true);
         
+        /**Set the menuItems to be enabled/disabled and add ActionListeners*/
+		loadGeography.setEnabled(true);
+		
+		importGeography.setEnabled(true);
+		
+		saveGeography.setEnabled(false);
+		
+		exportGeography.setEnabled(false);
+		
+		menu.add(loadGeography); 
+		menu.add(saveGeography);
+		menu.add(importGeography);
+		menu.add(exportGeography);
+		menu.add(exit);
+	
+		menuBar.add(menu);
+		
+		add(menuBar, BorderLayout.NORTH);
+		add(panel, BorderLayout.CENTER);
+		
+		
+        
         setVisible(true);
+        
+        
 		
 	}
     

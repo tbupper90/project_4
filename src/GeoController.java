@@ -283,6 +283,9 @@ public class GeoController
 		
 	}//end Class
 	
+	
+	
+	
 	public void setView(GeoView newView)
 	{
 		this.geoView = newView;

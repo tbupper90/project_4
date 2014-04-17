@@ -22,6 +22,7 @@ public class AddEditView extends JFrame implements ActionListener {
 	
 	JPanel btnPanel = new JPanel();
 	JPanel jtfPanel = new JPanel();
+	
 	JButton addBtn = new JButton("Add");
 	JButton editBtn = new JButton("Edit");
 	JButton cancelBtn = new JButton("Cancel");
@@ -29,13 +30,22 @@ public class AddEditView extends JFrame implements ActionListener {
 	JTextField nameJtf = new JTextField();
 	JTextField areaJtf = new JTextField();
 	JTextField popJtf = new JTextField();
+	JTextField latJtf = new JTextField();
+	JTextField lonJtf = new JTextField();
+	JTextField elevJtf = new JTextField();
+
 	JComboBox parentRegionsJcb = new JComboBox();
+	
 	
 	
 	JLabel nameJl = new JLabel("Name");
 	JLabel areaJl = new JLabel("Area");
 	JLabel popJl = new JLabel("Population");
-	JLabel continentJl = new JLabel("Location:");
+	JLabel locationJl = new JLabel("Location:");
+	JLabel latJl = new JLabel("Latitude:");
+	JLabel lonJl = new JLabel("Longitude:");
+	JLabel elevJl = new JLabel("Elevation");
+	
 	
 	
 	public AddEditView(String region, String type, Region toEdit, GeoModel model) 
@@ -104,7 +114,7 @@ public class AddEditView extends JFrame implements ActionListener {
 			components.add(areaJtf);
 			components.add(popJl);
 			components.add(popJtf);
-			components.add(continentJl);
+			components.add(locationJl);
 			components.add(parentRegionsJcb);
 			break;
 //			
@@ -116,12 +126,24 @@ public class AddEditView extends JFrame implements ActionListener {
 			
 			components.add(nameJl);
 			components.add(nameJtf);
+			
 			components.add(areaJl);
 			components.add(areaJtf);
+			
 			components.add(popJl);
 			components.add(popJtf);
-			components.add(continentJl);
+			
+			components.add(locationJl);
 			components.add(parentRegionsJcb);
+			
+			components.add(elevJl);
+			components.add(elevJtf);
+			
+			components.add(latJl);
+			components.add(latJtf);
+			
+			components.add(lonJl);
+			components.add(lonJtf);
 			break;
 			
 		}//end switch

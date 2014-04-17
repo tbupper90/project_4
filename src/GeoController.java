@@ -62,11 +62,17 @@ public class GeoController
 					String cityName = aeView.nameJtf.getText();
 					String cityArea = aeView.areaJtf.getText();
 					String cityPop = aeView.popJtf.getText();
+					String cityLat = aeView.latJtf.getText();
+					String cityLon = aeView.lonJtf.getText();
+					String cityElev = aeView.lonJtf.getText();
 					String country = aeView.parentRegionsJcb.getSelectedItem().toString();
 					
 					Country tmpCount = model.getCountries().get(country);
+					if(cityLat.isEmpty() && cityLon.isEmpty() && cityElev.isEmpty())
+						model.addRegion(new City(cityName,cityPop,cityArea,tmpCount));
 					
-					model.addRegion(new City(cityName,cityPop,cityArea,tmpCount));
+					else
+						model.addRegion(new City(cityName,cityPop,cityArea,tmpCount,cityLat,cityLon,cityElev));
 					
 					aeView.setVisible(false);
 					break;
@@ -118,6 +124,23 @@ public class GeoController
 					aeView.setVisible(false);
 					break;
 					
+				case "City":
+					String cityName = aeView.nameJtf.getText();
+					String cityArea = aeView.areaJtf.getText();
+					String cityPop = aeView.popJtf.getText();
+					String country = aeView.parentRegionsJcb.getSelectedItem().toString();
+					
+				
+					model.getCities().get(aeView.toEdit.name).country = model.getCountries().get(country);
+					aeView.toEdit.name = cityName;
+					aeView.toEdit.area = cityArea;
+					aeView.toEdit.pop = cityPop;
+					
+					model.regionEdited();
+					
+					aeView.setVisible(false);
+					break;
+					
 					
 					
 			}
@@ -149,7 +172,19 @@ public class GeoController
 				{
 					String name = list.getElementAt(index);
 					model.removeRegion(model.getCountries().get(name));
-				}
+				}//end for
+			}//end if
+			
+			if(e.getActionCommand().contains("Cities"))
+			{
+				int[] i = geoView.getCityPanel().list.getSelectedIndices();
+				ListModel<String> list = geoView.getCityPanel().list.getModel();
+				for(int index : i)
+				{
+					String name = list.getElementAt(index);
+					model.removeRegion(model.getCities().get(name));
+				}//end for
+				
 			}
 		}
 		
@@ -239,6 +274,7 @@ public class GeoController
 					aeView.areaJtf.setText(tmpCity.area);
 					aeView.popJtf.setText(tmpCity.pop);
 					aeView.parentRegionsJcb.setSelectedItem(tmpCity.getCountry().toString());
+				
 				}//end for
 			}
 			
@@ -261,6 +297,8 @@ public class GeoController
 		ActionListener deleteListener = new GeoViewDeleteListener();
 		geoView.getContinentPanel().delBtn.addActionListener(deleteListener);
 		geoView.getCountryPanel().delBtn.addActionListener(deleteListener);
+		geoView.getCityPanel().delBtn.addActionListener(deleteListener);
+		
 		
 		ActionListener editListener = new GeoViewEditListener();
 		geoView.getContinentPanel().editBtn.addActionListener(editListener);

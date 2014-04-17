@@ -14,7 +14,7 @@ public class City extends Region
 	 * 
 	 */
 	private static final long serialVersionUID = -7124684400952080970L;
-	private Country country;
+	Country country;
 	private String lat;
 	private String lon;
 	private String elev;

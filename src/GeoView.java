@@ -80,7 +80,12 @@ public class GeoView extends JFrame implements ActionListener
             btnPanel.add(editBtn);
             btnPanel.add(delBtn);
             btnPanel.add(sortBtn);
-        
+            
+            addBtn.setActionCommand("Add " + title);
+            editBtn.setActionCommand("Edit " + title);
+            delBtn.setActionCommand("Delete " + title);
+            sortBtn.setActionCommand("Sort " + title);
+            
             addBtn.setEnabled(false);
             editBtn.setEnabled(false);
             delBtn.setEnabled(false);

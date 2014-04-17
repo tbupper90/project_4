@@ -96,7 +96,8 @@ public class GeoView extends JFrame implements ActionListener
         
         public void refreshList(LinkedHashMap<String, ?> map) {
         	// Converts the key names of the hashmap to a string array
-        	String[] newList = map.keySet().toArray(new String[map.size()]);
+        	
+        	String[] newList = map.keySet().toArray(new String[0]);
         	
 //        	String[] newList = new String[map.size()];
 //        	

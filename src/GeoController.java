@@ -147,7 +147,7 @@ public class GeoController
 		}
 	}
 	
-	private class GeoViewDeleteListener implements ActionListener
+	private class DeleteButtonListener implements ActionListener
 	{
 
 		@Override
@@ -191,7 +191,7 @@ public class GeoController
 	}
 	
 	
-	public class GeoViewAddListener implements ActionListener
+	public class AddButtonListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e) {
 			if(model == null) return;
@@ -218,7 +218,7 @@ public class GeoController
 		
 	}
 	
-	public class GeoViewEditListener implements ActionListener
+	public class EditButtonListener implements ActionListener
 	{
 
 		@Override
@@ -287,20 +287,20 @@ public class GeoController
 	{
 		this.geoView = newView;
 		
-		ActionListener addListener = new GeoViewAddListener();
+		ActionListener addListener = new AddButtonListener();
 		geoView.getContinentPanel().addBtn.addActionListener(addListener);
 		geoView.getCountryPanel().addBtn.addActionListener(addListener);
 		geoView.getCityPanel().addBtn.addActionListener(addListener);
 		geoView.getPlacePanel().addBtn.addActionListener(addListener);
 		geoView.getPointPanel().addBtn.addActionListener(addListener);
 		
-		ActionListener deleteListener = new GeoViewDeleteListener();
+		ActionListener deleteListener = new DeleteButtonListener();
 		geoView.getContinentPanel().delBtn.addActionListener(deleteListener);
 		geoView.getCountryPanel().delBtn.addActionListener(deleteListener);
 		geoView.getCityPanel().delBtn.addActionListener(deleteListener);
 		
 		
-		ActionListener editListener = new GeoViewEditListener();
+		ActionListener editListener = new EditButtonListener();
 		geoView.getContinentPanel().editBtn.addActionListener(editListener);
 		geoView.getCountryPanel().editBtn.addActionListener(editListener);
 		geoView.getCityPanel().editBtn.addActionListener(editListener);

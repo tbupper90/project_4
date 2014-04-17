@@ -4,3 +4,12 @@
 /GeoController$AddContinentListener.class
 /GeoController$AddListener.class
 /GeoController$DeleteContinentListener.class
+/GeoController$CancelListener.class
+/GeoController$EditListener.class
+/GeoController$GeoViewAddListener.class
+/GeoController$GeoViewDeleteListener.class
+/GeoController$GeoViewEditListener.class
+/AddEditViewTest.class
+/GeoController$AddButtonListener.class
+/GeoController$DeleteButtonListener.class
+/GeoController$EditButtonListener.class

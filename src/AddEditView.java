@@ -108,6 +108,22 @@ public class AddEditView extends JFrame implements ActionListener {
 			components.add(parentRegionsJcb);
 			break;
 //			
+		case "City":
+			for(String country : model.getCountries().keySet())
+			{
+				parentRegionsJcb.addItem(country);
+			}
+			
+			components.add(nameJl);
+			components.add(nameJtf);
+			components.add(areaJl);
+			components.add(areaJtf);
+			components.add(popJl);
+			components.add(popJtf);
+			components.add(continentJl);
+			components.add(parentRegionsJcb);
+			break;
+			
 		}//end switch
 	}
 	

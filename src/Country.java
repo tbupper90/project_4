@@ -20,7 +20,7 @@ public class Country extends Region
 	LinkedHashMap<String,City> cities = new LinkedHashMap<String, City>();
 
 
-	private Continent continent;
+	Continent continent;
 	
 	/**
 	 * creates a Country object

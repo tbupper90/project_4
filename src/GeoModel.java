@@ -146,6 +146,9 @@ public class GeoModel {
             
         case ("Country"):
         	
+        	if(countries.isEmpty()) break;
+        
+        
         	//remove cities
         	for(String city : countries.get(rName).cities.keySet())
         	{
@@ -186,6 +189,8 @@ public class GeoModel {
         
         case ("City"):
         	
+        	if(cities.isEmpty()) break;
+        	
         	//remove from places
 	    	for(String place : cities.get(rName).places.keySet())
 	    	{
@@ -219,6 +224,8 @@ public class GeoModel {
         
         
         case ("PlaceOfInterest"):
+        	if(places.isEmpty()) break;
+        	
         	if(places.get(rName).locations.isEmpty())
         	{
         		places.remove(rName);
@@ -242,6 +249,8 @@ public class GeoModel {
         
         
         case ("PointOfInterest"):
+        	
+        	if(points.isEmpty()) break;
         	
         	for(String point : points.get(rName).points.keySet())
         	{

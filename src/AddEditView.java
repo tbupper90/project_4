@@ -49,27 +49,10 @@ public class AddEditView extends JFrame implements ActionListener {
 		setMinimumSize(new Dimension(400, 200));
 		setLocationRelativeTo(null);
 //		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		
-		
-		
-		
-		
+				
 		setComponents();
 		addComponents();
-		
-		
-//		jtfPanel.add(nameJl);
-//		jtfPanel.add(nameJtf);
-//		jtfPanel.add(areaJl);
-//		jtfPanel.add(areaJtf);
-//		jtfPanel.add(popJl);
-//		jtfPanel.add(popJtf);
-//		jtfPanel.add(continentJl);
-//		jtfPanel.add(parentRegionsJcb);
-		
-		
-		
+				
 		btnPanel.setLayout(new GridLayout(1,2));
 		if(type.equals("Add")) btnPanel.add(addBtn);
 		if(type.equals("Edit")) btnPanel.add(editBtn);
@@ -86,8 +69,7 @@ public class AddEditView extends JFrame implements ActionListener {
 	
 	public String getEditType()
 	{
-		return region
-				;
+		return region;
 	}
 	
 	public void setModel(GeoModel model)
@@ -100,21 +82,33 @@ public class AddEditView extends JFrame implements ActionListener {
 		switch(region)
 		{
 		case "Continent":
-			
-		
-//			for(String continent : model.getContinents().keySet())
-//			{
-//				parentRegionsJcb.addItem(continent);
-//			}
+
 			components.add(nameJl);
 			components.add(nameJtf);
 			components.add(areaJl);
 			components.add(areaJtf);
 			components.add(popJl);
 			components.add(popJtf);
-//			components.add(continentJl);
-//			components.add(parentRegionsJcb);
-		}
+			break;
+			
+		case "Country":
+			
+			for(String continent : model.getContinents().keySet())
+			{
+				parentRegionsJcb.addItem(continent);
+			}
+			
+			components.add(nameJl);
+			components.add(nameJtf);
+			components.add(areaJl);
+			components.add(areaJtf);
+			components.add(popJl);
+			components.add(popJtf);
+			components.add(continentJl);
+			components.add(parentRegionsJcb);
+			break;
+//			
+		}//end switch
 	}
 	
 	private void addComponents()

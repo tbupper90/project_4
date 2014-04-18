@@ -162,7 +162,7 @@ public class GeoView extends JFrame implements ActionListener
         JButton addBtn = new JButton("Add");
         JButton editBtn = new JButton("Edit");
         JButton delBtn = new JButton("Delete");
-        JButton sortBtn = new JButton("Sort");
+        JButton viewBtn = new JButton("View");
         JList<String> list = new JList<String>();
         
         public ListPanel(String title) {
@@ -182,17 +182,17 @@ public class GeoView extends JFrame implements ActionListener
             btnPanel.add(addBtn);
             btnPanel.add(editBtn);
             btnPanel.add(delBtn);
-            btnPanel.add(sortBtn);
+            btnPanel.add(viewBtn);
             
             addBtn.setActionCommand("Add " + title);
             editBtn.setActionCommand("Edit " + title);
             delBtn.setActionCommand("Delete " + title);
-            sortBtn.setActionCommand("Sort " + title);
+            viewBtn.setActionCommand("View " + title);
             
             addBtn.setEnabled(false);
             editBtn.setEnabled(false);
             delBtn.setEnabled(false);
-            sortBtn.setEnabled(false);
+            viewBtn.setEnabled(false);
             
             add(btnPanel, BorderLayout.SOUTH);
         }
@@ -233,6 +233,7 @@ public class GeoView extends JFrame implements ActionListener
             hasEntry = (continentPanel.list.getModel().getSize() > 0);
             continentPanel.editBtn.setEnabled(hasEntry);
             continentPanel.delBtn.setEnabled(hasEntry);
+            continentPanel.viewBtn.setEnabled(hasEntry);
             countryPanel.addBtn.setEnabled(hasEntry);
             placePanel.addBtn.setEnabled(hasEntry);
             pointPanel.addBtn.setEnabled(hasEntry);
@@ -246,6 +247,7 @@ public class GeoView extends JFrame implements ActionListener
             hasEntry = (countryPanel.list.getModel().getSize() > 0);
             countryPanel.editBtn.setEnabled(hasEntry);
             countryPanel.delBtn.setEnabled(hasEntry);
+            countryPanel.viewBtn.setEnabled(hasEntry);
             cityPanel.addBtn.setEnabled(hasEntry);
     	}
 
@@ -255,6 +257,7 @@ public class GeoView extends JFrame implements ActionListener
             hasEntry = (cityPanel.list.getModel().getSize() > 0);
             cityPanel.editBtn.setEnabled(hasEntry);
             cityPanel.delBtn.setEnabled(hasEntry);
+            cityPanel.viewBtn.setEnabled(hasEntry);
     	}
 
     	if (command.contains("PlaceOfInterest")) {
@@ -263,6 +266,7 @@ public class GeoView extends JFrame implements ActionListener
             hasEntry = (placePanel.list.getModel().getSize() > 0);
             placePanel.editBtn.setEnabled(hasEntry);
             placePanel.delBtn.setEnabled(hasEntry);
+            placePanel.viewBtn.setEnabled(hasEntry);
     	}
 
     	if (command.contains("PointOfInterest")) {
@@ -271,6 +275,7 @@ public class GeoView extends JFrame implements ActionListener
             hasEntry = (pointPanel.list.getModel().getSize() > 0);
             pointPanel.editBtn.setEnabled(hasEntry);
             pointPanel.delBtn.setEnabled(hasEntry);
+            pointPanel.viewBtn.setEnabled(hasEntry);
     	}
 
 

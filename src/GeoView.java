@@ -6,23 +6,49 @@ import java.util.LinkedHashMap;
 
 public class GeoView extends JFrame implements ActionListener
 {
-	/**This is the panels for the things*/
+    private GeoModel model;
+
+    /**This is the panels for the things*/
 	private ListPanel continentPanel = new ListPanel("Continents");
     private ListPanel countryPanel = new ListPanel("Countries");
     private ListPanel cityPanel = new ListPanel("Cities");
     private ListPanel placePanel = new ListPanel("Places of Interest");
     private ListPanel pointPanel = new ListPanel("Points of Interest");
     
-    /**File menu*/
     JMenuBar menuBar = new JMenuBar();
-    JMenu menu = new JMenu("Menu");
+    /**File menu*/
+    JMenu fileMenu = new JMenu("File");
     JMenuItem loadGeography = new JMenuItem("Load Geography");
     JMenuItem saveGeography = new JMenuItem("Save Geography");
     JMenuItem importGeography = new JMenuItem("Import Geography");
     JMenuItem exportGeography = new JMenuItem("Export Geography");
     JMenuItem exit = new JMenuItem("Exit Program");
-	
-    private GeoModel model;
+    /**Graph menu*/
+    JMenu graphMenu = new JMenu("Graph");
+    
+    JMenu simple = new JMenu("Simple Bar Chart");
+    
+    JMenu simpleArea = new JMenu("Area");
+    JMenuItem simpleAreaContinents = new JMenuItem("Continents");
+    JMenuItem simpleAreaCountries = new JMenuItem("Countries");
+    JMenuItem simpleAreaCities = new JMenuItem("Cities");
+    JMenuItem simpleAreaPlaces = new JMenuItem("Places of Interest");
+    JMenuItem simpleAreaPoints = new JMenuItem("Points of Interest");
+    
+    JMenu simplePop = new JMenu("Population");
+    JMenuItem simplePopContinents = new JMenuItem("Continents");
+    JMenuItem simplePopCountries = new JMenuItem("Countries");
+    JMenuItem simplePopCities = new JMenuItem("Cities");
+    JMenuItem simplePopPlaces = new JMenuItem("Places of Interest");
+    JMenuItem simplePopPoints = new JMenuItem("Points of Interest");
+    
+    JMenu stacked = new JMenu("Stacked Bar Chart");
+    
+    JMenu stackedArea = new JMenu("Area");
+    
+    JMenu stackedPop = new JMenu("Population");
+    
+    JMenuItem map = new JMenuItem("Map");
     
     public GeoView() {
     	JPanel panel = new JPanel(new GridLayout(1, 0));
@@ -49,15 +75,37 @@ public class GeoView extends JFrame implements ActionListener
 		
 		exportGeography.setEnabled(false);
 		
-		menu.add(loadGeography); 
-		menu.add(saveGeography);
-		menu.add(importGeography);
-		menu.add(exportGeography);
-		menu.add(exit);
+		fileMenu.add(loadGeography); 
+		fileMenu.add(saveGeography);
+		fileMenu.add(importGeography);
+		fileMenu.add(exportGeography);
+		fileMenu.add(exit);
 	
-		menuBar.add(menu);
+		menuBar.add(fileMenu);
 		
-		add(menuBar, BorderLayout.NORTH);
+		graphMenu.add(simple);
+		simple.add(simpleArea);
+		simpleArea.add(simpleAreaContinents);
+        simpleArea.add(simpleAreaCountries);
+        simpleArea.add(simpleAreaCities);
+        simpleArea.add(simpleAreaPlaces);
+        simpleArea.add(simpleAreaPoints);
+		simple.add(simplePop);
+        simplePop.add(simplePopContinents);
+        simplePop.add(simplePopCountries);
+        simplePop.add(simplePopCities);
+        simplePop.add(simplePopPlaces);
+        simplePop.add(simplePopPoints);
+        
+        graphMenu.add(stacked);
+        stacked.add(stackedArea);
+        stacked.add(stackedPop);
+        
+        graphMenu.add(map);
+
+        menuBar.add(graphMenu);
+
+        add(menuBar, BorderLayout.NORTH);
 		add(panel, BorderLayout.CENTER);
 		
 		

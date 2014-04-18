@@ -45,8 +45,18 @@ public class GeoView extends JFrame implements ActionListener
     JMenu stacked = new JMenu("Stacked Bar Chart");
     
     JMenu stackedArea = new JMenu("Area");
-    
+    JMenuItem stackedAreaCountriesInContinents = new JMenuItem("Countries Within Continents");
+    JMenuItem stackedAreaCitiesInCountries = new JMenuItem("Cities Within Countries");
+    JMenuItem stackedAreaPlacesInContinents = new JMenuItem("Places of Interest Within Continents");
+    JMenuItem stackedAreaPlacesInCountries = new JMenuItem("Places of Interest Within Countries");
+    JMenuItem stackedAreaPlacesInCities = new JMenuItem("Places of Interest Within Cities");
+
     JMenu stackedPop = new JMenu("Population");
+    JMenuItem stackedPopCountriesInContinents = new JMenuItem("Countries Within Continents");
+    JMenuItem stackedPopCitiesInCountries = new JMenuItem("Cities Within Countries");
+    JMenuItem stackedPopPlacesInContinents = new JMenuItem("Places of Interest Within Continents");
+    JMenuItem stackedPopPlacesInCountries = new JMenuItem("Places of Interest Within Countries");
+    JMenuItem stackedPopPlacesInCities = new JMenuItem("Places of Interest Within Cities");
     
     JMenuItem map = new JMenuItem("Map");
     
@@ -99,7 +109,17 @@ public class GeoView extends JFrame implements ActionListener
         
         graphMenu.add(stacked);
         stacked.add(stackedArea);
+        stackedArea.add(stackedAreaCountriesInContinents);
+        stackedArea.add(stackedAreaCitiesInCountries);
+        stackedArea.add(stackedAreaPlacesInContinents);
+        stackedArea.add(stackedAreaPlacesInCountries);
+        stackedArea.add(stackedAreaPlacesInCities);
         stacked.add(stackedPop);
+        stackedPop.add(stackedPopCountriesInContinents);
+        stackedPop.add(stackedPopCitiesInCountries);
+        stackedPop.add(stackedPopPlacesInContinents);
+        stackedPop.add(stackedPopPlacesInCountries);
+        stackedPop.add(stackedPopPlacesInCities);
         
         graphMenu.add(map);
 

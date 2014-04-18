@@ -239,6 +239,9 @@ public class GeoView extends JFrame implements ActionListener
             pointPanel.addBtn.setEnabled(hasEntry);
             saveGeography.setEnabled(hasEntry);
             exportGeography.setEnabled(hasEntry);
+            // Enable/disable menu items
+            simpleAreaContinents.setEnabled(hasEntry);
+            simplePopContinents.setEnabled(hasEntry);
     	}
     	
     	if (command.contains("Country")) {
@@ -249,6 +252,11 @@ public class GeoView extends JFrame implements ActionListener
             countryPanel.delBtn.setEnabled(hasEntry);
             countryPanel.viewBtn.setEnabled(hasEntry);
             cityPanel.addBtn.setEnabled(hasEntry);
+            // Enable/disable menu items
+            simpleAreaCountries.setEnabled(hasEntry);
+            simplePopCountries.setEnabled(hasEntry);
+            stackedAreaCountriesInContinents.setEnabled(hasEntry);
+            stackedPopCountriesInContinents.setEnabled(hasEntry);
     	}
 
     	if (command.contains("City")) {
@@ -258,6 +266,11 @@ public class GeoView extends JFrame implements ActionListener
             cityPanel.editBtn.setEnabled(hasEntry);
             cityPanel.delBtn.setEnabled(hasEntry);
             cityPanel.viewBtn.setEnabled(hasEntry);
+            // Enable/disable menu items
+            simpleAreaCities.setEnabled(hasEntry);
+            simplePopCities.setEnabled(hasEntry);
+            stackedAreaCitiesInCountries.setEnabled(hasEntry);
+            stackedPopCitiesInCountries.setEnabled(hasEntry);
     	}
 
     	if (command.contains("PlaceOfInterest")) {
@@ -267,6 +280,15 @@ public class GeoView extends JFrame implements ActionListener
             placePanel.editBtn.setEnabled(hasEntry);
             placePanel.delBtn.setEnabled(hasEntry);
             placePanel.viewBtn.setEnabled(hasEntry);
+            // Enable/disable menu items
+            simpleAreaPlaces.setEnabled(hasEntry);
+            simplePopPlaces.setEnabled(hasEntry);
+            stackedAreaPlacesInContinents.setEnabled(hasEntry);
+            stackedAreaPlacesInCountries.setEnabled(hasEntry);
+            stackedAreaPlacesInCities.setEnabled(hasEntry);
+            stackedPopPlacesInContinents.setEnabled(hasEntry);
+            stackedPopPlacesInCountries.setEnabled(hasEntry);
+            stackedPopPlacesInCities.setEnabled(hasEntry);
     	}
 
     	if (command.contains("PointOfInterest")) {
@@ -276,6 +298,9 @@ public class GeoView extends JFrame implements ActionListener
             pointPanel.editBtn.setEnabled(hasEntry);
             pointPanel.delBtn.setEnabled(hasEntry);
             pointPanel.viewBtn.setEnabled(hasEntry);
+            // Enable/disable menu items
+            simpleAreaPoints.setEnabled(hasEntry);
+            simplePopPoints.setEnabled(hasEntry);
     	}
 
 

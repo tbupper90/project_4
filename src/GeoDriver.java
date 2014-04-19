@@ -29,6 +29,8 @@ public class GeoDriver {
         LinkedHashMap<String, Region> pointLocs = new LinkedHashMap<String, Region>();
         pointLocs.put(count.toString(), count);
         PointOfInterest point = new PointOfInterest("PointName", null, null, null, null, pointLocs);
+        
+        
 
         model.addRegion(cont);
 		model.addRegion(count);

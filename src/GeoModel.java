@@ -36,11 +36,15 @@ public class GeoModel {
         case ("Country"):
         	
         	Country tempCountry = (Country) r;
-        	
+        
+        
             countries.put(tempCountry.getName(), tempCountry);
+           
         	
         	//add r to the countries list in the continent that is contained in the Country r. Confusing right?
         	continents.get(tempCountry.getContinent().toString()).countries.put(tempCountry.getName(), tempCountry);
+        	
+        	System.out.println(continents.get(tempCountry.getContinent().toString()).countries);
         	
             processEvent(
                     new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add " + type));
@@ -109,7 +113,9 @@ public class GeoModel {
         	//Remove countries
         	for(String country : continents.get(rName).countries.keySet())
         	{
-        		this.removeRegion(continents.get(rName).countries.get(country));       		
+//        		System.out.println(continents.get(rName).countries);
+        		this.removeRegion(continents.get(rName).countries.get(country));
+        		
         	}
         	
         	//remove continent from places
@@ -148,13 +154,17 @@ public class GeoModel {
         	
         	if(countries.isEmpty()) break;
         
-        
+        	//remove from Continent
+        	Country tmpCountry = (Country) r;
+        	tmpCountry.getContinent().countries.remove(rName);
+        	
         	//remove cities
         	for(String city : countries.get(rName).cities.keySet())
         	{
         		this.removeRegion(countries.get(rName).cities.get(city));
         	}
-        
+        	
+        	
         	//remove from places
 	    	for(String place : countries.get(rName).places.keySet())
 	    	{
@@ -191,6 +201,11 @@ public class GeoModel {
         	
         	if(cities.isEmpty()) break;
         	
+        
+	    	//remove from city
+	    	City tmpCity = (City) r;
+	    	tmpCity.getCountry().cities.remove(rName);
+        
         	//remove from places
 	    	for(String place : cities.get(rName).places.keySet())
 	    	{

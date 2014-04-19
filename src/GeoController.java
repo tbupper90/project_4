@@ -32,7 +32,7 @@ public class GeoController
 			if(model == null) return;
 			
 			String region = aeView.getEditType();
-//			System.out.println(type);
+//			System.out.println(region);
 			switch(region)
 			{
 				case "Continent": 
@@ -51,7 +51,11 @@ public class GeoController
 					String countryPop = aeView.popJtf.getText();
 					String continent = aeView.parentRegionsJcb.getSelectedItem().toString();
 					
+//					System.out.println(continent);
+					
 					Continent tmpCont = model.getContinents().get(continent);
+					
+//					System.out.println(tmpCont);
 					
 					model.addRegion(new Country(countryName,countryPop,countryArea,tmpCont));
 					
@@ -157,6 +161,9 @@ public class GeoController
 			{
 				int[] i = geoView.getContinentPanel().list.getSelectedIndices();
 				ListModel<String> list = geoView.getContinentPanel().list.getModel();
+				
+				System.out.println(list);
+				
 				for(int index : i)
 				{
 					String name = list.getElementAt(index);
@@ -168,6 +175,13 @@ public class GeoController
 			{
 				int[] i = geoView.getCountryPanel().list.getSelectedIndices();
 				ListModel<String> list = geoView.getCountryPanel().list.getModel();
+				
+//				for(int index : i)
+//				{
+//					System.out.println(index);
+//					System.out.println(list.getElementAt(index));
+//				}
+				
 				for(int index : i)
 				{
 					String name = list.getElementAt(index);

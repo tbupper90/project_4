@@ -2,18 +2,20 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Set;
 
 import javax.swing.*;
 
 
 public class AddEditView extends JFrame implements ActionListener {
 	
-	GeoModel model;
+	/**
+     * 
+     */
+    private static final long serialVersionUID = -1568841983837685841L;
+    GeoModel model;
 	String type;
 	String region;
 	ArrayList<Component> components = new ArrayList<Component>();
@@ -34,7 +36,7 @@ public class AddEditView extends JFrame implements ActionListener {
 	JTextField lonJtf = new JTextField();
 	JTextField elevJtf = new JTextField();
 
-	JComboBox parentRegionsJcb = new JComboBox();
+	JComboBox<String> parentRegionsJcb = new JComboBox<String>();
 	
 	
 	

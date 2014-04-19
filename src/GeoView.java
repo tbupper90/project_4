@@ -6,6 +6,8 @@ import java.util.LinkedHashMap;
 
 public class GeoView extends JFrame implements ActionListener
 {
+    private static final long serialVersionUID = -8738230123623659374L;
+
     private GeoModel model;
 
     /**This is the panels for the things*/
@@ -158,6 +160,8 @@ public class GeoView extends JFrame implements ActionListener
     
 
     class ListPanel extends JPanel {
+        private static final long serialVersionUID = 6675385658735931034L;
+        
         private JPanel btnPanel = new JPanel();
         JButton addBtn = new JButton("Add");
         JButton editBtn = new JButton("Edit");

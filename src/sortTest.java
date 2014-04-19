@@ -6,6 +6,12 @@ import org.junit.Test;
 
 
 public class sortTest {
+    Country Count1 = new Country("Count1Name", null, null,
+            new Continent("Con1", null, null));
+    Country Count2 = new Country("Count2Name", null, null,
+            new Continent("Con2", null, null));
+    Country Count3 = new Country("Count3Name", null, null,
+            new Continent("Con3", null, null));
     
     public ArrayList<Region> makeTestList() {
         // List with unique out-of-order elements to test sorting methods
@@ -19,9 +25,9 @@ public class sortTest {
     public ArrayList<City> makeTestCity() {
         // List with unique out-of-order elements to test sorting methods
         ArrayList<City> testList = new ArrayList<City>();
-        testList.add(new City("Name1", "333", "22", "Coun1", "N3", "E2", "1"));
-        testList.add(new City("Name2", "111", "33", "Coun2", "N1", "E3", "2"));
-        testList.add(new City("Name3", "222", "11", "Coun3", "N2", "E1", "3"));
+        testList.add(new City("Name1", "333", "22", Count1, "N3", "E2", "1"));
+        testList.add(new City("Name2", "111", "33", Count2, "N1", "E3", "2"));
+        testList.add(new City("Name3", "222", "11", Count3, "N2", "E1", "3"));
         return testList;
     }
     

@@ -8,7 +8,6 @@ public class GeoViewTest {
 	@Test
 	public void test() {
 	    GeoView mainView = new GeoView();
-	    mainMenu.setVisible(true);
 		while (true){}
 	}
 

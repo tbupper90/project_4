@@ -66,7 +66,7 @@ public class GeoModel {
         	
             places.put(tempPlace.toString(), tempPlace);
             
-            //Add place to each Region it is contained in
+            //Add place to the Region it is contained in
         	for(String region : tempPlace.getLocations().keySet())
         	{
         		searchAllData(region).addPlace(tempPlace.getName(), tempPlace);
@@ -82,10 +82,7 @@ public class GeoModel {
             points.put(tempPoint.getName(), tempPoint);
             
             //Add Point to each region it is contained in.
-            for(String region : tempPoint.getLocations().keySet())
-            {
-            	searchAllData(region).addPoint(tempPoint.getName(), tempPoint);
-            }
+            searchAllData(tempPoint.getLocation().toString()).addPoint(tempPoint.getName(), tempPoint);
             	
             processEvent(
                     new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add " + type));
@@ -130,16 +127,10 @@ public class GeoModel {
         		}
         	}
         	
-        	//remove continent from points
+        	//remove points
         	for(String point : continents.get(rName).points.keySet())
         	{
-        		continents.get(rName).points.get(point).locations.remove(rName);
-        		
-        		//if there are no more locations in this Place, remove it.
-        		if(continents.get(rName).points.get(point).locations.isEmpty())
-        		{
-        			removeRegion(continents.get(rName).points.get(point));
-        		}
+        		this.removeRegion(continents.get(rName).points.get(point));
         	}
         	
         	continents.remove(rName);
@@ -177,16 +168,10 @@ public class GeoModel {
 	    		}
 	    	}
 	    	
-	    	//remove from points
+	    	//remove points
         	for(String point : countries.get(rName).points.keySet())
         	{
-        		countries.get(rName).points.get(point).locations.remove(rName);
-        		
-        		//if there are no more locations in this Place, remove it.
-        		if(countries.get(rName).points.get(point).locations.isEmpty())
-        		{
-        			removeRegion(countries.get(rName).points.get(point));
-        		}
+        		this.removeRegion(countries.get(rName).points.get(point));
         	}
 	    	
 	    	
@@ -218,16 +203,10 @@ public class GeoModel {
 	    		}
 	    	}
 	    	
-	    	//remove from points
+	    	//remove points
         	for(String point : cities.get(rName).points.keySet())
         	{
-        		cities.get(rName).points.get(point).locations.remove(rName);
-        		
-        		//if there are no more locations in this Place, remove it.
-        		if(cities.get(rName).points.get(point).locations.isEmpty())
-        		{
-        			removeRegion(cities.get(rName).points.get(point));
-        		}
+        		this.removeRegion(cities.get(rName).points.get(point));
         	}
         	
             cities.remove(rName);
@@ -240,6 +219,7 @@ public class GeoModel {
         
         case ("PlaceOfInterest"):
         	if(places.isEmpty()) break;
+        	
         	
         	if(places.get(rName).locations.isEmpty())
         	{

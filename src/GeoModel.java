@@ -257,7 +257,7 @@ public class GeoModel {
         		this.removeRegion(points.get(rName).points.get(point));       		
         	}
         
-        	if(points.get(rName).locations.isEmpty())
+        	if(points.get(rName).location == null)
         	{
         		points.remove(rName);
         	}

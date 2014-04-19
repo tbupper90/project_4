@@ -14,7 +14,7 @@ public class PointOfInterest extends Region
     private static final long serialVersionUID = -5566762757484533693L;
 
     private String description;
-    LinkedHashMap<String,Region> locations;
+    Region location;
     private String lat;
     private String lon;
     private String elev;
@@ -29,11 +29,11 @@ public class PointOfInterest extends Region
      * @param elev Elevation of the point
      */
     public PointOfInterest(String name, String description, 
-            String lat, String lon, String elev, LinkedHashMap<String,Region> locations)
+            String lat, String lon, String elev, Region location)
     {
     	this.name = name;
     	this.description = description;
-    	this.locations = locations;
+    	this.location = location;
     	this.lat = lat;
     	this.lon = lon;
     	this.elev = elev;
@@ -58,9 +58,9 @@ public class PointOfInterest extends Region
     /**
      * @return The place's location
      */
-    public LinkedHashMap<String,Region> getLocations()
+    public Region getLocation()
     {
-        return locations;
+        return location;
     }
 
     /**
@@ -98,6 +98,7 @@ public class PointOfInterest extends Region
     			}//end if
     	}//end for
     	
+    	/*
     	for(String location : locations.keySet())
     	{
     		if(this.area.equals(locations.get(location).area) == false)
@@ -105,7 +106,7 @@ public class PointOfInterest extends Region
     			return false;
     		}//end if
     	}//end for
-    	
+    	*/
     	return true;
     }
     

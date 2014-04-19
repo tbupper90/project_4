@@ -567,30 +567,26 @@ public class GeoModel {
 				break;
 				
 			case "points":
-				LinkedHashMap<String,Region> regions1 = new LinkedHashMap<String,Region>();
-				PointOfInterest point;
-				for(int i = 5; i < array.length; i++)
-				{
-					if(searchAllData(array[i]) != null) regions1.put(array[i],searchAllData(array[i]));
-				}
+				Region region = searchAllData(array[6]);
+				if (region == null) break;
+
+                PointOfInterest point;
+
+				point = new PointOfInterest(array[0],array[1],array[2],array[3], array[4], region);
 				
-				point = new PointOfInterest(array[0],array[1],array[2],array[3], array[4], regions1);
-				
-				for(String region : regions1.keySet())
-				{
-					regions1.get(region).addPoint(point.getName(), point);
+					region.addPoint(point.getName(), point);
 					
 					//QC
-					if(regions1.get(region).dataQC() == false)
+					if(region.dataQC() == false)
 					{
 						System.out.println("There is a problem with your data. Specifically " + 
-								regions1.get(region));
+								region);
 						
 //						break;
 						
 					}//end if QC
-				}//end for
-				points.put(point.getName(), point);
+
+					points.put(point.getName(), point);
 				
 //				processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "point added"));
 				

@@ -247,11 +247,13 @@ public class GeoModel {
         	
         	if(points.isEmpty()) break;
         	
+        	
+        	/*
         	for(String point : points.get(rName).points.keySet())
         	{
         		this.removeRegion(points.get(rName).points.get(point));       		
         	}
-        
+        	
         	if(points.get(rName).location == null)
         	{
         		points.remove(rName);
@@ -267,6 +269,10 @@ public class GeoModel {
         		
         		points.remove(rName);
         	}
+        	*/
+        	points.get(rName).getLocation().points.remove(rName);
+        
+        	points.remove(rName);
         	
         	processEvent(
                     new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove " + type));

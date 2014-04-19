@@ -13,29 +13,17 @@ public class GeoDriver {
 		view.setModel(model);
 		controller.setModel(model);
 		controller.setView(view);
-		
 
 		Continent cont = new Continent("ContinentName", null, null);
 		Country count = new Country("CountryName", null, null, cont);
         City city = new City("CityName", null, null, count);
-
-        
-
 		
         LinkedHashMap<String, Region> placeLocs = new LinkedHashMap<String, Region>();
         placeLocs.put(cont.toString(), cont);
-        PlaceOfInterest place = new PlaceOfInterest("PlaceName", null, null, placeLocs);
-
-<<<<<<< HEAD
-        LinkedHashMap<String, Region> pointLocs = new LinkedHashMap<String, Region>();
-        pointLocs.put(count.toString(), count);
-        PointOfInterest point = new PointOfInterest("PointName", null, null, null, null, pointLocs);
+        PlaceOfInterest place = new PlaceOfInterest("PlaceName", null, null, placeLocs);        
         
-        
-=======
         Region pointLoc = count;
         PointOfInterest point = new PointOfInterest("PointName", null, null, null, null, pointLoc);
->>>>>>> FETCH_HEAD
 
         model.addRegion(cont);
 		model.addRegion(count);

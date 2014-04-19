@@ -8,7 +8,8 @@ public class GeoModelTest {
     @Test
     public void test() {
         Continent continent = new Continent("Name", "Pop", "Area");
-        Country country = new Country("Name", "Pop", "Area", "Continent");
+        Country country = new Country("Name", "Pop", "Area",
+        		new Continent("ConName", "ConPop", "ConArea"));
         grabType(continent);
         grabType(country);
     }

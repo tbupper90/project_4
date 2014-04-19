@@ -301,6 +301,9 @@ public class GeoController
 	private class ImportListener implements ActionListener
 	{
 		boolean hasData = false; //Need to see if there is saved data on the system
+		//I will do this in a simple way, by just seeing if variables in other classes have values (such as ArrayLists containing objects)
+		
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (model==null)
@@ -353,6 +356,16 @@ public class GeoController
 				return;
 			}
 			
+		}
+		
+	}
+	
+	private class ExitListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			System.exit(0);
 		}
 		
 	}

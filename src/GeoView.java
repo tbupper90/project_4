@@ -231,6 +231,30 @@ public class GeoView extends JFrame implements ActionListener
     	String command = e.getActionCommand();
     	boolean hasEntry;
     	
+    	saveGeography.setEnabled(false);
+    	exportGeography.setEnabled(false);
+        continentPanel.editBtn.setEnabled(false);
+        continentPanel.delBtn.setEnabled(false);
+        continentPanel.viewBtn.setEnabled(false);
+        
+        countryPanel.editBtn.setEnabled(false);
+        countryPanel.delBtn.setEnabled(false);
+        countryPanel.viewBtn.setEnabled(false);
+        
+        cityPanel.editBtn.setEnabled(false);
+        cityPanel.delBtn.setEnabled(false);
+        cityPanel.viewBtn.setEnabled(false);
+        
+        placePanel.editBtn.setEnabled(false);
+        placePanel.delBtn.setEnabled(false);
+        placePanel.viewBtn.setEnabled(false);
+        
+        pointPanel.editBtn.setEnabled(false);
+        pointPanel.delBtn.setEnabled(false);
+        pointPanel.viewBtn.setEnabled(false);
+         
+    	
+    	
     	if (command.contains("Continent")) {
     		continentPanel.refreshList(model.getContinents());   		
             // Enable/disable buttons based on whether there are any continents

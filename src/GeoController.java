@@ -1,4 +1,5 @@
 import java.awt.event.*;
+import java.util.LinkedHashMap;
 
 import javax.swing.ListModel;
 
@@ -370,6 +371,21 @@ public class GeoController
 		
 	}
 	
+	private class SimpleAreaChartListener implements ActionListener
+	{
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+            LinkedHashMap<String, ? extends Region> map;
+	        
+	        String command = e.getActionCommand();
+	        switch (command) {
+	        case "Continents":
+	            map = model.getContinents();
+	            new SimpleChartView((LinkedHashMap<String, Region>)map, "Area", model);
+	        }
+	    }
+	}
+	
 	public void setView(GeoView newView)
 	{
 		this.geoView = newView;
@@ -401,6 +417,10 @@ public class GeoController
 		geoView.exportGeography.addActionListener(new ExportListener());
 		
 		geoView.saveGeography.addActionListener(new SaveListener());
+		
+		/** Action Listeners for Graph menu items */
+		ActionListener simpleAreaListener = new SimpleAreaChartListener();
+		geoView.simpleAreaContinents.addActionListener(simpleAreaListener);
 	}
 	
 	public void setAddEditView(AddEditView newView)

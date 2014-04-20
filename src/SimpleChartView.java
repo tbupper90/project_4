@@ -13,13 +13,15 @@ public class SimpleChartView extends JFrame implements ActionListener {
     private static final long serialVersionUID = -844411455751569515L;
     
     private BarsPanel barsPanel;
-    private JScrollPane barsScroll = new JScrollPane(barsPanel);
-    
+            
     private GeoModel model;
 
-    public SimpleChartView(LinkedHashMap<String, Region> regions, String sortMethod) {
+    public SimpleChartView(LinkedHashMap<String, Region> regions, String sortMethod,
+            GeoModel model) {
+        this.model = model;
+        model.addActionListener(this);
         barsPanel = new BarsPanel(regions, sortMethod);
-        add(barsScroll);
+        add(new JScrollPane(barsPanel));
         
         setSize(600, 400);
         setLocationRelativeTo(null);
@@ -27,23 +29,11 @@ public class SimpleChartView extends JFrame implements ActionListener {
         setVisible(true);
     }
         
-    public void actionPerformed(ActionEvent actionEvent) {
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("Update");
         repaint();
     }
-    
-    public void setModel(GeoModel newModel) {
-        model = newModel;
         
-        if (model != null)
-            model.addActionListener(this);
-        
-        repaint();
-    }
-    
-    public GeoModel getModel() {
-        return model;
-    }
-    
     class BarsPanel extends JPanel {
         private static final long serialVersionUID = -1079594597927132094L;
         private Color[] colors = {Color.DARK_GRAY, Color.LIGHT_GRAY};
@@ -69,6 +59,8 @@ public class SimpleChartView extends JFrame implements ActionListener {
             regionsCopy = new LinkedHashMap<String, Region>(regions);
             regionsCopy = sort.performSort(
                     (LinkedHashMap<String, Region>)regionsCopy, sortMethod);
+            names = new String[regionsCopy.size()];
+            data = new long[regionsCopy.size()];
             
             Region tempRegion;
             Iterator<Region> iter = regionsCopy.values().iterator();

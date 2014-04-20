@@ -15,8 +15,9 @@ public class GeoDriver {
 		controller.setView(view);
 
 		Continent cont1 = new Continent("Continent1", "1000", "300");
-        Continent cont2 = new Continent("Continent1", "2000", "200");
-        Continent cont3 = new Continent("Continent1", "3000", "100");
+        Continent cont2 = new Continent("Continent2", "2000", "200");
+        Continent cont3 = new Continent("Continent3", "3000", "100");
+        Continent cont4 = new Continent("Continent4", "4000", "50");
 		Country count1 = new Country("Country1", null, null, cont1);
         City city1 = new City("City1", null, null, count1);
 		
@@ -30,6 +31,7 @@ public class GeoDriver {
         model.addRegion(cont1);
         model.addRegion(cont2);
         model.addRegion(cont3);
+        model.addRegion(cont4);
 		model.addRegion(count1);
         model.addRegion(city1);
         model.addRegion(place1);

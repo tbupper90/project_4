@@ -58,7 +58,7 @@ public class GeoView extends JFrame implements ActionListener
     
     public GeoView() {
     	JPanel panel = new JPanel(new GridLayout(1, 0));
-		setMinimumSize(new Dimension(1200, 400));
+		setMinimumSize(new Dimension(1000, 400));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -313,7 +313,7 @@ public class GeoView extends JFrame implements ActionListener
             pointPanel.delBtn.setEnabled(hasEntry);
             pointPanel.viewBtn.setEnabled(hasEntry);
     	}
-
+    	
 
     }
     

@@ -103,12 +103,14 @@ public class GeoModel {
     public void removeRegion(Region r) {
         String rName = r.toString();
     	String type = r.getClass().getName();
-        switch (type) {
-       
         
-        case ("Continent"):
+    	
+    	switch (type) {
+
+    	case ("Continent"):
         	//Remove countries
-        	for(String country : continents.get(rName).countries.keySet())
+ 
+    	    for(String country : new ArrayList<String>(continents.get(rName).countries.keySet()))
         	{
 //        		System.out.println(continents.get(rName).countries);
         		this.removeRegion(continents.get(rName).countries.get(country));
@@ -116,7 +118,7 @@ public class GeoModel {
         	}
         	
         	//remove continent from places
-        	for(String place : continents.get(rName).places.keySet())
+    	    for(String place : new ArrayList<String>(continents.get(rName).places.keySet()))
         	{
         		continents.get(rName).places.get(place).locations.remove(rName);
         		
@@ -128,7 +130,7 @@ public class GeoModel {
         	}
         	
         	//remove points
-        	for(String point : continents.get(rName).points.keySet())
+        	for(String point : new ArrayList<String>(continents.get(rName).points.keySet()))
         	{
         		this.removeRegion(continents.get(rName).points.get(point));
         	}
@@ -150,14 +152,14 @@ public class GeoModel {
         	tmpCountry.getContinent().countries.remove(rName);
         	
         	//remove cities
-        	for(String city : countries.get(rName).cities.keySet())
+        	for(String city : new ArrayList<String>(countries.get(rName).cities.keySet()))
         	{
         		this.removeRegion(countries.get(rName).cities.get(city));
         	}
         	
         	
         	//remove from places
-	    	for(String place : countries.get(rName).places.keySet())
+	    	for(String place : new ArrayList<String>(countries.get(rName).places.keySet()))
 	    	{
 	    		countries.get(r.toString()).places.get(place).locations.remove(rName);
 	    		
@@ -169,7 +171,7 @@ public class GeoModel {
 	    	}
 	    	
 	    	//remove points
-        	for(String point : countries.get(rName).points.keySet())
+        	for(String point : new ArrayList<String>(countries.get(rName).points.keySet()))
         	{
         		this.removeRegion(countries.get(rName).points.get(point));
         	}
@@ -192,7 +194,7 @@ public class GeoModel {
 	    	tmpCity.getCountry().cities.remove(rName);
         
         	//remove from places
-	    	for(String place : cities.get(rName).places.keySet())
+	    	for(String place : new ArrayList<String>(cities.get(rName).places.keySet()))
 	    	{
 	    		cities.get(rName).places.get(place).locations.remove(rName);
 	    		
@@ -204,7 +206,7 @@ public class GeoModel {
 	    	}
 	    	
 	    	//remove points
-        	for(String point : cities.get(rName).points.keySet())
+        	for(String point : new ArrayList<String>(cities.get(rName).points.keySet()))
         	{
         		this.removeRegion(cities.get(rName).points.get(point));
         	}
@@ -228,7 +230,7 @@ public class GeoModel {
         	
         	else
         	{
-        		for(String location : places.get(rName).locations.keySet())
+        		for(String location : new ArrayList<String>(places.get(rName).locations.keySet()))
         		{
         			//for each location in Place r, remove this Place from the places list in each location.
         			places.get(rName).locations.get(location).places.remove(rName);

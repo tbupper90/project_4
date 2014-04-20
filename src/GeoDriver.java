@@ -23,25 +23,35 @@ public class GeoDriver {
         Country count3 = new Country("Country3", "2000", "120", cont2);
         Country count4 = new Country("Country4", "4000", "50", cont2);
         City city1 = new City("City1", "1000", "500", count1);
+        City city2 = new City("City2", "2000", "300", count1);
 		
         LinkedHashMap<String, Region> placeLocs = new LinkedHashMap<String, Region>();
         placeLocs.put(cont1.toString(), cont1);
         PlaceOfInterest place1 = new PlaceOfInterest("Place1", "300", null, placeLocs);        
+        PlaceOfInterest place2 = new PlaceOfInterest("Place2", "200", null, placeLocs);        
         
         Region pointLoc = count1;
         PointOfInterest point1 = new PointOfInterest("Point1", null, null, null, null, pointLoc);
+        PointOfInterest point2 = new PointOfInterest("Point2", null, null, null, null, pointLoc);
 
         model.addRegion(cont1);
         model.addRegion(cont2);
         model.addRegion(cont3);
         model.addRegion(cont4);
-		model.addRegion(count1);
+
+        model.addRegion(count1);
         model.addRegion(count2);
         model.addRegion(count3);
         model.addRegion(count4);
+
         model.addRegion(city1);
+        model.addRegion(city2);
+
         model.addRegion(place1);
+        model.addRegion(place2);
+
         model.addRegion(point1);
+        model.addRegion(point2);
       
 //        System.out.println(model.getContinents());
 		

@@ -54,7 +54,14 @@ public class GeoView extends JFrame implements ActionListener
     JMenuItem stackedPopCountriesInContinents = new JMenuItem("Countries Within Continents");
     JMenuItem stackedPopCitiesInCountries = new JMenuItem("Cities Within Countries");
     
-    JMenuItem map = new JMenuItem("Map");
+    JMenu map = new JMenu("Map");
+    JMenuItem mapAllCities = new JMenuItem("All Cities");
+    JMenuItem mapCitiesInContinents = new JMenuItem("Cities Within Continents");
+    JMenuItem mapCitiesInCountries = new JMenuItem("Cities Within Countries");
+    JMenuItem mapAllPoints = new JMenuItem("All Points of Interest");
+    JMenuItem mapPointsInContinents = new JMenuItem("Points of Interest Within Continents");
+    JMenuItem mapPointsInCountries = new JMenuItem("Points of Interest Within Countries");
+    JMenuItem mapPointsInCities = new JMenuItem("Points of Interest Within Cities");
     
     public GeoView() {
     	JPanel panel = new JPanel(new GridLayout(1, 0));
@@ -138,6 +145,14 @@ public class GeoView extends JFrame implements ActionListener
         stackedPopCitiesInCountries.setActionCommand("Populations of All Cities Within Countries");
         
         graphMenu.add(map);
+        
+        map.add(mapAllCities);
+        map.add(mapCitiesInContinents);
+        map.add(mapCitiesInCountries);
+        map.add(mapAllPoints);
+        map.add(mapPointsInContinents);
+        map.add(mapPointsInCountries);
+        map.add(mapPointsInCities);
 
         menuBar.add(graphMenu);
 

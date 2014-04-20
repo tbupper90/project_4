@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.LinkedHashMap;
 
 
@@ -8,7 +9,7 @@ public class GeoDriver {
 	
 
 	
-	public GeoDriver() {
+	public GeoDriver() throws IOException {
 //		System.out.println(model);
 		view.setModel(model);
 		controller.setModel(model);
@@ -52,12 +53,15 @@ public class GeoDriver {
 
         model.addRegion(point1);
         model.addRegion(point2);
+        
+        model.readTextFile("continents.csv", "Continents");
+        //model.readTextFile("countries.csv", "Countries");
       
 //        System.out.println(model.getContinents());
 		
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		new GeoDriver();
 
 	}

@@ -44,7 +44,7 @@ public class GeoModel {
         	//add r to the countries list in the continent that is contained in the Country r. Confusing right?
         	continents.get(tempCountry.getContinent().toString()).countries.put(tempCountry.getName(), tempCountry);
         	
-        	System.out.println(continents.get(tempCountry.getContinent().toString()).countries);
+//        	System.out.println(continents.get(tempCountry.getContinent().toString()).countries);
         	
             processEvent(
                     new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add " + type));
@@ -423,20 +423,22 @@ public class GeoModel {
 	 * @param type What kind of data the file contains
 	 */
 	private void assignVariables(String[] array, String file, String type)
-	{	
+	{
+
 //		System.out.println(array[0] + " " +  array[1] + " " + array[2]);
 		switch(type)
 		{
-			case "continents":
+			case "Continents":
 //				System.out.println("added " + array[0]);
-				continents.put(array[0], new Continent(array[0],array[1],array[2]));
+				addRegion(new Continent(array[0],array[1],array[2]));
+//			    continents.put(array[0], new Continent(array[0],array[1],array[2]));
 				
 //				processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "continent added"));
 				
 				break;
 
 		
-			case "countries":
+			case "Countries":
 				for(String continent : continents.keySet())
 				{
 					if(continent.equals(array[3]))
@@ -453,7 +455,8 @@ public class GeoModel {
 							
 						}
 						
-						countries.put(country.getName(), country);
+						addRegion(country);
+//						countries.put(country.getName(), country);
 						
 //						processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "country added"));
 						
@@ -461,7 +464,7 @@ public class GeoModel {
 					}//end if
 				}//end for
 		
-			case "cities":
+			case "Cities":
 			
 				if(array.length == 7)
 				{
@@ -530,7 +533,7 @@ public class GeoModel {
 				}//end else	
 				break;
 				
-			case "places":
+			case "Places of Interest":
 				LinkedHashMap<String,Region> regions = new LinkedHashMap<String,Region>();
 				PlaceOfInterest place;
 				for(int i = 3; i < array.length; i++)
@@ -568,7 +571,7 @@ public class GeoModel {
 				
 				break;
 				
-			case "points":
+			case "Points of Interest":
 				Region region = searchAllData(array[6]);
 				if (region == null) break;
 

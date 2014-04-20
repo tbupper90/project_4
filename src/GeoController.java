@@ -521,7 +521,6 @@ public class GeoController
 	public void setModel(GeoModel model) 
 	{
 		this.model = model;
-		System.out.println(this.model);
 		
 	}
 	

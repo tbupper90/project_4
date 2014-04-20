@@ -25,7 +25,7 @@ public class StackedChartView extends JFrame implements ActionListener {
         this.dataType = dataType;
         
         barsPanel = new BarsPanel();
-        add(barsPanel);
+        add(new JScrollPane(barsPanel));
         
         setTitle(title);
         setSize(600, 400);
@@ -62,6 +62,8 @@ public class StackedChartView extends JFrame implements ActionListener {
             regionsCopy = sort.performSort(regionsCopy, dataType);
             
             numOfRegions = regionsCopy.size();
+            if (numOfRegions == 0) dispose();
+            
             names = new String[numOfRegions];
             data = new long[numOfRegions];
             

@@ -2,7 +2,6 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
-
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
@@ -28,7 +27,7 @@ public class SimpleChartView extends JFrame implements ActionListener {
         this.dataType = dataType;
         
         barsPanel = new BarsPanel();
-        add(barsPanel);
+        add(new JScrollPane(barsPanel));
         
         setTitle(title);
         setSize(600, 400);
@@ -64,6 +63,8 @@ public class SimpleChartView extends JFrame implements ActionListener {
             regionsCopy = sort.performSort(regionsCopy, dataType);
             
             numOfRegions = regionsCopy.size();
+            if (numOfRegions == 0) dispose();
+            
             names = new String[numOfRegions];
             data = new long[numOfRegions];
             
@@ -93,9 +94,11 @@ public class SimpleChartView extends JFrame implements ActionListener {
                 g.fillRect(i * barWidth,
                         getHeight() - barHeight[i] - 5,
                         barWidth,
-                        barHeight[i]);
-                
+                        barHeight[i]);                
             }
+            // Separator bar
+            g.setColor(Color.BLACK);
+            g.fillRect(0, getHeight() - 5, getWidth(), 5);
         }
     }
 }

@@ -56,7 +56,7 @@ public class GeoDriver {
         
         model.readTextFile("continents.csv", "Continents");
         model.readTextFile("countries.csv", "Countries");
-//      model.readTextFile("cities.csv", "Cities");
+        model.readTextFile("cities.csv", "Cities");
 //      model.readTextFile("places.csv", "Places of Interest");
 //      model.readTextFile("points.csv", "Points of Interest");
       

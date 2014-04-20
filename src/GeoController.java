@@ -382,7 +382,7 @@ public class GeoController
 	        
             // The whole command string will get passed as the title
             String command = e.getActionCommand();
-	        // The first part of the split will get passed as the sort method,
+	        // The first part of the split will get passed as the data type,
             // while the second part determines the regions to get from model
             String[] split = command.split("s ", 2);
 	        

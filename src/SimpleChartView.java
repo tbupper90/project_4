@@ -14,18 +14,18 @@ public class SimpleChartView extends JFrame implements ActionListener {
     
     private GeoModel model;
     private LinkedHashMap<String, Region> regions;
-    private String sortMethod;
+    private String dataType;
     private BarsPanel barsPanel;
             
 
     public SimpleChartView(String title, LinkedHashMap<String, Region> regions,
-            String sortMethod, GeoModel newModel) {
+            String dataType, GeoModel newModel) {
         
         model = newModel;
         model.addActionListener(this);
         
         this.regions = regions;
-        this.sortMethod = sortMethod;
+        this.dataType = dataType;
         
         barsPanel = new BarsPanel();
         add(barsPanel);
@@ -62,7 +62,7 @@ public class SimpleChartView extends JFrame implements ActionListener {
             // affecting the original
             regionsCopy = new LinkedHashMap<String, Region>(regions);
             regionsCopy = sort.performSort(
-                    (LinkedHashMap<String, Region>)regionsCopy, sortMethod);
+                    (LinkedHashMap<String, Region>)regionsCopy, dataType);
             names = new String[regionsCopy.size()];
             data = new long[regionsCopy.size()];
             
@@ -71,9 +71,9 @@ public class SimpleChartView extends JFrame implements ActionListener {
             for (int i = 0; iter.hasNext(); i++) {
                 tempRegion = iter.next();
                 names[i] = tempRegion.getName();
-                if (sortMethod.equals("Area"))
+                if (dataType.equals("Area"))
                     data[i] = Long.parseLong(tempRegion.getArea());
-                if (sortMethod.equals("Population"))
+                if (dataType.equals("Population"))
                     data[i] = Long.parseLong(tempRegion.getPop());
             }
             

@@ -423,7 +423,7 @@ public class GeoController
 	    public void actionPerformed(ActionEvent e) {
             // Declaring map this way, then casting it only when it's passed
 	        // was the only way to get this idea to work
-	        LinkedHashMap<String, ? extends Region> map = null;
+	        LinkedHashMap<String, ? extends Region> regions = null;
 	        
             // The whole command string will get passed as the title
             String command = e.getActionCommand();
@@ -433,20 +433,20 @@ public class GeoController
 	        
             switch (split[1]) {
 	        case "of All Continents":
-	            map = model.getContinents();
+	            regions = model.getContinents();
 	            break;
             case "of All Countries":
-                map = model.getCountries();
+                regions = model.getCountries();
                 break;
             case "of All Cities":
-                map = model.getCities();
+                regions = model.getCities();
                 break;
             case "of All Places of Interest":
-                map = model.getPlaces();
+                regions = model.getPlaces();
                 break;
 	        }
             
-            new SimpleChartView(command, (LinkedHashMap<String, Region>)map,
+            new SimpleChartView(command, (LinkedHashMap<String, Region>)regions,
                     split[0], model);
 	    }
 	}
@@ -455,42 +455,92 @@ public class GeoController
 	{
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
-	        LinkedHashMap<String, ? extends Region> map = null;
+	        LinkedHashMap<String, ? extends Region> regions = null;
 	        
 	        String command = e.getActionCommand();
 	        String[] split = command.split("s ", 2);
-	        String region;
+	        String parent;
+	        
+	        int[] i;
+	        ListModel<String> list;
 	        
 	        switch (split[1]) {
 	        case "of All Countries Within Continents":
-	            region = "Continent1";
-	            map = model.getContinents().get(region).countries;
-	            command = command.replaceAll("Continents", region);
+
+	            i = geoView.getContinentPanel().list.getSelectedIndices();
+                list = geoView.getContinentPanel().list.getModel();
+                                
+                for(int index : i)
+                {
+                    parent = list.getElementAt(index);
+                    regions = model.getContinents().get(parent).countries;
+                    command = command.replace("Continents", "");
+                    new StackedChartView(command + parent,
+                            (LinkedHashMap<String, Region>)regions, split[0], model);
+                }
 	            break;
+	            
             case "of All Cities Within Countries":
-                region = "Country1";
-                map = model.getCountries().get(region).cities;
-                command = command.replaceAll("Countries", region);
+
+                i = geoView.getCountryPanel().list.getSelectedIndices();
+                list = geoView.getCountryPanel().list.getModel();
+                                
+                for(int index : i)
+                {
+                    parent = list.getElementAt(index);
+                    regions = model.getCountries().get(parent).cities;
+                    command = command.replace("Countries", "");
+                    new StackedChartView(command + parent,
+                            (LinkedHashMap<String, Region>)regions, split[0], model);
+                }
                 break;
+
             case "of All Places Within Continents":
-                region = "Continent1";
-                map = model.getContinents().get(region).places;
-                command = command.replaceAll("Continents", region);
+
+                i = geoView.getContinentPanel().list.getSelectedIndices();
+                list = geoView.getContinentPanel().list.getModel();
+                                
+                for(int index : i)
+                {
+                    parent = list.getElementAt(index);
+                    regions = model.getContinents().get(parent).places;
+                    command = command.replace("Continents", "");
+                    new StackedChartView(command + parent,
+                            (LinkedHashMap<String, Region>)regions, split[0], model);
+                }
                 break;
+                
             case "of All Places Within Countries":
-                region = "Country1";
-                map = model.getCountries().get(region).places;
-                command = command.replaceAll("Countries", region);
+
+                i = geoView.getCountryPanel().list.getSelectedIndices();
+                list = geoView.getCountryPanel().list.getModel();
+                                
+                for(int index : i)
+                {
+                    parent = list.getElementAt(index);
+                    regions = model.getCountries().get(parent).places;
+                    command = command.replace("Countries", "");
+                    new StackedChartView(command + parent,
+                            (LinkedHashMap<String, Region>)regions, split[0], model);
+                }
                 break;
+                
             case "of All Places Within Cities":
-                region = "City1";
-                map = model.getCities().get(region).places;
-                command = command.replaceAll("Cities", region);
+
+                i = geoView.getCityPanel().list.getSelectedIndices();
+                list = geoView.getCityPanel().list.getModel();
+                                
+                for(int index : i)
+                {
+                    parent = list.getElementAt(index);
+                    regions = model.getCities().get(parent).places;
+                    command = command.replace("Cities", "");
+                    new StackedChartView(command + parent,
+                            (LinkedHashMap<String, Region>)regions, split[0], model);
+                }
                 break;
 	        }
 	        
-            new StackedChartView(command, (LinkedHashMap<String, Region>)map,
-                    split[0], model);
 	    }
 	}
 

@@ -399,9 +399,6 @@ public class GeoController
             case "of All Places of Interest":
                 map = model.getPlaces();
                 break;
-            case "of All Points of Interest":
-                map = model.getPoints();
-                break;
 	        }
             
             new SimpleChartView(command, (LinkedHashMap<String, Region>)map,
@@ -417,6 +414,38 @@ public class GeoController
 	        
 	        String command = e.getActionCommand();
 	        String[] split = command.split("s ", 2);
+	        String region;
+	        
+	        switch (split[1]) {
+	        case "of All Countries Within Continents":
+	            region = "Continent1";
+	            map = model.getContinents().get(region).countries;
+	            command = command.replaceAll("Continents", region);
+	            break;
+            case "of All Cities Within Countries":
+                region = "Country1";
+                map = model.getCountries().get(region).cities;
+                command = command.replaceAll("Countries", region);
+                break;
+            case "of All Places Within Continents":
+                region = "Continent1";
+                map = model.getContinents().get(region).places;
+                command = command.replaceAll("Continents", region);
+                break;
+            case "of All Places Within Countries":
+                region = "Country1";
+                map = model.getCountries().get(region).places;
+                command = command.replaceAll("Countries", region);
+                break;
+            case "of All Places Within Cities":
+                region = "City1";
+                map = model.getCities().get(region).places;
+                command = command.replaceAll("Cities", region);
+                break;
+	        }
+	        
+            //new SimpleChartView(command, (LinkedHashMap<String, Region>)map,
+            //        split[0], model);
 	    }
 	}
 
@@ -462,6 +491,15 @@ public class GeoController
         geoView.simplePopContinents.addActionListener(simpleListener);
         geoView.simplePopCountries.addActionListener(simpleListener);
         geoView.simplePopCities.addActionListener(simpleListener);
+
+        ActionListener stackedListener = new StackedChartListener();
+        geoView.stackedAreaCountriesInContinents.addActionListener(stackedListener);
+        geoView.stackedAreaCitiesInCountries.addActionListener(stackedListener);
+        geoView.stackedAreaPlacesInContinents.addActionListener(stackedListener);
+        geoView.stackedAreaPlacesInCountries.addActionListener(stackedListener);
+        geoView.stackedAreaPlacesInCities.addActionListener(stackedListener);
+        geoView.stackedPopCountriesInContinents.addActionListener(stackedListener);
+        geoView.stackedPopCitiesInCountries.addActionListener(stackedListener);
 	}
 	
 	public void setAddEditView(AddEditView newView)

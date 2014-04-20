@@ -12,17 +12,22 @@ import java.util.LinkedHashMap;
 public class SimpleChartView extends JFrame implements ActionListener {
     private static final long serialVersionUID = -844411455751569515L;
     
+    private GeoModel model;
+    private LinkedHashMap<String, Region> regions;
+    private String sortMethod;
     private BarsPanel barsPanel;
             
-    private GeoModel model;
 
     public SimpleChartView(String title, LinkedHashMap<String, Region> regions,
-            String sortMethod, GeoModel model) {
+            String sortMethod, GeoModel newModel) {
         
-        this.model = model;
+        model = newModel;
         model.addActionListener(this);
         
-        barsPanel = new BarsPanel(regions, sortMethod);
+        this.regions = regions;
+        this.sortMethod = sortMethod;
+        
+        barsPanel = new BarsPanel();
         add(barsPanel);
         
         setTitle(title);
@@ -43,16 +48,13 @@ public class SimpleChartView extends JFrame implements ActionListener {
         private int barHeight[];
         private int barWidth = 20;
         
-        private LinkedHashMap<String, Region> regions;
         private LinkedHashMap<String, Region> regionsCopy;
         private String[] names;
         private long[] data;
         
-        private String sortMethod;
         
-        public BarsPanel(LinkedHashMap<String, Region> regions, String sortMethod) {
-            this.regions = regions;
-            this.sortMethod = sortMethod;
+        public BarsPanel() {
+
         }
         
         private void refreshData() {

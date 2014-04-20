@@ -18,7 +18,10 @@ public class GeoDriver {
         Continent cont2 = new Continent("Continent2", "2000", "280");
         Continent cont3 = new Continent("Continent3", "3000", "260");
         Continent cont4 = new Continent("Continent4", "4000", "150");
-		Country count1 = new Country("Country1", "1000", "400", cont1);
+		Country count1 = new Country("Country1", "1000", "200", cont1);
+        Country count2 = new Country("Country2", "1500", "180", cont1);
+        Country count3 = new Country("Country3", "2000", "120", cont2);
+        Country count4 = new Country("Country4", "4000", "50", cont2);
         City city1 = new City("City1", "1000", "500", count1);
 		
         LinkedHashMap<String, Region> placeLocs = new LinkedHashMap<String, Region>();
@@ -33,6 +36,9 @@ public class GeoDriver {
         model.addRegion(cont3);
         model.addRegion(cont4);
 		model.addRegion(count1);
+        model.addRegion(count2);
+        model.addRegion(count3);
+        model.addRegion(count4);
         model.addRegion(city1);
         model.addRegion(place1);
         model.addRegion(point1);

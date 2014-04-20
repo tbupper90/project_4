@@ -376,38 +376,47 @@ public class GeoController
 	    @SuppressWarnings("unchecked")
         @Override
 	    public void actionPerformed(ActionEvent e) {
-            LinkedHashMap<String, ? extends Region> map;
+            // Declaring map this way, then casting it only when it's passed
+	        // was the only way to get this idea to work
+	        LinkedHashMap<String, ? extends Region> map = null;
 	        
+            // The whole command string will get passed as the title
             String command = e.getActionCommand();
-	        String[] split = command.split("s ", 2);
+	        // The first part of the split will get passed as the sort method,
+            // while the second part determines the regions to get from model
+            String[] split = command.split("s ", 2);
 	        
             switch (split[1]) {
 	        case "of All Continents":
 	            map = model.getContinents();
-	            new SimpleChartView(command, (LinkedHashMap<String, Region>)map,
-	                    split[0], model);
 	            break;
             case "of All Countries":
                 map = model.getCountries();
-                new SimpleChartView(command, (LinkedHashMap<String, Region>)map,
-                        split[0], model);
                 break;
             case "of All Cities":
                 map = model.getCities();
-                new SimpleChartView(command, (LinkedHashMap<String, Region>)map,
-                        split[0], model);
                 break;
             case "of All Places of Interest":
                 map = model.getPlaces();
-                new SimpleChartView(command, (LinkedHashMap<String, Region>)map,
-                        split[0], model);
                 break;
             case "of All Points of Interest":
                 map = model.getPoints();
-                new SimpleChartView(command, (LinkedHashMap<String, Region>)map,
-                        split[0], model);
                 break;
 	        }
+            
+            new SimpleChartView(command, (LinkedHashMap<String, Region>)map,
+                    split[0], model);
+	    }
+	}
+	
+	private class StackedChartListener implements ActionListener {
+	    
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+	        LinkedHashMap<String, ? extends Region> map = null;
+	        
+	        String command = e.getActionCommand();
+	        String[] split = command.split("s ", 2);
 	    }
 	}
 
@@ -450,12 +459,9 @@ public class GeoController
 		geoView.simpleAreaCountries.addActionListener(simpleListener);
         geoView.simpleAreaCities.addActionListener(simpleListener);
         geoView.simpleAreaPlaces.addActionListener(simpleListener);
-        geoView.simpleAreaPoints.addActionListener(simpleListener);
         geoView.simplePopContinents.addActionListener(simpleListener);
         geoView.simplePopCountries.addActionListener(simpleListener);
         geoView.simplePopCities.addActionListener(simpleListener);
-        geoView.simplePopPlaces.addActionListener(simpleListener);
-        geoView.simplePopPoints.addActionListener(simpleListener);
 	}
 	
 	public void setAddEditView(AddEditView newView)

@@ -35,14 +35,11 @@ public class GeoView extends JFrame implements ActionListener
     JMenuItem simpleAreaCountries = new JMenuItem("Countries");
     JMenuItem simpleAreaCities = new JMenuItem("Cities");
     JMenuItem simpleAreaPlaces = new JMenuItem("Places of Interest");
-    JMenuItem simpleAreaPoints = new JMenuItem("Points of Interest");
     
     JMenu simplePop = new JMenu("Population");
     JMenuItem simplePopContinents = new JMenuItem("Continents");
     JMenuItem simplePopCountries = new JMenuItem("Countries");
     JMenuItem simplePopCities = new JMenuItem("Cities");
-    JMenuItem simplePopPlaces = new JMenuItem("Places of Interest");
-    JMenuItem simplePopPoints = new JMenuItem("Points of Interest");
     
     JMenu stacked = new JMenu("Stacked Bar Chart");
     
@@ -56,9 +53,6 @@ public class GeoView extends JFrame implements ActionListener
     JMenu stackedPop = new JMenu("Population");
     JMenuItem stackedPopCountriesInContinents = new JMenuItem("Countries Within Continents");
     JMenuItem stackedPopCitiesInCountries = new JMenuItem("Cities Within Countries");
-    JMenuItem stackedPopPlacesInContinents = new JMenuItem("Places of Interest Within Continents");
-    JMenuItem stackedPopPlacesInCountries = new JMenuItem("Places of Interest Within Countries");
-    JMenuItem stackedPopPlacesInCities = new JMenuItem("Places of Interest Within Cities");
     
     JMenuItem map = new JMenuItem("Map");
     
@@ -96,45 +90,53 @@ public class GeoView extends JFrame implements ActionListener
 		menuBar.add(fileMenu);
 		
 		graphMenu.add(simple);
+
 		simple.add(simpleArea);
+
 		simpleArea.add(simpleAreaContinents);
         simpleArea.add(simpleAreaCountries);
         simpleArea.add(simpleAreaCities);
         simpleArea.add(simpleAreaPlaces);
-//      simpleArea.add(simpleAreaPoints);
-		simple.add(simplePop);
+
+        simple.add(simplePop);
+
         simplePop.add(simplePopContinents);
         simplePop.add(simplePopCountries);
         simplePop.add(simplePopCities);
-//      simplePop.add(simplePopPlaces);
-//      simplePop.add(simplePopPoints);
         
         graphMenu.add(stacked);
+
         stacked.add(stackedArea);
+
         stackedArea.add(stackedAreaCountriesInContinents);
         stackedArea.add(stackedAreaCitiesInCountries);
         stackedArea.add(stackedAreaPlacesInContinents);
         stackedArea.add(stackedAreaPlacesInCountries);
         stackedArea.add(stackedAreaPlacesInCities);
+
         stacked.add(stackedPop);
+
         stackedPop.add(stackedPopCountriesInContinents);
         stackedPop.add(stackedPopCitiesInCountries);
-//      stackedPop.add(stackedPopPlacesInContinents);
-//      stackedPop.add(stackedPopPlacesInCountries);
-//      stackedPop.add(stackedPopPlacesInCities);
 
         simpleAreaContinents.setActionCommand("Areas of All Continents");
         simpleAreaCountries.setActionCommand("Areas of All Countries");
         simpleAreaCities.setActionCommand("Areas of All Cities");
         simpleAreaPlaces.setActionCommand("Areas of All Places of Interest");
-        simpleAreaPoints.setActionCommand("Areas of All Points of Interest");
 
         simplePopContinents.setActionCommand("Populations of All Continents");
         simplePopCountries.setActionCommand("Populations of All Countries");
         simplePopCities.setActionCommand("Populations of All Cities");
-        simplePopPlaces.setActionCommand("Populations of All Places of Interest");
-        simplePopPoints.setActionCommand("Populations of All Points of Interest");
 
+        stackedAreaCountriesInContinents.setActionCommand("Areas of All Countries Within Continents");
+        stackedAreaCitiesInCountries.setActionCommand("Areas of All Cities Within Countries");
+        stackedAreaPlacesInContinents.setActionCommand("Areas of All Places Within Continents");
+        stackedAreaPlacesInCountries.setActionCommand("Areas of All Places Within Countries");
+        stackedAreaPlacesInCities.setActionCommand("Areas of All Places Within Cities");
+        
+        stackedPopCountriesInContinents.setActionCommand("Populations of All Countries Within Continents");
+        stackedPopCitiesInCountries.setActionCommand("Populations of All Cities Within Countries");
+        
         graphMenu.add(map);
 
         menuBar.add(graphMenu);
@@ -298,13 +300,9 @@ public class GeoView extends JFrame implements ActionListener
             placePanel.viewBtn.setEnabled(hasEntry);
             // Enable/disable menu items
             simpleAreaPlaces.setEnabled(hasEntry);
-            simplePopPlaces.setEnabled(hasEntry);
             stackedAreaPlacesInContinents.setEnabled(hasEntry);
             stackedAreaPlacesInCountries.setEnabled(hasEntry);
             stackedAreaPlacesInCities.setEnabled(hasEntry);
-            stackedPopPlacesInContinents.setEnabled(hasEntry);
-            stackedPopPlacesInCountries.setEnabled(hasEntry);
-            stackedPopPlacesInCities.setEnabled(hasEntry);
     	}
 
     	if (command.contains("PointOfInterest")) {
@@ -314,9 +312,6 @@ public class GeoView extends JFrame implements ActionListener
             pointPanel.editBtn.setEnabled(hasEntry);
             pointPanel.delBtn.setEnabled(hasEntry);
             pointPanel.viewBtn.setEnabled(hasEntry);
-            // Enable/disable menu items
-            simpleAreaPoints.setEnabled(hasEntry);
-            simplePopPoints.setEnabled(hasEntry);
     	}
 
 

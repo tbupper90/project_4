@@ -1,4 +1,8 @@
+import java.awt.event.ActionListener;
 
-public class StackedChartView {
+import javax.swing.JFrame;
+
+
+public class StackedChartView extends JFrame implements ActionListener {
 
 }

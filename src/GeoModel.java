@@ -433,7 +433,7 @@ public class GeoModel {
 						if(continents.get(continent).dataQC() == false)
 						{
 							System.out.println("There is a problem with your data. Specifically " + continents.get(continent));
-							
+							continents.get(continent).dataQC();
 //							break;
 							
 						}
@@ -761,6 +761,23 @@ public class GeoModel {
 //		
 //	}
 
-    
+	public void saveGeography()
+	{
+		
+	}
+	
+	public void exportGeography()
+	{
+		
+	}
+	
+	public void discardGeography()
+	{
+		continents.clear();
+		countries.clear();
+		cities.clear();
+		places.clear();
+		points.clear();
+	}
     
 }

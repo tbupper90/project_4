@@ -1,6 +1,8 @@
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
 
@@ -302,8 +304,9 @@ public class GeoController
 	private class ImportListener implements ActionListener
 	{
 		boolean hasData = false; //Need to see if there is saved data on the system
-		//I will do this in a simple way, by just seeing if variables in other classes have values (such as ArrayLists containing objects)
-		
+		String fileName;
+		String[] options;
+		int choice;
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -311,9 +314,52 @@ public class GeoController
 			{
 				return;
 			}
-			if (hasData)
+			if (!(model.getContinents().isEmpty() && model.getContinents().isEmpty() && model.getContinents().isEmpty() 
+					&& model.getContinents().isEmpty() && model.getContinents().isEmpty())) //There is unsaved data in the system
 			{
-				//Do stuff with the data
+				options = new String[] {"Export", "Save", "Discard"};
+				choice = JOptionPane.showOptionDialog(null, "Would you like to export, save, or discard the data?", "Save, export, or discard", 1, 1, 
+						null, options, "Discard");
+				if (choice==1) //Export
+				{
+					exportGeography();
+				}
+				else if (choice == 2) //Save
+				{
+					saveGeography();
+				}
+				else if (choice == 3)
+				{
+					discardGeography();
+				}
+			}
+			else 
+			{
+				fileName = JOptionPane.showInputDialog("Please enter the name of the text file you wish to import from. Press 'OK' if you wish to "
+						+ "import from a Binary file istead.");
+				
+				if (fileName.equals(null))
+				{
+					fileName = JOptionPane.showInputDialog("Please enter the name of the binary file you wish to import from.");
+					try 
+					{	
+						model.readBinary(fileName);
+					} 
+					catch (ClassNotFoundException | IOException e1) 
+					{
+						e1.printStackTrace();
+					}
+				}
+				String fileType = JOptionPane.showInputDialog("And please enter the name of the objects in this file (for example, 'Continents').");
+				try 
+				{
+					model.readTextFile(fileName, fileType);
+				} 
+				catch (IOException e1) 
+				{
+					e1.printStackTrace();
+				}
+				
 			}
 		}
 		
@@ -521,8 +567,9 @@ public class GeoController
 	public void setModel(GeoModel model) 
 	{
 		this.model = model;
-		
 	}
+	
+	
 	
 	
 }

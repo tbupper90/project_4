@@ -30,24 +30,16 @@ public class GeoModel {
         case ("Continent"):
             continents.put(r.toString(), (Continent)r);
         	
-	        processEvent(
-	        		new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add " + type));
             break;
         case ("Country"):
         	
         	Country tempCountry = (Country) r;
         
-        
             countries.put(tempCountry.getName(), tempCountry);
-           
         	
         	//add r to the countries list in the continent that is contained in the Country r. Confusing right?
         	continents.get(tempCountry.getContinent().toString()).countries.put(tempCountry.getName(), tempCountry);
-        	
 //        	System.out.println(continents.get(tempCountry.getContinent().toString()).countries);
-        	
-            processEvent(
-                    new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add " + type));
         	
             break;
         case ("City"):
@@ -57,9 +49,6 @@ public class GeoModel {
         	//add r to the cities list in the city that is contained in the City r. So confusing!
         	countries.get(tempCity.getCountry().toString()).cities.put(tempCity.getName(), tempCity);
             
-            processEvent(
-                    new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add " + type));
-        	
         	break;
         case ("PlaceOfInterest"):
         	PlaceOfInterest tempPlace = (PlaceOfInterest) r;
@@ -72,9 +61,6 @@ public class GeoModel {
         		searchAllData(region).addPlace(tempPlace.getName(), tempPlace);
         	}
         
-            processEvent(
-                    new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add " + type));
-        	
         	break;
         case ("PointOfInterest"):
         	PointOfInterest tempPoint = (PointOfInterest) r;
@@ -84,9 +70,6 @@ public class GeoModel {
             //Add Point to each region it is contained in.
             searchAllData(tempPoint.getLocation().toString()).addPoint(tempPoint.getName(), tempPoint);
             	
-            processEvent(
-                    new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add " + type));
-        
             break;
         }
         // Notify the listener
@@ -455,7 +438,7 @@ public class GeoModel {
 							
 						}
 						
-						addRegion(country);
+                        addRegion(country);
 //						countries.put(country.getName(), country);
 						
 //						processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "country added"));

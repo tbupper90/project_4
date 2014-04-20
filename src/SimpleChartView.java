@@ -47,7 +47,7 @@ public class SimpleChartView extends JFrame implements ActionListener {
         
         private int numOfRegions;
         private int barHeight[];
-        private int barWidth = 20;
+        private int barWidth = 40;
         
         private LinkedHashMap<String, Region> regionsCopy;
         private String[] names;

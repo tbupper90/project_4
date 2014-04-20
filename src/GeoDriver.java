@@ -55,7 +55,10 @@ public class GeoDriver {
         model.addRegion(point2);
         
         model.readTextFile("continents.csv", "Continents");
-        //model.readTextFile("countries.csv", "Countries");
+        model.readTextFile("countries.csv", "Countries");
+//      model.readTextFile("cities.csv", "Cities");
+//      model.readTextFile("places.csv", "Places of Interest");
+//      model.readTextFile("points.csv", "Points of Interest");
       
 //        System.out.println(model.getContinents());
 		
@@ -64,6 +67,10 @@ public class GeoDriver {
 	public static void main(String[] args) throws IOException {
 		new GeoDriver();
 
+	}
+	
+	public static void testStuff() {
+	    
 	}
 
 }

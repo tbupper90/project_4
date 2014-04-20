@@ -14,22 +14,26 @@ public class GeoDriver {
 		controller.setModel(model);
 		controller.setView(view);
 
-		Continent cont = new Continent("ContinentName", null, null);
-		Country count = new Country("CountryName", null, null, cont);
-        City city = new City("CityName", null, null, count);
+		Continent cont1 = new Continent("Continent1", "1000", "300");
+        Continent cont2 = new Continent("Continent1", "2000", "200");
+        Continent cont3 = new Continent("Continent1", "3000", "100");
+		Country count1 = new Country("Country1", null, null, cont1);
+        City city1 = new City("City1", null, null, count1);
 		
         LinkedHashMap<String, Region> placeLocs = new LinkedHashMap<String, Region>();
-        placeLocs.put(cont.toString(), cont);
-        PlaceOfInterest place = new PlaceOfInterest("PlaceName", null, null, placeLocs);        
+        placeLocs.put(cont1.toString(), cont1);
+        PlaceOfInterest place1 = new PlaceOfInterest("Place1", null, null, placeLocs);        
         
-        Region pointLoc = count;
-        PointOfInterest point = new PointOfInterest("PointName", null, null, null, null, pointLoc);
+        Region pointLoc = count1;
+        PointOfInterest point1 = new PointOfInterest("Point1", null, null, null, null, pointLoc);
 
-        model.addRegion(cont);
-		model.addRegion(count);
-        model.addRegion(city);
-        model.addRegion(place);
-        model.addRegion(point);
+        model.addRegion(cont1);
+        model.addRegion(cont2);
+        model.addRegion(cont3);
+		model.addRegion(count1);
+        model.addRegion(city1);
+        model.addRegion(place1);
+        model.addRegion(point1);
       
 //        System.out.println(model.getContinents());
 		

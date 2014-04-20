@@ -473,7 +473,8 @@ public class GeoModel {
 									
 								}
 								
-								cities.put(city.getName(),city);
+								addRegion(city);
+//								cities.put(city.getName(),city);
 								
 //								processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "city added"));
 								
@@ -506,7 +507,8 @@ public class GeoModel {
 									
 								}
 								
-								cities.put(city.getName(),city);
+								addRegion(city);
+//								cities.put(city.getName(),city);
 								
 //								processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "city added"));
 //								System.out.println(city.getName() + " added to " + continents.get(continent).countries.get(country));
@@ -547,15 +549,15 @@ public class GeoModel {
 				}
 				
 				
-				
-				places.put(place.getName(), place);
+				addRegion(place);
+//				places.put(place.getName(), place);
 				
 //				processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "place added"));
 				
 				break;
 				
 			case "Points of Interest":
-				Region region = searchAllData(array[6]);
+			    Region region = searchAllData(array[5]);
 				if (region == null) break;
 
                 PointOfInterest point;
@@ -573,8 +575,9 @@ public class GeoModel {
 //						break;
 						
 					}//end if QC
-
-					points.put(point.getName(), point);
+					
+					addRegion(point);
+//					points.put(point.getName(), point);
 				
 //				processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "point added"));
 				

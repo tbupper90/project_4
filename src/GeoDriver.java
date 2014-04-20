@@ -1,5 +1,8 @@
+import java.awt.EventQueue;
 import java.io.IOException;
 import java.util.LinkedHashMap;
+
+import javax.swing.SwingUtilities;
 
 
 public class GeoDriver {
@@ -9,12 +12,13 @@ public class GeoDriver {
 	
 
 	
-	public GeoDriver() throws IOException {
+	public GeoDriver() {
 //		System.out.println(model);
 		view.setModel(model);
 		controller.setModel(model);
 		controller.setView(view);
 
+/*		
 		Continent cont1 = new Continent("Continent1", "1000", "300");
         Continent cont2 = new Continent("Continent2", "2000", "280");
         Continent cont3 = new Continent("Continent3", "3000", "260");
@@ -53,19 +57,32 @@ public class GeoDriver {
 
         model.addRegion(point1);
         model.addRegion(point2);
+*/
+		
+        try {
+            model.readTextFile("continents.csv", "Continents");
+            model.readTextFile("countries.csv", "Countries");
+            model.readTextFile("cities.csv", "Cities");
+            model.readTextFile("places.csv", "Places of Interest");
+            model.readTextFile("points.csv", "Points of Interest");
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         
-        model.readTextFile("continents.csv", "Continents");
-        model.readTextFile("countries.csv", "Countries");
-//      model.readTextFile("cities.csv", "Cities");
-//      model.readTextFile("places.csv", "Places of Interest");
-//      model.readTextFile("points.csv", "Points of Interest");
-      
+        
 //        System.out.println(model.getContinents());
 		
 	}
 	
-	public static void main(String[] args) throws IOException {
-		new GeoDriver();
+	public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
+                new GeoDriver();
+            }
+        });
 
 	}
 	

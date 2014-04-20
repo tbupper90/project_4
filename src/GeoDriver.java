@@ -15,15 +15,15 @@ public class GeoDriver {
 		controller.setView(view);
 
 		Continent cont1 = new Continent("Continent1", "1000", "300");
-        Continent cont2 = new Continent("Continent2", "2000", "200");
-        Continent cont3 = new Continent("Continent3", "3000", "100");
-        Continent cont4 = new Continent("Continent4", "4000", "50");
-		Country count1 = new Country("Country1", null, null, cont1);
-        City city1 = new City("City1", null, null, count1);
+        Continent cont2 = new Continent("Continent2", "2000", "280");
+        Continent cont3 = new Continent("Continent3", "3000", "260");
+        Continent cont4 = new Continent("Continent4", "4000", "150");
+		Country count1 = new Country("Country1", "1000", "400", cont1);
+        City city1 = new City("City1", "1000", "500", count1);
 		
         LinkedHashMap<String, Region> placeLocs = new LinkedHashMap<String, Region>();
         placeLocs.put(cont1.toString(), cont1);
-        PlaceOfInterest place1 = new PlaceOfInterest("Place1", null, null, placeLocs);        
+        PlaceOfInterest place1 = new PlaceOfInterest("Place1", "300", null, placeLocs);        
         
         Region pointLoc = count1;
         PointOfInterest point1 = new PointOfInterest("Point1", null, null, null, null, pointLoc);

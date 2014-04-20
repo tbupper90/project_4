@@ -101,13 +101,13 @@ public class GeoView extends JFrame implements ActionListener
         simpleArea.add(simpleAreaCountries);
         simpleArea.add(simpleAreaCities);
         simpleArea.add(simpleAreaPlaces);
-        simpleArea.add(simpleAreaPoints);
+//      simpleArea.add(simpleAreaPoints);
 		simple.add(simplePop);
         simplePop.add(simplePopContinents);
         simplePop.add(simplePopCountries);
         simplePop.add(simplePopCities);
-        simplePop.add(simplePopPlaces);
-        simplePop.add(simplePopPoints);
+//      simplePop.add(simplePopPlaces);
+//      simplePop.add(simplePopPoints);
         
         graphMenu.add(stacked);
         stacked.add(stackedArea);
@@ -119,10 +119,22 @@ public class GeoView extends JFrame implements ActionListener
         stacked.add(stackedPop);
         stackedPop.add(stackedPopCountriesInContinents);
         stackedPop.add(stackedPopCitiesInCountries);
-        stackedPop.add(stackedPopPlacesInContinents);
-        stackedPop.add(stackedPopPlacesInCountries);
-        stackedPop.add(stackedPopPlacesInCities);
-        
+//      stackedPop.add(stackedPopPlacesInContinents);
+//      stackedPop.add(stackedPopPlacesInCountries);
+//      stackedPop.add(stackedPopPlacesInCities);
+
+        simpleAreaContinents.setActionCommand("Areas of All Continents");
+        simpleAreaCountries.setActionCommand("Areas of All Countries");
+        simpleAreaCities.setActionCommand("Areas of All Cities");
+        simpleAreaPlaces.setActionCommand("Areas of All Places of Interest");
+        simpleAreaPoints.setActionCommand("Areas of All Points of Interest");
+
+        simplePopContinents.setActionCommand("Populations of All Continents");
+        simplePopCountries.setActionCommand("Populations of All Countries");
+        simplePopCities.setActionCommand("Populations of All Cities");
+        simplePopPlaces.setActionCommand("Populations of All Places of Interest");
+        simplePopPoints.setActionCommand("Populations of All Points of Interest");
+
         graphMenu.add(map);
 
         menuBar.add(graphMenu);
@@ -230,30 +242,6 @@ public class GeoView extends JFrame implements ActionListener
     public void actionPerformed(ActionEvent e) {
     	String command = e.getActionCommand();
     	boolean hasEntry;
-    	
-    	saveGeography.setEnabled(false);
-    	exportGeography.setEnabled(false);
-        continentPanel.editBtn.setEnabled(false);
-        continentPanel.delBtn.setEnabled(false);
-        continentPanel.viewBtn.setEnabled(false);
-        
-        countryPanel.editBtn.setEnabled(false);
-        countryPanel.delBtn.setEnabled(false);
-        countryPanel.viewBtn.setEnabled(false);
-        
-        cityPanel.editBtn.setEnabled(false);
-        cityPanel.delBtn.setEnabled(false);
-        cityPanel.viewBtn.setEnabled(false);
-        
-        placePanel.editBtn.setEnabled(false);
-        placePanel.delBtn.setEnabled(false);
-        placePanel.viewBtn.setEnabled(false);
-        
-        pointPanel.editBtn.setEnabled(false);
-        pointPanel.delBtn.setEnabled(false);
-        pointPanel.viewBtn.setEnabled(false);
-         
-    	
     	
     	if (command.contains("Continent")) {
     		continentPanel.refreshList(model.getContinents());   		

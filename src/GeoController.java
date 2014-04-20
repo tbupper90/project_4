@@ -371,21 +371,47 @@ public class GeoController
 		
 	}
 	
-	private class SimpleAreaChartListener implements ActionListener
+	private class SimpleChartListener implements ActionListener
 	{
-	    @Override
+	    @SuppressWarnings("unchecked")
+        @Override
 	    public void actionPerformed(ActionEvent e) {
             LinkedHashMap<String, ? extends Region> map;
 	        
-	        String command = e.getActionCommand();
-	        switch (command) {
-	        case "Continents":
+            String command = e.getActionCommand();
+	        String[] split = command.split("s ", 2);
+	        
+            switch (split[1]) {
+	        case "of All Continents":
 	            map = model.getContinents();
-	            new SimpleChartView((LinkedHashMap<String, Region>)map, "Area", model);
+	            new SimpleChartView(command, (LinkedHashMap<String, Region>)map,
+	                    split[0], model);
+	            break;
+            case "of All Countries":
+                map = model.getCountries();
+                new SimpleChartView(command, (LinkedHashMap<String, Region>)map,
+                        split[0], model);
+                break;
+            case "of All Cities":
+                map = model.getCities();
+                new SimpleChartView(command, (LinkedHashMap<String, Region>)map,
+                        split[0], model);
+                break;
+            case "of All Places of Interest":
+                map = model.getPlaces();
+                new SimpleChartView(command, (LinkedHashMap<String, Region>)map,
+                        split[0], model);
+                break;
+            case "of All Points of Interest":
+                map = model.getPoints();
+                new SimpleChartView(command, (LinkedHashMap<String, Region>)map,
+                        split[0], model);
+                break;
 	        }
 	    }
 	}
-	
+
+
 	public void setView(GeoView newView)
 	{
 		this.geoView = newView;
@@ -419,8 +445,17 @@ public class GeoController
 		geoView.saveGeography.addActionListener(new SaveListener());
 		
 		/** Action Listeners for Graph menu items */
-		ActionListener simpleAreaListener = new SimpleAreaChartListener();
-		geoView.simpleAreaContinents.addActionListener(simpleAreaListener);
+		ActionListener simpleListener = new SimpleChartListener();
+		geoView.simpleAreaContinents.addActionListener(simpleListener);
+		geoView.simpleAreaCountries.addActionListener(simpleListener);
+        geoView.simpleAreaCities.addActionListener(simpleListener);
+        geoView.simpleAreaPlaces.addActionListener(simpleListener);
+        geoView.simpleAreaPoints.addActionListener(simpleListener);
+        geoView.simplePopContinents.addActionListener(simpleListener);
+        geoView.simplePopCountries.addActionListener(simpleListener);
+        geoView.simplePopCities.addActionListener(simpleListener);
+        geoView.simplePopPlaces.addActionListener(simpleListener);
+        geoView.simplePopPoints.addActionListener(simpleListener);
 	}
 	
 	public void setAddEditView(AddEditView newView)

@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+import javax.swing.JOptionPane;
+
 
 public class GeoModel {
 	
@@ -766,11 +768,28 @@ public class GeoModel {
 
 	public void saveGeography()
 	{
-		
+		String fileChoice = JOptionPane.showInputDialog("Enter the name of the file you would like to save to");
+		try 
+		{
+			writeFile(fileChoice, "Binary");
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void exportGeography()
 	{
+		String fileChoice = JOptionPane.showInputDialog("Enter the name of the file you wish to export the data to");
+		try 
+		{
+			writeFile(fileChoice, "Text");
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -782,5 +801,32 @@ public class GeoModel {
 		places.clear();
 		points.clear();
 	}
+    public void importGeography()
+    {
+    	String choice = JOptionPane.showInputDialog("Enter the name of the binary file you with to load data from");
+    	try 
+    	{
+			readBinary(choice);
+		} 
+    	catch (ClassNotFoundException | IOException e) 
+    	{
+			e.printStackTrace();
+		}
+    }
     
+    public void loadGeography()
+    {
+    	String[] options = {"Continents", "Countries", "Cities", "Places of Interest", "Points of Interest"};
+    	String fileChoice = JOptionPane.showInputDialog("Please enter the name of the text file you wish to load data from");
+    	String objectChoice = (String) JOptionPane.showInputDialog(null, "Objects?", "Please enter the type of object represented in the file",
+    			1, null, options, "Continents");
+    	try 
+    	{
+			readTextFile(fileChoice, objectChoice);
+		} 
+    	catch (IOException e) 
+    	{
+			e.printStackTrace();
+		}    	
+    }
 }

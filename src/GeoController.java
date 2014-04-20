@@ -303,7 +303,6 @@ public class GeoController
 	
 	private class ImportListener implements ActionListener
 	{
-		boolean hasData = false; //Need to see if there is saved data on the system
 		String fileName;
 		String[] options;
 		int choice;
@@ -318,93 +317,141 @@ public class GeoController
 					&& model.getContinents().isEmpty() && model.getContinents().isEmpty())) //There is unsaved data in the system
 			{
 				options = new String[] {"Export", "Save", "Discard"};
-				choice = JOptionPane.showOptionDialog(null, "Would you like to export, save, or discard the data?", "Save, export, or discard", 1, 1, 
+				choice = JOptionPane.showOptionDialog(null, "Would you like to export, save, or discard the current unsaved data?", "Save, export, or discard", 1, 1, 
 						null, options, "Discard");
-				if (choice==1) //Export
+				if (choice == 0) //Export
 				{
-					exportGeography();
+					model.exportGeography();
 				}
-				else if (choice == 2) //Save
+				else if (choice == 1) //Save
 				{
-					saveGeography();
+					model.saveGeography();
 				}
-				else if (choice == 3)
+				else if (choice == 2)
 				{
-					discardGeography();
+					model.discardGeography();
 				}
 			}
-			else 
-			{
-				fileName = JOptionPane.showInputDialog("Please enter the name of the text file you wish to import from. Press 'OK' if you wish to "
-						+ "import from a Binary file istead.");
-				
-				if (fileName.equals(null))
-				{
-					fileName = JOptionPane.showInputDialog("Please enter the name of the binary file you wish to import from.");
-					try 
-					{	
-						model.readBinary(fileName);
-					} 
-					catch (ClassNotFoundException | IOException e1) 
-					{
-						e1.printStackTrace();
-					}
-				}
-				String fileType = JOptionPane.showInputDialog("And please enter the name of the objects in this file (for example, 'Continents').");
-				try 
-				{
-					model.readTextFile(fileName, fileType);
-				} 
-				catch (IOException e1) 
-				{
-					e1.printStackTrace();
-				}
-				
-			}
+			model.importGeography();
 		}
+		
 		
 	}
 	
 	private class ExportListener implements ActionListener
 	{
-		 
+		String fileName;
+		String[] options;
+		int choice;
+		
 		@Override
-		public void actionPerformed(ActionEvent arg0) {
+		public void actionPerformed(ActionEvent e) 
+		{
 			if (model==null)
 			{
 				return;
 			}
+			if (!(model.getContinents().isEmpty() && model.getContinents().isEmpty() && model.getContinents().isEmpty() 
+					&& model.getContinents().isEmpty() && model.getContinents().isEmpty())) //There is unsaved data in the system
+			{
+				options = new String[] {"Export", "Save", "Discard"};
+				choice = JOptionPane.showOptionDialog(null, "Would you like to export, save, or discard the current unsaved data?", "Save, export, or discard", 1, 1, 
+						null, options, "Discard");
+				if (choice == 0) //Export
+				{
+					model.exportGeography();
+				}
+				else if (choice == 1) //Save
+				{
+					model.saveGeography();
+				}
+				else if (choice == 2)
+				{
+					model.discardGeography();
+				}
+				
 			
+			}
+				model.exportGeography();
 		}
-		
 	}
+		
 	
 	private class LoadListener implements ActionListener
 	{
 
+		String fileName;
+		String[] options;
+		int choice;
+		
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(ActionEvent e)
+		{
 			if (model==null)
 			{
 				return;
 			}
+			if (!(model.getContinents().isEmpty() && model.getContinents().isEmpty() && model.getContinents().isEmpty() 
+					&& model.getContinents().isEmpty() && model.getContinents().isEmpty())) //There is unsaved data in the system
+			{
+				options = new String[] {"Export", "Save", "Discard"};
+				choice = JOptionPane.showOptionDialog(null, "Would you like to export, save, or discard the current unsaved data?", "Save, export, or discard", 1, 1, 
+						null, options, "Discard");
+				if (choice== 0) //Export
+				{
+					model.exportGeography();
+				}
+				else if (choice == 1) //Save
+				{
+					model.saveGeography();
+				}
+				else if (choice == 2)
+				{
+					model.discardGeography();
+				}
+				
+			}
 			
-		}
-		
+				model.loadGeography();
+			
+	}
 	}
 	
 	private class SaveListener implements ActionListener
 	{
 
+		String[] options;
+		int choice;
+		
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(ActionEvent e)
+		{
 			if (model==null)
 			{
 				return;
 			}
-			
+			if (!(model.getContinents().isEmpty() && model.getContinents().isEmpty() && model.getContinents().isEmpty() 
+					&& model.getContinents().isEmpty() && model.getContinents().isEmpty())) //There is unsaved data in the system
+			{
+				options = new String[] {"Export", "Save", "Discard"};
+				choice = JOptionPane.showOptionDialog(null, "Would you like to export, save, or discard the current unsaved data?", "Save, export, or discard", 1, 1, 
+						null, options, "Discard");
+				if (choice == 0) //Export
+				{
+					model.exportGeography();
+				}
+				else if (choice == 1) //Save
+				{
+					model.saveGeography();
+				}
+				else if (choice == 2)
+				{
+					model.discardGeography();
+				}
+				
+			}
+			model.saveGeography();
 		}
-		
 	}
 	
 	private class ExitListener implements ActionListener
@@ -577,6 +624,10 @@ public class GeoController
 		
 		geoView.saveGeography.addActionListener(new SaveListener());
 		
+		geoView.exit.addActionListener(new ExitListener());
+
+		
+		
 		/** Action Listeners for Graph menu items */
 		ActionListener simpleListener = new SimpleChartListener();
 		geoView.simpleAreaContinents.addActionListener(simpleListener);
@@ -623,4 +674,5 @@ public class GeoController
 	
 	
 }
+
 

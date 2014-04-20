@@ -18,10 +18,10 @@ public class GeoDriver {
         Continent cont2 = new Continent("Continent2", "2000", "280");
         Continent cont3 = new Continent("Continent3", "3000", "260");
         Continent cont4 = new Continent("Continent4", "4000", "150");
-		Country count1 = new Country("Country1", "1000", "200", cont1);
-        Country count2 = new Country("Country2", "1500", "180", cont1);
-        Country count3 = new Country("Country3", "2000", "120", cont2);
-        Country count4 = new Country("Country4", "4000", "50", cont2);
+		Country count1 = new Country("Country1", "1000", "3000", cont1);
+        Country count2 = new Country("Country2", "1500", "200", cont1);
+        Country count3 = new Country("Country3", "2000", "120", cont1);
+        Country count4 = new Country("Country4", "4000", "50", cont1);
         City city1 = new City("City1", "1000", "500", count1);
         City city2 = new City("City2", "2000", "300", count1);
 		

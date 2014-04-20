@@ -16,11 +16,11 @@ public class SimpleChartView extends JFrame implements ActionListener {
     private LinkedHashMap<String, Region> regions;
     private String dataType;
     private BarsPanel barsPanel;
-            
 
     public SimpleChartView(String title, LinkedHashMap<String, Region> regions,
             String dataType, GeoModel newModel) {
         
+        // "this.model = model" seems to confuse the compiler
         model = newModel;
         model.addActionListener(this);
         
@@ -45,6 +45,7 @@ public class SimpleChartView extends JFrame implements ActionListener {
         private static final long serialVersionUID = -1079594597927132094L;
         private Color[] colors = {Color.DARK_GRAY, Color.LIGHT_GRAY};
         
+        private int numOfRegions;
         private int barHeight[];
         private int barWidth = 20;
         
@@ -52,24 +53,23 @@ public class SimpleChartView extends JFrame implements ActionListener {
         private String[] names;
         private long[] data;
         
-        
         public BarsPanel() {
 
         }
         
         private void refreshData() {
-            // Create/refresh a shallow copy that can be sorted without
-            // affecting the original
+            // Create/refresh a shallow copy of regions that can be sorted
+            // without affecting the original
             regionsCopy = new LinkedHashMap<String, Region>(regions);
-            regionsCopy = sort.performSort(
-                    (LinkedHashMap<String, Region>)regionsCopy, dataType);
-            names = new String[regionsCopy.size()];
-            data = new long[regionsCopy.size()];
+            regionsCopy = sort.performSort(regionsCopy, dataType);
             
-            Region tempRegion;
+            numOfRegions = regionsCopy.size();
+            names = new String[numOfRegions];
+            data = new long[numOfRegions];
+            
             Iterator<Region> iter = regionsCopy.values().iterator();
             for (int i = 0; iter.hasNext(); i++) {
-                tempRegion = iter.next();
+                Region tempRegion = iter.next();
                 names[i] = tempRegion.getName();
                 if (dataType.equals("Area"))
                     data[i] = Long.parseLong(tempRegion.getArea());
@@ -77,8 +77,8 @@ public class SimpleChartView extends JFrame implements ActionListener {
                     data[i] = Long.parseLong(tempRegion.getPop());
             }
             
-            barHeight = new int[regionsCopy.size()];
-            setPreferredSize(new Dimension(barWidth * regionsCopy.size(), 300));
+            barHeight = new int[numOfRegions];
+            setPreferredSize(new Dimension(barWidth * numOfRegions, 300));
         }
 
         @Override
@@ -86,7 +86,7 @@ public class SimpleChartView extends JFrame implements ActionListener {
             super.paintComponent(g);
             refreshData();
             
-            for (int i = 0; i < regionsCopy.size(); i++) {
+            for (int i = 0; i < numOfRegions; i++) {
                 barHeight[i] = (int)(data[i] / (double)data[0]
                         * getHeight() * 0.9);
                 g.setColor(colors[i % colors.length]);

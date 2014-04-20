@@ -373,7 +373,6 @@ public class GeoController
 	
 	private class SimpleChartListener implements ActionListener
 	{
-	    @SuppressWarnings("unchecked")
         @Override
 	    public void actionPerformed(ActionEvent e) {
             // Declaring map this way, then casting it only when it's passed
@@ -406,8 +405,8 @@ public class GeoController
 	    }
 	}
 	
-	private class StackedChartListener implements ActionListener {
-	    
+	private class StackedChartListener implements ActionListener
+	{
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
 	        LinkedHashMap<String, ? extends Region> map = null;
@@ -444,8 +443,8 @@ public class GeoController
                 break;
 	        }
 	        
-            //new SimpleChartView(command, (LinkedHashMap<String, Region>)map,
-            //        split[0], model);
+            new StackedChartView(command, (LinkedHashMap<String, Region>)map,
+                    split[0], model);
 	    }
 	}
 

@@ -275,6 +275,19 @@ public class GeoView extends JFrame implements ActionListener
             // Enable/disable menu items
             simpleAreaContinents.setEnabled(hasEntry);
             simplePopContinents.setEnabled(hasEntry);
+            mapPointsInContinents.setEnabled(hasEntry);
+            // Set tooltips
+            continentPanel.editBtn.setToolTipText((hasEntry) ? "" : "No entries");
+            continentPanel.delBtn.setToolTipText((hasEntry) ? "" : "No entries");
+            continentPanel.viewBtn.setToolTipText((hasEntry) ? "" : "No entries");
+            countryPanel.addBtn.setToolTipText((hasEntry) ? "" : "Need at least one continent");
+            placePanel.addBtn.setToolTipText((hasEntry) ? "" : "Need at least one region");
+            pointPanel.addBtn.setToolTipText((hasEntry) ? "" : "Need at least one region");
+            saveGeography.setToolTipText((hasEntry) ? "" : "No regions to save");
+            exportGeography.setToolTipText((hasEntry) ? "" : "No regions to export");
+            simpleAreaContinents.setToolTipText((hasEntry) ? "" : "No continents");
+            simplePopContinents.setToolTipText((hasEntry) ? "" : "No continents");
+            mapPointsInContinents.setToolTipText((hasEntry) ? "" : "No continents");
     	}
     	
     	if (command.contains("Country")) {
@@ -290,6 +303,17 @@ public class GeoView extends JFrame implements ActionListener
             simplePopCountries.setEnabled(hasEntry);
             stackedAreaCountriesInContinents.setEnabled(hasEntry);
             stackedPopCountriesInContinents.setEnabled(hasEntry);
+            mapPointsInCountries.setEnabled(hasEntry);
+            // Set tooltips
+            countryPanel.editBtn.setToolTipText((hasEntry) ? "" : "No entries");
+            countryPanel.delBtn.setToolTipText((hasEntry) ? "" : "No entries");
+            countryPanel.viewBtn.setToolTipText((hasEntry) ? "" : "No entries");
+            cityPanel.addBtn.setToolTipText((hasEntry) ? "" : "Need at least one country");
+            simpleAreaCountries.setToolTipText((hasEntry) ? "" : "No countries");
+            simplePopCountries.setToolTipText((hasEntry) ? "" : "No countries");
+            stackedAreaCountriesInContinents.setToolTipText((hasEntry) ? "" : "No countries");
+            stackedPopCountriesInContinents.setToolTipText((hasEntry) ? "" : "No countries");
+            mapPointsInCountries.setToolTipText((hasEntry) ? "" : "No countries");
     	}
 
     	if (command.contains("City")) {
@@ -304,6 +328,22 @@ public class GeoView extends JFrame implements ActionListener
             simplePopCities.setEnabled(hasEntry);
             stackedAreaCitiesInCountries.setEnabled(hasEntry);
             stackedPopCitiesInCountries.setEnabled(hasEntry);
+            mapAllCities.setEnabled(hasEntry);
+            mapCitiesInContinents.setEnabled(hasEntry);
+            mapCitiesInCountries.setEnabled(hasEntry);
+            mapPointsInCities.setEnabled(hasEntry);
+            // Set tooltips
+            cityPanel.editBtn.setToolTipText((hasEntry) ? "" : "No entries");
+            cityPanel.delBtn.setToolTipText((hasEntry) ? "" : "No entries");
+            cityPanel.viewBtn.setToolTipText((hasEntry) ? "" : "No entries");
+            simpleAreaCities.setToolTipText((hasEntry) ? "" : "No cities");
+            simplePopCities.setToolTipText((hasEntry) ? "" : "No cities");
+            stackedAreaCitiesInCountries.setToolTipText((hasEntry) ? "" : "No cities");
+            stackedPopCitiesInCountries.setToolTipText((hasEntry) ? "" : "No cities");
+            mapAllCities.setToolTipText((hasEntry) ? "" : "No cities");
+            mapCitiesInContinents.setToolTipText((hasEntry) ? "" : "No cities");
+            mapCitiesInCountries.setToolTipText((hasEntry) ? "" : "No cities");
+            mapPointsInCities.setToolTipText((hasEntry) ? "" : "No cities");
     	}
 
     	if (command.contains("PlaceOfInterest")) {
@@ -318,6 +358,14 @@ public class GeoView extends JFrame implements ActionListener
             stackedAreaPlacesInContinents.setEnabled(hasEntry);
             stackedAreaPlacesInCountries.setEnabled(hasEntry);
             stackedAreaPlacesInCities.setEnabled(hasEntry);
+            // Set tooltips
+            placePanel.editBtn.setToolTipText((hasEntry) ? "" : "No entries");
+            placePanel.delBtn.setToolTipText((hasEntry) ? "" : "No entries");
+            placePanel.viewBtn.setToolTipText((hasEntry) ? "" : "No entries");
+            simpleAreaPlaces.setToolTipText((hasEntry) ? "" : "No places of interest");
+            stackedAreaPlacesInContinents.setToolTipText((hasEntry) ? "" : "No places of interest");
+            stackedAreaPlacesInCountries.setToolTipText((hasEntry) ? "" : "No places of interest");
+            stackedAreaPlacesInCities.setToolTipText((hasEntry) ? "" : "No places of interest");
     	}
 
     	if (command.contains("PointOfInterest")) {
@@ -327,6 +375,12 @@ public class GeoView extends JFrame implements ActionListener
             pointPanel.editBtn.setEnabled(hasEntry);
             pointPanel.delBtn.setEnabled(hasEntry);
             pointPanel.viewBtn.setEnabled(hasEntry);
+            mapAllPoints.setEnabled(hasEntry);
+            // Set tooltips
+            pointPanel.editBtn.setToolTipText((hasEntry) ? "" : "No entries");
+            pointPanel.delBtn.setToolTipText((hasEntry) ? "" : "No entries");
+            pointPanel.viewBtn.setToolTipText((hasEntry) ? "" : "No entries");
+            mapAllPoints.setToolTipText((hasEntry) ? "" : "No points of interest");
     	}
     	
 

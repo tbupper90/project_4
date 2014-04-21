@@ -112,6 +112,30 @@ public class GeoController
 					aeView.setVisible(false);
 					break;
 					
+				case "Point":
+					String pointName = aeView.nameJtf.getText();
+					String pointDescription = aeView.descriptionJtf.getText();
+					String pointLat = aeView.latJtf.getText();
+					String pointLon = aeView.lonJtf.getText();
+					String pointElev = aeView.elevJtf.getText();
+					
+					String location = aeView.parentRegionsJcb.getItemAt(aeView.parentRegionsJcb.getSelectedIndex());
+					
+					if(model.getContinents().containsKey(location))
+						model.addRegion(new PointOfInterest(pointName, pointDescription,pointLat, pointLon, pointElev,
+								model.getContinents().get(location)));
+					else if(model.getCountries().containsKey(location))
+						model.addRegion(new PointOfInterest(pointName, pointDescription,pointLat, pointLon, pointElev,
+								model.getCountries().get(location)));
+					else if(model.getCities().containsKey(location))
+						model.addRegion(new PointOfInterest(pointName, pointDescription,pointLat, pointLon, pointElev,
+								model.getCities().get(location)));
+					else if(model.getPlaces().containsKey(location))
+						model.addRegion(new PointOfInterest(pointName, pointDescription,pointLat, pointLon, pointElev,
+								model.getPlaces().get(location)));
+					
+					aeView.setVisible(false);
+					break;
 					
 					
 			}//end switch
@@ -130,11 +154,11 @@ public class GeoController
 			switch(region)
 			{
 				case "Continent": 
-					String name = aeView.nameJtf.getText();
+//					String name = aeView.nameJtf.getText();
 					String area = aeView.areaJtf.getText();
 					String pop = aeView.popJtf.getText();
 					
-					aeView.toEdit.name = name;
+//					aeView.toEdit.name = name;
 					aeView.toEdit.area = area;
 					aeView.toEdit.pop = pop;
 					Continent tmpContinent = (Continent) aeView.toEdit;
@@ -147,14 +171,14 @@ public class GeoController
 					break;
 					
 				case "Country":
-					String countryName = aeView.nameJtf.getText();
+//					String countryName = aeView.nameJtf.getText();
 					String countryArea = aeView.areaJtf.getText();
 					String countryPop = aeView.popJtf.getText();
 					String continent = aeView.parentRegionsJcb.getSelectedItem().toString();
 					
 				
 					model.getCountries().get(aeView.toEdit.name).continent = model.getContinents().get(continent);
-					aeView.toEdit.name = countryName;
+//					aeView.toEdit.name = countryName;
 					aeView.toEdit.area = countryArea;
 					aeView.toEdit.pop = countryPop;
 					
@@ -164,14 +188,14 @@ public class GeoController
 					break;
 					
 				case "City":
-					String cityName = aeView.nameJtf.getText();
+//					String cityName = aeView.nameJtf.getText();
 					String cityArea = aeView.areaJtf.getText();
 					String cityPop = aeView.popJtf.getText();
 					String country = aeView.parentRegionsJcb.getSelectedItem().toString();
 					
 				
 					model.getCities().get(aeView.toEdit.name).country = model.getCountries().get(country);
-					aeView.toEdit.name = cityName;
+//					aeView.toEdit.name = cityName;
 					aeView.toEdit.area = cityArea;
 					aeView.toEdit.pop = cityPop;
 					
@@ -182,7 +206,7 @@ public class GeoController
 					
 				case "Place":
 										
-					String placeName = aeView.nameJtf.getText();
+//					String placeName = aeView.nameJtf.getText();
 					String placeArea = aeView.areaJtf.getText();
 					String placeDescription = aeView.descriptionJtf.getText();
 					List<String> locs = aeView.multipleLocsList.getSelectedValuesList();
@@ -200,7 +224,7 @@ public class GeoController
 							locsMap.put(location, model.getCities().get(location));
 					}
 					
-					place.name = placeName;
+//					place.name = placeName;
 					place.area = placeArea;
 					place.description = placeDescription;
 					
@@ -209,6 +233,58 @@ public class GeoController
 					aeView.setVisible(false);
 					break;
 					
+				case "Point":
+					PointOfInterest point = (PointOfInterest) aeView.toEdit;
+					
+					String pointName = aeView.nameJtf.getText();
+					String pointDescription = aeView.descriptionJtf.getText();
+					String pointLat = aeView.latJtf.getText();
+					String pointLon = aeView.lonJtf.getText();
+					String pointElev = aeView.elevJtf.getText();
+					
+					String location = aeView.parentRegionsJcb.getItemAt(aeView.parentRegionsJcb.getSelectedIndex());
+					
+					if(model.getContinents().containsKey(location))
+					{
+						point.name = pointName;
+						point.description = pointDescription;
+						point.lat = pointLat;
+						point.lon = pointLon;
+						point.elev = pointElev;
+						point.location = model.getContinents().get(location);
+					}
+					else if(model.getCountries().containsKey(location))
+					{
+						point.name = pointName;
+						point.description = pointDescription;
+						point.lat = pointLat;
+						point.lon = pointLon;
+						point.elev = pointElev;
+						point.location = model.getCountries().get(location);
+					}
+					else if(model.getCities().containsKey(location))
+					{
+						point.name = pointName;
+						point.description = pointDescription;
+						point.lat = pointLat;
+						point.lon = pointLon;
+						point.elev = pointElev;
+						point.location = model.getCities().get(location);
+					}
+					
+					else if(model.getPlaces().containsKey(location))
+					{
+						point.name = pointName;
+						point.description = pointDescription;
+						point.lat = pointLat;
+						point.lon = pointLon;
+						point.elev = pointElev;
+						point.location = model.getPlaces().get(location);
+					}
+
+					aeView.setVisible(false);
+					break;
+
 			}
 		}
 	}
@@ -312,6 +388,11 @@ public class GeoController
 				aeView = new AddEditView("Place", "Add", null, model);
 			}
 			
+			if(e.getActionCommand().contains("Points"))
+			{
+				aeView = new AddEditView("Point", "Add", null, model);
+			}
+			
 			setAddEditView(aeView);
 			
 			
@@ -392,6 +473,23 @@ public class GeoController
 					aeView.nameJtf.setText(tmpPlace.name);
 					aeView.areaJtf.setText(tmpPlace.area);
 					aeView.descriptionJtf.setText(tmpPlace.description);
+//					aeView.multipleLocsList.setSelectedIndices(indices)
+				}//end for
+			}
+			
+			if(e.getActionCommand().contains("Point"))
+			{
+				int[] i = geoView.getPointPanel().list.getSelectedIndices();
+				ListModel<String> list = geoView.getPointPanel().list.getModel();
+				
+				for(int index : i)
+				{
+					PointOfInterest tmpPoint = model.getPoints().get(list.getElementAt(index));
+					aeView = new AddEditView("Point", "Edit", tmpPoint, model);
+					setAddEditView(aeView);
+					aeView.nameJtf.setText(tmpPoint.name);
+					aeView.areaJtf.setText(tmpPoint.area);
+					aeView.descriptionJtf.setText(tmpPoint.description);
 //					aeView.multipleLocsList.setSelectedIndices(indices)
 				}//end for
 			}

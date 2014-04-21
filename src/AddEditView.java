@@ -162,7 +162,7 @@ public class AddEditView extends JFrame implements ActionListener {
 						
 			String[] locs = locations.toArray(new String[0]);
 			
-			multipleLocsList = new JList(locs);
+			multipleLocsList = new JList<String>(locs);
 			
 			JScrollPane listScroll = new JScrollPane(multipleLocsList);
 
@@ -178,6 +178,38 @@ public class AddEditView extends JFrame implements ActionListener {
 			
 			components.add(locationJl);
 			components.add(listScroll);
+			
+			break;
+			
+		case "Point":
+			for(String continent : model.getContinents().keySet())
+				parentRegionsJcb.addItem(continent);
+			for(String country : model.getCountries().keySet())
+				parentRegionsJcb.addItem(country);
+			for(String city : model.getCities().keySet())
+				parentRegionsJcb.addItem(city);
+			for(String places : model.getPlaces().keySet())
+				parentRegionsJcb.addItem(places);
+			
+			components.add(nameJl);
+			components.add(nameJtf);
+			
+			components.add(descriptionJl);
+			components.add(descriptionJtf);
+			
+			components.add(locationJl);
+			components.add(parentRegionsJcb);
+			
+			components.add(latJl);
+			components.add(latJtf);
+			
+			components.add(lonJl);
+			components.add(lonJtf);
+			
+			components.add(elevJl);
+			components.add(elevJtf);
+			
+			break;
 			
 		}//end switch
 	}

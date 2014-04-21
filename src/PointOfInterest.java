@@ -11,11 +11,11 @@ public class PointOfInterest extends Region
      */
     private static final long serialVersionUID = -5566762757484533693L;
 
-    private String description;
+    String description;
     Region location;
-    private String lat;
-    private String lon;
-    private String elev;
+    String lat;
+    String lon;
+    String elev;
 
     /**
      * This is the constructor for the PlaceOfInterest object.

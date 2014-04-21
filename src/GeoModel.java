@@ -181,7 +181,8 @@ public class GeoModel {
         	//remove from places
 	    	for(String place : new ArrayList<String>(cities.get(rName).places.keySet()))
 	    	{
-	    		cities.get(rName).places.get(place).locations.remove(rName);
+	    		System.out.println(place.toString());
+	    	    cities.get(rName).places.get(place).locations.remove(rName);
 	    		
 	    		//if there are no more locations in this Place, remove it.
 	    		if(cities.get(rName).places.get(place).locations.isEmpty())
@@ -207,6 +208,11 @@ public class GeoModel {
         case ("PlaceOfInterest"):
         	if(places.isEmpty()) break;
         	
+            //remove points
+            for(String point : new ArrayList<String>(places.get(rName).points.keySet()))
+            {
+                this.removeRegion(places.get(rName).points.get(point));
+            }
         	
         	if(places.get(rName).locations.isEmpty())
         	{
@@ -223,7 +229,7 @@ public class GeoModel {
         		
         		places.remove(rName);
         	}
-        
+
         	processEvent(
                 new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove " + type));
         	
@@ -257,7 +263,14 @@ public class GeoModel {
         		points.remove(rName);
         	}
         	*/
-        	points.get(rName).getLocation().points.remove(rName);
+
+            //remove other points
+            for(String point : new ArrayList<String>(points.get(rName).points.keySet()))
+            {
+                this.removeRegion(points.get(rName).points.get(point));
+            }
+
+            points.get(rName).getLocation().points.remove(rName);
         
         	points.remove(rName);
         	

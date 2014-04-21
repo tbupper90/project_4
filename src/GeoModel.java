@@ -842,8 +842,12 @@ public class GeoModel {
     {
     	String[] options = {"Continents", "Countries", "Cities", "Places of Interest", "Points of Interest"};
     	String fileChoice = JOptionPane.showInputDialog("Please enter the name of the text file you wish to load data from");
+    	if (fileChoice == null) return;
+    	
     	String objectChoice = (String) JOptionPane.showInputDialog(null, "Objects?", "Please enter the type of object represented in the file",
     			1, null, options, "Continents");
+    	if (objectChoice == null) return;
+    	
     	try 
     	{
 			readTextFile(fileChoice, objectChoice);
@@ -852,5 +856,6 @@ public class GeoModel {
     	{
 			e.printStackTrace();
 		}    	
+    		
     }
 }

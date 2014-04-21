@@ -434,9 +434,7 @@ public class GeoController
 				unsavedDialog();
 			}
 			
-			if (geoView.dataSaved) { // In case the user cancelled earlier
-				model.importGeography();
-			}
+			model.importGeography();
 		}
 		
 		
@@ -451,9 +449,9 @@ public class GeoController
 			{
 				return;
 			}
+
 			geoView.dataSaved = model.exportGeography();
-			System.out.println(geoView.dataSaved);
-			//geoView.actionPerformed(e);
+			geoView.actionPerformed(e);
 		}
 	}
 		
@@ -472,9 +470,7 @@ public class GeoController
 				unsavedDialog();
 			}
 			
-			if (geoView.dataSaved) { // In case the user cancelled earlier
-				model.loadGeography();
-			}
+			model.loadGeography();
 		}
 	}
 	
@@ -487,8 +483,9 @@ public class GeoController
 			{
 				return;
 			}
-			geoView.dataSaved = model.saveGeography();
 			
+			geoView.dataSaved = model.saveGeography();
+			geoView.actionPerformed(e);
 		}
 	}
 	

@@ -402,12 +402,14 @@ public class GeoController
 		if (choice == 0) //Export
 		{
 			model.exportGeography();
+			model.discardGeography();
 		}
 		else if (choice == 1) //Save
 		{
 			model.saveGeography();
+			model.discardGeography();
 		}
-		else if (choice == 2)
+		else
 		{
 			model.discardGeography();
 		}

@@ -37,6 +37,8 @@ public class GeoController
 		{
 			if(model == null) return;
 			
+			geoView.dataSaved = false;
+			
 			String region = aeView.getEditType();
 //			System.out.println(region);
 			switch(region)
@@ -121,7 +123,9 @@ public class GeoController
 		public void actionPerformed(ActionEvent e)
 		{
 			if(model == null) return;
-			
+
+			geoView.dataSaved = false;
+
 			String region = aeView.getEditType();
 			switch(region)
 			{
@@ -215,6 +219,8 @@ public class GeoController
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
+			geoView.dataSaved = false;
+
 			if(e.getActionCommand().contains("Continent"))
 			{
 				int[] i = geoView.getContinentPanel().list.getSelectedIndices();
@@ -401,12 +407,12 @@ public class GeoController
 				null, options, "Discard");
 		if (choice == 0) //Export
 		{
-			model.exportGeography();
+			geoView.dataSaved = model.exportGeography();
 			model.discardGeography();
 		}
 		else if (choice == 1) //Save
 		{
-			model.saveGeography();
+			geoView.dataSaved = model.saveGeography();
 			model.discardGeography();
 		}
 		else
@@ -423,12 +429,14 @@ public class GeoController
 			{
 				return;
 			}
-			if (!(model.getContinents().isEmpty() && model.getCountries().isEmpty() && model.getCities().isEmpty() 
-					&& model.getPlaces().isEmpty() && model.getPoints().isEmpty())) //There is unsaved data in the system
+			if (!(geoView.dataSaved)) //There is unsaved data in the system
 			{
 				unsavedDialog();
 			}
-			model.importGeography();
+			
+			if (geoView.dataSaved) { // In case the user cancelled earlier
+				model.importGeography();
+			}
 		}
 		
 		
@@ -443,7 +451,9 @@ public class GeoController
 			{
 				return;
 			}
-			model.exportGeography();
+			geoView.dataSaved = model.exportGeography();
+			System.out.println(geoView.dataSaved);
+			//geoView.actionPerformed(e);
 		}
 	}
 		
@@ -457,13 +467,14 @@ public class GeoController
 			{
 				return;
 			}
-			if (!(model.getContinents().isEmpty() && model.getCountries().isEmpty() && model.getCities().isEmpty() 
-					&& model.getPlaces().isEmpty() && model.getPoints().isEmpty())) //There is unsaved data in the system
+			if (!(geoView.dataSaved)) //There is unsaved data in the system
 			{
 				unsavedDialog();
 			}
 			
-			model.loadGeography();
+			if (geoView.dataSaved) { // In case the user cancelled earlier
+				model.loadGeography();
+			}
 		}
 	}
 	
@@ -476,7 +487,8 @@ public class GeoController
 			{
 				return;
 			}
-			model.saveGeography();
+			geoView.dataSaved = model.saveGeography();
+			
 		}
 	}
 	

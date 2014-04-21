@@ -785,10 +785,10 @@ public class GeoModel {
 //		
 //	}
 
-	public void saveGeography()
+	public boolean saveGeography()
 	{
 		String fileChoice = JOptionPane.showInputDialog("Enter the name of the binary file you would like to save to");
-		if (fileChoice == null) return;
+		if (fileChoice == null) return false;
 		
 		try 
 		{
@@ -798,12 +798,13 @@ public class GeoModel {
 		{
 			e.printStackTrace();
 		}
+		return true;
 	}
 	
-	public void exportGeography()
+	public boolean exportGeography()
 	{
 		String fileChoice = JOptionPane.showInputDialog("Enter the name of the text file you wish to export the data to");
-		if (fileChoice == null) return;
+		if (fileChoice == null) return false;
 		
 		try 
 		{
@@ -813,7 +814,7 @@ public class GeoModel {
 		{
 			e.printStackTrace();
 		}
-		
+		return true;
 	}
 	
 	public void discardGeography()

@@ -63,6 +63,8 @@ public class GeoView extends JFrame implements ActionListener
     JMenuItem mapPointsInCountries = new JMenuItem("Points of Interest Within Countries");
     JMenuItem mapPointsInCities = new JMenuItem("Points of Interest Within Cities");
     
+    boolean dataSaved = true;
+    
     public GeoView() {
     	JPanel panel = new JPanel(new GridLayout(1, 0));
 		setMinimumSize(new Dimension(1000, 400));
@@ -270,8 +272,6 @@ public class GeoView extends JFrame implements ActionListener
             countryPanel.addBtn.setEnabled(hasEntry);
             placePanel.addBtn.setEnabled(hasEntry);
             pointPanel.addBtn.setEnabled(hasEntry);
-            saveGeography.setEnabled(hasEntry);
-            exportGeography.setEnabled(hasEntry);
             // Enable/disable menu items
             simpleAreaContinents.setEnabled(hasEntry);
             simplePopContinents.setEnabled(hasEntry);
@@ -283,11 +283,10 @@ public class GeoView extends JFrame implements ActionListener
             countryPanel.addBtn.setToolTipText((hasEntry) ? "" : "Need at least one continent");
             placePanel.addBtn.setToolTipText((hasEntry) ? "" : "Need at least one region");
             pointPanel.addBtn.setToolTipText((hasEntry) ? "" : "Need at least one region");
-            saveGeography.setToolTipText((hasEntry) ? "" : "No regions to save");
-            exportGeography.setToolTipText((hasEntry) ? "" : "No regions to export");
             simpleAreaContinents.setToolTipText((hasEntry) ? "" : "No continents");
             simplePopContinents.setToolTipText((hasEntry) ? "" : "No continents");
             mapPointsInContinents.setToolTipText((hasEntry) ? "" : "No continents");
+            if (!hasEntry) dataSaved = true; // No continents means nothing to save
     	}
     	
     	if (command.contains("Country")) {
@@ -383,6 +382,10 @@ public class GeoView extends JFrame implements ActionListener
             mapAllPoints.setToolTipText((hasEntry) ? "" : "No points of interest");
     	}
     	
+        saveGeography.setEnabled(!dataSaved);
+        exportGeography.setEnabled(!dataSaved);
+        saveGeography.setToolTipText((!dataSaved) ? "" : "No unsaved data");
+        exportGeography.setToolTipText((!dataSaved) ? "" : "No unsaved data");
 
     }
     

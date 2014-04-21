@@ -377,8 +377,8 @@ public class GeoController
 			{
 				return;
 			}
-			if (!(model.getContinents().isEmpty() && model.getContinents().isEmpty() && model.getContinents().isEmpty() 
-					&& model.getContinents().isEmpty() && model.getContinents().isEmpty())) //There is unsaved data in the system
+			if (!(model.getContinents().isEmpty() && model.getCountries().isEmpty() && model.getCities().isEmpty() 
+					&& model.getPlaces().isEmpty() && model.getPoints().isEmpty())) //There is unsaved data in the system
 			{
 				unsavedDialog();
 			}
@@ -397,12 +397,7 @@ public class GeoController
 			{
 				return;
 			}
-			if (!(model.getContinents().isEmpty() && model.getContinents().isEmpty() && model.getContinents().isEmpty() 
-					&& model.getContinents().isEmpty() && model.getContinents().isEmpty())) //There is unsaved data in the system
-			{
-				unsavedDialog();
-			}
-				model.exportGeography();
+			model.exportGeography();
 		}
 	}
 		
@@ -416,13 +411,13 @@ public class GeoController
 			{
 				return;
 			}
-			if (!(model.getContinents().isEmpty() && model.getContinents().isEmpty() && model.getContinents().isEmpty() 
-					&& model.getContinents().isEmpty() && model.getContinents().isEmpty())) //There is unsaved data in the system
+			if (!(model.getContinents().isEmpty() && model.getCountries().isEmpty() && model.getCities().isEmpty() 
+					&& model.getPlaces().isEmpty() && model.getPoints().isEmpty())) //There is unsaved data in the system
 			{
 				unsavedDialog();
 			}
 			
-				model.loadGeography();
+			model.loadGeography();
 		}
 	}
 	
@@ -434,11 +429,6 @@ public class GeoController
 			if (model==null)
 			{
 				return;
-			}
-			if (!(model.getContinents().isEmpty() && model.getContinents().isEmpty() && model.getContinents().isEmpty() 
-					&& model.getContinents().isEmpty() && model.getContinents().isEmpty())) //There is unsaved data in the system
-			{
-				unsavedDialog();
 			}
 			model.saveGeography();
 		}

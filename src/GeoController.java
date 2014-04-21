@@ -300,6 +300,17 @@ public class GeoController
 		
 	}//end Class
 	
+	/*
+	private class ImportViewButtonListener implements ActionListener
+	{
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+	        String[] file = IMPORTVIEW.importFile();
+	        if (file != null)
+	            model.readTextFile(file[0], file[1]);
+	    }
+	}
+	*/
 	
 	private class ImportListener implements ActionListener
 	{

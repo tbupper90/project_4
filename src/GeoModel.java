@@ -643,7 +643,13 @@ public class GeoModel {
 		{
 			System.out.println("Your data doesn't make sense! Exiting the program");
 		}
-		
+
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add Continent"));
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add Country"));
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add City"));
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add PlaceOfInterest"));
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "add PointOfInterest"));
+
 		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "load binary"));
 		
 	}
@@ -781,7 +787,9 @@ public class GeoModel {
 
 	public void saveGeography()
 	{
-		String fileChoice = JOptionPane.showInputDialog("Enter the name of the file you would like to save to");
+		String fileChoice = JOptionPane.showInputDialog("Enter the name of the binary file you would like to save to");
+		if (fileChoice == null) return;
+		
 		try 
 		{
 			writeFile(fileChoice, "Binary");
@@ -794,7 +802,9 @@ public class GeoModel {
 	
 	public void exportGeography()
 	{
-		String fileChoice = JOptionPane.showInputDialog("Enter the name of the file you wish to export the data to");
+		String fileChoice = JOptionPane.showInputDialog("Enter the name of the text file you wish to export the data to");
+		if (fileChoice == null) return;
+		
 		try 
 		{
 			writeFile(fileChoice, "Text");
@@ -809,29 +819,28 @@ public class GeoModel {
 	public void discardGeography()
 	{
 		continents.clear();
-		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove Continent"));
-
 		countries.clear();
-		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove Country"));
-
 		cities.clear();
-		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove City"));
-
 		places.clear();
-		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove PlaceOfInterest"));
-
 		points.clear();
+
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove Continent"));
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove Country"));
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove City"));
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove PlaceOfInterest"));
 		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove PointOfInterest"));
 		
 	}
 	
     public void loadGeography()
     {
-    	String choice = JOptionPane.showInputDialog("Enter the name of the binary file you with to load data from");
-    	try 
+    	String fileChoice = JOptionPane.showInputDialog("Enter the name of the binary file you wish to load data from");
+    	if (fileChoice == null) return;
+    	
+    	try
     	{
-			readBinary(choice);
-		} 
+			readBinary(fileChoice);
+		}
     	catch (ClassNotFoundException | IOException e) 
     	{
 			e.printStackTrace();

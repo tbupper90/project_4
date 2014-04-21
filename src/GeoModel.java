@@ -803,8 +803,9 @@ public class GeoModel {
 	
 	public boolean exportGeography()
 	{
-		String fileChoice = JOptionPane.showInputDialog("Enter the name of the text file you wish to export the data to");
-		if (fileChoice == null) return false;
+		String fileChoice = "";
+//		String fileChoice = JOptionPane.showInputDialog("Enter the name of the text file you wish to export the data to");
+//		if (fileChoice == null) return false;
 		
 		try 
 		{
@@ -814,6 +815,7 @@ public class GeoModel {
 		{
 			e.printStackTrace();
 		}
+		JOptionPane.showMessageDialog(null, "Data exported to text files");
 		return true;
 	}
 	

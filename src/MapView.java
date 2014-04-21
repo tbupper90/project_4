@@ -1,9 +1,13 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 
@@ -14,9 +18,11 @@ public class MapView extends JFrame implements ActionListener {
     private LinkedHashMap<String, Region> regions;
     private String dataType;
     private MapPanel mapPanel;
-    
+
+    private BufferedImage img;
+
     public MapView(String title, LinkedHashMap<String, Region> regions,
-            String dataType, GeoModel newModel) {
+            String dataType, GeoModel newModel) throws IOException {
         
         // "this.model = model" seems to confuse the compiler
         model = newModel;
@@ -24,6 +30,8 @@ public class MapView extends JFrame implements ActionListener {
         
         this.regions = regions;
         this.dataType = dataType;
+        
+        img = ImageIO.read(new File("Worldmap.jpg"));
         
         mapPanel = new MapPanel();
         add(new JScrollPane(mapPanel));
@@ -52,7 +60,7 @@ public class MapView extends JFrame implements ActionListener {
         private int[] plotLat;
         
         public MapPanel() {
-            
+            setPreferredSize(new Dimension(1029, 518));
         }
         
         private void refreshData() {
@@ -71,6 +79,8 @@ public class MapView extends JFrame implements ActionListener {
             String latString = "";
             int tempLon = 0;
             int tempLat = 0;
+            
+            boolean noGPSData = true;
             
             Iterator<Region> iter = regionsCopy.values().iterator();
             for (int i = 0; iter.hasNext(); i++) {
@@ -97,26 +107,48 @@ public class MapView extends JFrame implements ActionListener {
                     // Convert GPS coordinates to something usable
                     if (lonString.contains("E")) {
                         tempLon = (180 + tempLon) % 359;
-                    } else if (lonString.contains("W")) {
+                    } else
+                    if (lonString.contains("W")) {
                         tempLon = (180 - tempLon) % 359;
                     }
                     if (latString.contains("S")) {
                         tempLat = (90 + tempLat) % 179;
-                    } else if (latString.contains("N")) {
+                    } else
+                    if (latString.contains("N")) {
                         tempLat = (90 - tempLat) % 179;
                     }
                     plotLon[i] = tempLon;
                     plotLat[i] = tempLat;
+                    noGPSData = false;
                 }
             }
             
+            if (noGPSData) dispose();
         }
         
+        @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
             refreshData();
             
+            FontMetrics font = g.getFontMetrics();
+            g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
             
+            for (int i = 0; i < numOfRegions; i++) {
+                g.setColor(semiWhite);
+                g.fillOval(plotLon[i] * getWidth() / 360 - 4,
+                           plotLat[i] * getHeight() / 180 - 4, 9, 9);
+                g.fillRect(plotLon[i] * getWidth() / 360 + 4,
+                           plotLat[i] * getHeight() / 180 - 10,
+                           font.stringWidth(names[i]) + 1,
+                           12);
+                g.setColor(colors[i % colors.length]);
+                g.fillOval(plotLon[i] * getWidth() / 360 - 3,
+                           plotLat[i] * getHeight() / 180 - 3, 7, 7);
+                g.drawString(names[i],
+                             plotLon[i] * getWidth() / 360 + 5,
+                             plotLat[i] * getHeight() / 180);                    
+            }
         }
     }
 

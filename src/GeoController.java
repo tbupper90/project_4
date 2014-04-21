@@ -652,12 +652,43 @@ public class GeoController
                 case "ithin Continents":
                     i = geoView.getContinentPanel().list.getSelectedIndices();
                     list = geoView.getContinentPanel().list.getModel();
+                                    
+                    for(int index : i)
+                    {
+                        parent = list.getElementAt(index);
+                        regions = model.getContinents().get(parent).points;
+                        command = command.replace("Continents", "");
+                        new MapView(command + parent,
+                                (LinkedHashMap<String, Region>)regions, split[0], model);
+                    }
                     break;
                     
                 case "ithin Countries":
+                    i = geoView.getCountryPanel().list.getSelectedIndices();
+                    list = geoView.getCountryPanel().list.getModel();
+                                    
+                    for(int index : i)
+                    {
+                        parent = list.getElementAt(index);
+                        regions = model.getCountries().get(parent).points;
+                        command = command.replace("Countries", "");
+                        new MapView(command + parent,
+                                (LinkedHashMap<String, Region>)regions, split[0], model);
+                    }
                     break;
                     
                 case "ithin Cities":
+                    i = geoView.getCityPanel().list.getSelectedIndices();
+                    list = geoView.getCityPanel().list.getModel();
+                                    
+                    for(int index : i)
+                    {
+                        parent = list.getElementAt(index);
+                        regions = model.getCities().get(parent).points;
+                        command = command.replace("Cities", "");
+                        new MapView(command + parent,
+                                (LinkedHashMap<String, Region>)regions, split[0], model);
+                    }
                     break;
                 }
                 

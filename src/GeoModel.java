@@ -809,10 +809,20 @@ public class GeoModel {
 	public void discardGeography()
 	{
 		continents.clear();
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove Continent"));
+
 		countries.clear();
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove Country"));
+
 		cities.clear();
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove City"));
+
 		places.clear();
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove PlaceOfInterest"));
+
 		points.clear();
+		processEvent(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "remove PointOfInterest"));
+		
 	}
 	
     public void loadGeography()

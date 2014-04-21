@@ -622,10 +622,24 @@ public class GeoController
                     new MapView(command, (LinkedHashMap<String, Region>)regions,
                             split[0], model);
                     break;
+                    
                 case "ithin Continents":
                     break;
+                    
                 case "ithin Countries":
+                    i = geoView.getCountryPanel().list.getSelectedIndices();
+                    list = geoView.getCountryPanel().list.getModel();
+                                    
+                    for(int index : i)
+                    {
+                        parent = list.getElementAt(index);
+                        regions = model.getCountries().get(parent).cities;
+                        command = command.replace("Countries", "");
+                        new MapView(command + parent,
+                                (LinkedHashMap<String, Region>)regions, split[0], model);
+                    }
                     break;
+                    
                 }
             } else if (split[0].equals("Points of Interest")) {
                 switch(split[1]) {
@@ -634,12 +648,15 @@ public class GeoController
                     new MapView(command, (LinkedHashMap<String, Region>)regions,
                             split[0], model);
                     break;
+                    
                 case "ithin Continents":
                     i = geoView.getContinentPanel().list.getSelectedIndices();
                     list = geoView.getContinentPanel().list.getModel();
                     break;
+                    
                 case "ithin Countries":
                     break;
+                    
                 case "ithin Cities":
                     break;
                 }

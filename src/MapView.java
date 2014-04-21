@@ -76,10 +76,6 @@ public class MapView extends JFrame implements ActionListener {
             numOfRegions = regionsCopy.size();
             if (numOfRegions == 0) dispose();
             
-            System.out.println(numOfRegions);
-
-            System.out.println(dataType);
-            
             names = new String[numOfRegions];
             plotLon = new int[numOfRegions];
             plotLat = new int[numOfRegions];

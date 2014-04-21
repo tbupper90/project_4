@@ -165,7 +165,7 @@ public class GeoController
 				int[] i = geoView.getContinentPanel().list.getSelectedIndices();
 				ListModel<String> list = geoView.getContinentPanel().list.getModel();
 				
-				System.out.println(list);
+//				System.out.println(list);
 				
 				for(int index : i)
 				{
@@ -203,6 +203,30 @@ public class GeoController
 				}//end for
 				
 			}
+
+            if(e.getActionCommand().contains("Places"))
+            {
+                int[] i = geoView.getPlacePanel().list.getSelectedIndices();
+                ListModel<String> list = geoView.getPlacePanel().list.getModel();
+                for(int index : i)
+                {
+                    String name = list.getElementAt(index);
+                    model.removeRegion(model.getPlaces().get(name));
+                }//end for
+                
+            }
+
+            if(e.getActionCommand().contains("Points"))
+            {
+                int[] i = geoView.getPointPanel().list.getSelectedIndices();
+                ListModel<String> list = geoView.getPointPanel().list.getModel();
+                for(int index : i)
+                {
+                    String name = list.getElementAt(index);
+                    model.removeRegion(model.getPoints().get(name));
+                }//end for
+                
+            }
 		}
 		
 	}
@@ -714,7 +738,8 @@ public class GeoController
 		geoView.getContinentPanel().delBtn.addActionListener(deleteListener);
 		geoView.getCountryPanel().delBtn.addActionListener(deleteListener);
 		geoView.getCityPanel().delBtn.addActionListener(deleteListener);
-		
+        geoView.getPlacePanel().delBtn.addActionListener(deleteListener);
+        geoView.getPointPanel().delBtn.addActionListener(deleteListener);
 		
 		ActionListener editListener = new EditButtonListener();
 		geoView.getContinentPanel().editBtn.addActionListener(editListener);

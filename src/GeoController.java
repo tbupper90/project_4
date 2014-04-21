@@ -1,7 +1,9 @@
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
@@ -84,6 +86,30 @@ public class GeoController
 					
 					aeView.setVisible(false);
 					break;
+					
+				case "Place":
+					String placeName = aeView.nameJtf.getText();
+					String placeArea = aeView.areaJtf.getText();
+					String placeDescription = aeView.descriptionJtf.getText();
+					List<String> locs = aeView.multipleLocsList.getSelectedValuesList();
+					LinkedHashMap<String, Region> locsMap = new LinkedHashMap<String, Region>();
+					
+					for(String location : locs)
+					{
+						if(model.getContinents().containsKey(location))
+							locsMap.put(location, model.getContinents().get(location));
+						if(model.getCountries().containsKey(location))
+							locsMap.put(location, model.getCountries().get(location));
+						if(model.getCities().containsKey(location))
+							locsMap.put(location, model.getCities().get(location));
+					}
+					
+					
+					model.addRegion(new PlaceOfInterest(placeName,placeArea,placeDescription,locsMap));
+					
+					aeView.setVisible(false);
+					
+					
 					
 			}//end switch
 		}//end actionPerformed

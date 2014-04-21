@@ -34,6 +34,7 @@ public class AddEditView extends JFrame implements ActionListener {
 	JTextField latJtf = new JTextField();
 	JTextField lonJtf = new JTextField();
 	JTextField elevJtf = new JTextField();
+	JTextField descriptionJtf = new JTextField();
 
 	JComboBox<String> parentRegionsJcb = new JComboBox<String>(); 	
 	
@@ -44,7 +45,9 @@ public class AddEditView extends JFrame implements ActionListener {
 	JLabel latJl = new JLabel("Latitude:");
 	JLabel lonJl = new JLabel("Longitude:");
 	JLabel elevJl = new JLabel("Elevation");
+	JLabel descriptionJl = new JLabel("Description");
 	
+	JList multipleLocsList;
 	
 	
 	public AddEditView(String region, String type, Region toEdit, GeoModel model) 
@@ -159,9 +162,9 @@ public class AddEditView extends JFrame implements ActionListener {
 						
 			String[] locs = locations.toArray(new String[0]);
 			
+			multipleLocsList = new JList(locs);
 			
-			
-			JList multipleLocsList = new JList(locs);
+			JScrollPane listScroll = new JScrollPane(multipleLocsList);
 
 			
 			components.add(nameJl);
@@ -170,12 +173,10 @@ public class AddEditView extends JFrame implements ActionListener {
 			components.add(areaJl);
 			components.add(areaJtf);
 			
-			components.add(popJl);
-			components.add(popJtf);
+			components.add(descriptionJl);
+			components.add(descriptionJtf);
 			
 			components.add(locationJl);
-			
-			JScrollPane listScroll = new JScrollPane(multipleLocsList);
 			components.add(listScroll);
 			
 		}//end switch

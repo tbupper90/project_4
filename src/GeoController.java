@@ -178,13 +178,7 @@ public class GeoController
 			{
 				int[] i = geoView.getCountryPanel().list.getSelectedIndices();
 				ListModel<String> list = geoView.getCountryPanel().list.getModel();
-				
-//				for(int index : i)
-//				{
-//					System.out.println(index);
-//					System.out.println(list.getElementAt(index));
-//				}
-				
+								
 				for(int index : i)
 				{
 					String name = list.getElementAt(index);
@@ -250,6 +244,11 @@ public class GeoController
 			if(e.getActionCommand().contains("Cities"))
 			{
 				aeView = new AddEditView("City", "Add", null, model);
+			}
+			
+			if(e.getActionCommand().contains("Places"))
+			{
+				aeView = new AddEditView("Place", "Add", null, model);
 			}
 			
 			setAddEditView(aeView);

@@ -5,7 +5,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import javax.swing.*;
 
 
@@ -36,9 +35,7 @@ public class AddEditView extends JFrame implements ActionListener {
 	JTextField lonJtf = new JTextField();
 	JTextField elevJtf = new JTextField();
 
-	JComboBox<String> parentRegionsJcb = new JComboBox<String>();
-	
-	
+	JComboBox<String> parentRegionsJcb = new JComboBox<String>(); 	
 	
 	JLabel nameJl = new JLabel("Name");
 	JLabel areaJl = new JLabel("Area");
@@ -121,6 +118,7 @@ public class AddEditView extends JFrame implements ActionListener {
 			break;
 //			
 		case "City":
+			
 			for(String country : model.getCountries().keySet())
 			{
 				parentRegionsJcb.addItem(country);
@@ -138,15 +136,47 @@ public class AddEditView extends JFrame implements ActionListener {
 			components.add(locationJl);
 			components.add(parentRegionsJcb);
 			
-			components.add(elevJl);
-			components.add(elevJtf);
-			
 			components.add(latJl);
 			components.add(latJtf);
 			
 			components.add(lonJl);
 			components.add(lonJtf);
+			
+			components.add(elevJl);
+			components.add(elevJtf);
+			
 			break;
+			
+		case "Place":
+			ArrayList<String> locations = new ArrayList<String>();
+			
+			for(String continent : model.getContinents().keySet())
+				locations.add(continent);
+			for(String country : model.getCountries().keySet())
+				locations.add(country);
+			for(String city : model.getCities().keySet())
+				locations.add(city);
+						
+			String[] locs = locations.toArray(new String[0]);
+			
+			
+			
+			JList multipleLocsList = new JList(locs);
+
+			
+			components.add(nameJl);
+			components.add(nameJtf);
+			
+			components.add(areaJl);
+			components.add(areaJtf);
+			
+			components.add(popJl);
+			components.add(popJtf);
+			
+			components.add(locationJl);
+			
+			JScrollPane listScroll = new JScrollPane(multipleLocsList);
+			components.add(listScroll);
 			
 		}//end switch
 	}

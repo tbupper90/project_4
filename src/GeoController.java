@@ -1,5 +1,6 @@
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 import javax.swing.JOptionPane;
@@ -637,6 +638,28 @@ public class GeoController
                     break;
                     
                 case "ithin Continents":
+                    i = geoView.getContinentPanel().list.getSelectedIndices();
+                    list = geoView.getContinentPanel().list.getModel();
+                    for(int index : i)
+                    {                    	
+                    	//regions = new LinkedHashMap<String, City>();
+                    	LinkedHashMap<String, City> continentCities = new LinkedHashMap<String, City>();
+                    	parent = list.getElementAt(index);
+                    	
+                    	LinkedHashMap<String, Country> countries = model.getContinents().get(parent).countries;
+                    	//Iterator<Country> countryIter = countries.values().iterator();
+                    	for (String countryKey: countries.keySet()) {
+                    		LinkedHashMap<String, City> cities = countries.get(countryKey).cities;
+                    		continentCities.putAll(cities);
+                    	}
+
+                    	regions = continentCities;
+                        command = command.replace("Continents", "");
+                    	new MapView(command + parent,
+                                (LinkedHashMap<String, Region>)regions, split[0], model);
+
+                    }
+                	
                     break;
                     
                 case "ithin Countries":

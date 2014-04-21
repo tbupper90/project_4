@@ -76,6 +76,10 @@ public class MapView extends JFrame implements ActionListener {
             numOfRegions = regionsCopy.size();
             if (numOfRegions == 0) dispose();
             
+            System.out.println(numOfRegions);
+
+            System.out.println(dataType);
+            
             names = new String[numOfRegions];
             plotLon = new int[numOfRegions];
             plotLat = new int[numOfRegions];
@@ -92,18 +96,17 @@ public class MapView extends JFrame implements ActionListener {
                 // A very dirty workaround...
                 City tempCity;
                 PointOfInterest tempPoint;
-                if (dataType == "Cities") {
+                if (dataType.equals("Cities")) {
                     tempCity = (City)iter.next();
                     names[i] = tempCity.getName();
                     lonString = tempCity.getLon();
                     latString = tempCity.getLat();
-                } else if (dataType == "Points of Interest") {
+                } else if (dataType.equals("Points of Interest")) {
                     tempPoint = (PointOfInterest)iter.next();
                     names[i] = tempPoint.getName();
                     lonString = tempPoint.getLon();
                     latString = tempPoint.getLat();
                 }
-                
                 plotLon[i] = -1;
                 plotLat[i] = -1;
                 if (lonString != "" && latString != "") {

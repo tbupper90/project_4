@@ -19,6 +19,7 @@ public class SimpleChartView extends JFrame implements ActionListener {
     public SimpleChartView(String title, LinkedHashMap<String, Region> regions,
             String dataType, GeoModel newModel) {
         
+        
         // "this.model = model" seems to confuse the compiler
         model = newModel;
         model.addActionListener(this);

@@ -55,10 +55,10 @@ public class GeoView extends JFrame implements ActionListener
     JMenuItem stackedPopCitiesInCountries = new JMenuItem("Cities Within Countries");
     
     JMenu map = new JMenu("Map");
-    JMenuItem mapAllCities = new JMenuItem("All Cities");
+    JMenuItem mapAllCities = new JMenuItem("Cities Worldwide");
     JMenuItem mapCitiesInContinents = new JMenuItem("Cities Within Continents");
     JMenuItem mapCitiesInCountries = new JMenuItem("Cities Within Countries");
-    JMenuItem mapAllPoints = new JMenuItem("All Points of Interest");
+    JMenuItem mapAllPoints = new JMenuItem("Points of Interest Worldwide");
     JMenuItem mapPointsInContinents = new JMenuItem("Points of Interest Within Continents");
     JMenuItem mapPointsInCountries = new JMenuItem("Points of Interest Within Countries");
     JMenuItem mapPointsInCities = new JMenuItem("Points of Interest Within Cities");

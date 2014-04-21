@@ -22,7 +22,7 @@ public class MapView extends JFrame implements ActionListener {
     private BufferedImage img;
 
     public MapView(String title, LinkedHashMap<String, Region> regions,
-            String dataType, GeoModel newModel) throws IOException {
+            String dataType, GeoModel newModel) {
         
         // "this.model = model" seems to confuse the compiler
         model = newModel;
@@ -31,7 +31,12 @@ public class MapView extends JFrame implements ActionListener {
         this.regions = regions;
         this.dataType = dataType;
         
-        img = ImageIO.read(new File("Worldmap.jpg"));
+        try {
+            img = ImageIO.read(new File("Worldmap.jpg"));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         
         mapPanel = new MapPanel();
         add(new JScrollPane(mapPanel));
@@ -135,19 +140,21 @@ public class MapView extends JFrame implements ActionListener {
             g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
             
             for (int i = 0; i < numOfRegions; i++) {
-                g.setColor(semiWhite);
-                g.fillOval(plotLon[i] * getWidth() / 360 - 4,
-                           plotLat[i] * getHeight() / 180 - 4, 9, 9);
-                g.fillRect(plotLon[i] * getWidth() / 360 + 4,
-                           plotLat[i] * getHeight() / 180 - 10,
-                           font.stringWidth(names[i]) + 1,
-                           12);
-                g.setColor(colors[i % colors.length]);
-                g.fillOval(plotLon[i] * getWidth() / 360 - 3,
-                           plotLat[i] * getHeight() / 180 - 3, 7, 7);
-                g.drawString(names[i],
-                             plotLon[i] * getWidth() / 360 + 5,
-                             plotLat[i] * getHeight() / 180);                    
+                if (plotLon[i] >= 0 && plotLat[i] >= 0) {
+                    g.setColor(semiWhite);
+                    g.fillOval(plotLon[i] * getWidth() / 360 - 4,
+                               plotLat[i] * getHeight() / 180 - 4, 9, 9);
+                    g.fillRect(plotLon[i] * getWidth() / 360 + 4,
+                               plotLat[i] * getHeight() / 180 - 10,
+                               font.stringWidth(names[i]) + 1,
+                               12);
+                    g.setColor(colors[i % colors.length]);
+                    g.fillOval(plotLon[i] * getWidth() / 360 - 3,
+                               plotLat[i] * getHeight() / 180 - 3, 7, 7);
+                    g.drawString(names[i],
+                                 plotLon[i] * getWidth() / 360 + 5,
+                                 plotLat[i] * getHeight() / 180);                    
+                }
             }
         }
     }

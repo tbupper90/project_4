@@ -601,7 +601,55 @@ public class GeoController
 	        
 	    }
 	}
+	
+	private class MapListener implements ActionListener {
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+            LinkedHashMap<String, ? extends Region> regions = null;
+	        
+	        String command = e.getActionCommand();
+	        // Good thing all the action commands have a W after their region type
+	        String[] split = command.split(" W", 2);
+	        String parent;
 
+	        int[] i;
+            ListModel<String> list;
+	        
+            if (split[0].equals("Cities")) {
+                switch(split[1]) {
+                case "orldwide":
+                    regions = model.getCities();
+                    new MapView(command, (LinkedHashMap<String, Region>)regions,
+                            split[0], model);
+                    break;
+                case "ithin Continents":
+                    break;
+                case "ithin Countries":
+                    break;
+                }
+            } else if (split[0].equals("Points of Interest")) {
+                switch(split[1]) {
+                case "orldwide":
+                    regions = model.getPoints();
+                    new MapView(command, (LinkedHashMap<String, Region>)regions,
+                            split[0], model);
+                    break;
+                case "ithin Continents":
+                    i = geoView.getContinentPanel().list.getSelectedIndices();
+                    list = geoView.getContinentPanel().list.getModel();
+                    break;
+                case "ithin Countries":
+                    break;
+                case "ithin Cities":
+                    break;
+                }
+                
+            }
+            
+	            
+	        
+	    }
+	}
 
 	public void setView(GeoView newView)
 	{
@@ -657,6 +705,16 @@ public class GeoController
         geoView.stackedAreaPlacesInCities.addActionListener(stackedListener);
         geoView.stackedPopCountriesInContinents.addActionListener(stackedListener);
         geoView.stackedPopCitiesInCountries.addActionListener(stackedListener);
+        
+        ActionListener mapListener = new MapListener();
+        geoView.mapAllCities.addActionListener(mapListener);
+        geoView.mapCitiesInContinents.addActionListener(mapListener);
+        geoView.mapCitiesInCountries.addActionListener(mapListener);
+        geoView.mapAllPoints.addActionListener(mapListener);
+        geoView.mapPointsInContinents.addActionListener(mapListener);
+        geoView.mapPointsInCountries.addActionListener(mapListener);
+        geoView.mapPointsInCities.addActionListener(mapListener);
+
 	}
 	
 	public void setAddEditView(AddEditView newView)

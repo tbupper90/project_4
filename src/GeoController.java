@@ -1,5 +1,6 @@
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 import javax.swing.JOptionPane;
@@ -323,13 +324,27 @@ public class GeoController
 		
 	}//end Class
 	
+	private void unsavedDialog()
+	{
+		String[] options = new String[] {"Export", "Save", "Discard"};
+		int choice = JOptionPane.showOptionDialog(null, "Would you like to export, save, or discard the current unsaved data?", "Save, export, or discard", 1, 1, 
+				null, options, "Discard");
+		if (choice == 0) //Export
+		{
+			model.exportGeography();
+		}
+		else if (choice == 1) //Save
+		{
+			model.saveGeography();
+		}
+		else if (choice == 2)
+		{
+			model.discardGeography();
+		}
+	}
 	
 	private class ImportListener implements ActionListener
 	{
-		String fileName;
-		String[] options;
-		int choice;
-		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (model==null)
@@ -339,21 +354,7 @@ public class GeoController
 			if (!(model.getContinents().isEmpty() && model.getContinents().isEmpty() && model.getContinents().isEmpty() 
 					&& model.getContinents().isEmpty() && model.getContinents().isEmpty())) //There is unsaved data in the system
 			{
-				options = new String[] {"Export", "Save", "Discard"};
-				choice = JOptionPane.showOptionDialog(null, "Would you like to export, save, or discard the current unsaved data?", "Save, export, or discard", 1, 1, 
-						null, options, "Discard");
-				if (choice == 0) //Export
-				{
-					model.exportGeography();
-				}
-				else if (choice == 1) //Save
-				{
-					model.saveGeography();
-				}
-				else if (choice == 2)
-				{
-					model.discardGeography();
-				}
+				unsavedDialog();
 			}
 			model.importGeography();
 		}
@@ -363,10 +364,6 @@ public class GeoController
 	
 	private class ExportListener implements ActionListener
 	{
-		String fileName;
-		String[] options;
-		int choice;
-		
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
@@ -377,23 +374,7 @@ public class GeoController
 			if (!(model.getContinents().isEmpty() && model.getContinents().isEmpty() && model.getContinents().isEmpty() 
 					&& model.getContinents().isEmpty() && model.getContinents().isEmpty())) //There is unsaved data in the system
 			{
-				options = new String[] {"Export", "Save", "Discard"};
-				choice = JOptionPane.showOptionDialog(null, "Would you like to export, save, or discard the current unsaved data?", "Save, export, or discard", 1, 1, 
-						null, options, "Discard");
-				if (choice == 0) //Export
-				{
-					model.exportGeography();
-				}
-				else if (choice == 1) //Save
-				{
-					model.saveGeography();
-				}
-				else if (choice == 2)
-				{
-					model.discardGeography();
-				}
-				
-			
+				unsavedDialog();
 			}
 				model.exportGeography();
 		}
@@ -402,11 +383,6 @@ public class GeoController
 	
 	private class LoadListener implements ActionListener
 	{
-
-		String fileName;
-		String[] options;
-		int choice;
-		
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
@@ -417,35 +393,15 @@ public class GeoController
 			if (!(model.getContinents().isEmpty() && model.getContinents().isEmpty() && model.getContinents().isEmpty() 
 					&& model.getContinents().isEmpty() && model.getContinents().isEmpty())) //There is unsaved data in the system
 			{
-				options = new String[] {"Export", "Save", "Discard"};
-				choice = JOptionPane.showOptionDialog(null, "Would you like to export, save, or discard the current unsaved data?", "Save, export, or discard", 1, 1, 
-						null, options, "Discard");
-				if (choice== 0) //Export
-				{
-					model.exportGeography();
-				}
-				else if (choice == 1) //Save
-				{
-					model.saveGeography();
-				}
-				else if (choice == 2)
-				{
-					model.discardGeography();
-				}
-				
+				unsavedDialog();
 			}
 			
 				model.loadGeography();
-			
-	}
+		}
 	}
 	
 	private class SaveListener implements ActionListener
 	{
-
-		String[] options;
-		int choice;
-		
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
@@ -456,22 +412,7 @@ public class GeoController
 			if (!(model.getContinents().isEmpty() && model.getContinents().isEmpty() && model.getContinents().isEmpty() 
 					&& model.getContinents().isEmpty() && model.getContinents().isEmpty())) //There is unsaved data in the system
 			{
-				options = new String[] {"Export", "Save", "Discard"};
-				choice = JOptionPane.showOptionDialog(null, "Would you like to export, save, or discard the current unsaved data?", "Save, export, or discard", 1, 1, 
-						null, options, "Discard");
-				if (choice == 0) //Export
-				{
-					model.exportGeography();
-				}
-				else if (choice == 1) //Save
-				{
-					model.saveGeography();
-				}
-				else if (choice == 2)
-				{
-					model.discardGeography();
-				}
-				
+				unsavedDialog();
 			}
 			model.saveGeography();
 		}
@@ -636,6 +577,28 @@ public class GeoController
                     break;
                     
                 case "ithin Continents":
+                    i = geoView.getContinentPanel().list.getSelectedIndices();
+                    list = geoView.getContinentPanel().list.getModel();
+                    for(int index : i)
+                    {                    	
+                    	//regions = new LinkedHashMap<String, City>();
+                    	LinkedHashMap<String, City> continentCities = new LinkedHashMap<String, City>();
+                    	parent = list.getElementAt(index);
+                    	
+                    	LinkedHashMap<String, Country> countries = model.getContinents().get(parent).countries;
+                    	//Iterator<Country> countryIter = countries.values().iterator();
+                    	for (String countryKey: countries.keySet()) {
+                    		LinkedHashMap<String, City> cities = countries.get(countryKey).cities;
+                    		continentCities.putAll(cities);
+                    	}
+
+                    	regions = continentCities;
+                        command = command.replace("Continents", "");
+                    	new MapView(command + parent,
+                                (LinkedHashMap<String, Region>)regions, split[0], model);
+
+                    }
+                	
                     break;
                     
                 case "ithin Countries":

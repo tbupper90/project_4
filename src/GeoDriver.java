@@ -70,7 +70,7 @@ public class GeoDriver {
             e.printStackTrace();
         }
         
-        System.out.println(model.getCountries().get("Pakistan").cities);
+        
         
 //        System.out.println(model.getContinents());
 		

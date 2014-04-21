@@ -814,7 +814,8 @@ public class GeoModel {
 		places.clear();
 		points.clear();
 	}
-    public void importGeography()
+	
+    public void loadGeography()
     {
     	String choice = JOptionPane.showInputDialog("Enter the name of the binary file you with to load data from");
     	try 
@@ -827,7 +828,7 @@ public class GeoModel {
 		}
     }
     
-    public void loadGeography()
+    public void importGeography()
     {
     	String[] options = {"Continents", "Countries", "Cities", "Places of Interest", "Points of Interest"};
     	String fileChoice = JOptionPane.showInputDialog("Please enter the name of the text file you wish to load data from");

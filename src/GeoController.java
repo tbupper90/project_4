@@ -108,6 +108,7 @@ public class GeoController
 					model.addRegion(new PlaceOfInterest(placeName,placeArea,placeDescription,locsMap));
 					
 					aeView.setVisible(false);
+					break;
 					
 					
 					
@@ -175,7 +176,34 @@ public class GeoController
 					aeView.setVisible(false);
 					break;
 					
+				case "Place":
+										
+					String placeName = aeView.nameJtf.getText();
+					String placeArea = aeView.areaJtf.getText();
+					String placeDescription = aeView.descriptionJtf.getText();
+					List<String> locs = aeView.multipleLocsList.getSelectedValuesList();
+					LinkedHashMap<String, Region> locsMap = new LinkedHashMap<String, Region>();
 					
+					PlaceOfInterest place = (PlaceOfInterest) aeView.toEdit;
+					
+					for(String location : locs)
+					{
+						if(model.getContinents().containsKey(location))
+							locsMap.put(location, model.getContinents().get(location));
+						if(model.getCountries().containsKey(location))
+							locsMap.put(location, model.getCountries().get(location));
+						if(model.getCities().containsKey(location))
+							locsMap.put(location, model.getCities().get(location));
+					}
+					
+					place.name = placeName;
+					place.area = placeArea;
+					place.description = placeDescription;
+					
+					model.regionEdited();
+					
+					aeView.setVisible(false);
+					break;
 					
 			}
 		}
@@ -345,6 +373,22 @@ public class GeoController
 				}//end for
 			}
 			
+			if(e.getActionCommand().contains("Place"))
+			{
+				int[] i = geoView.getPlacePanel().list.getSelectedIndices();
+				ListModel<String> list = geoView.getPlacePanel().list.getModel();
+				
+				for(int index : i)
+				{
+					PlaceOfInterest tmpPlace = model.getPlaces().get(list.getElementAt(index));
+					aeView = new AddEditView("Place", "Edit", tmpPlace, model);
+					setAddEditView(aeView);
+					aeView.nameJtf.setText(tmpPlace.name);
+					aeView.areaJtf.setText(tmpPlace.area);
+					aeView.descriptionJtf.setText(tmpPlace.description);
+//					aeView.multipleLocsList.setSelectedIndices(indices)
+				}//end for
+			}
 			
 		}
 		
@@ -712,6 +756,8 @@ public class GeoController
 		geoView.getContinentPanel().editBtn.addActionListener(editListener);
 		geoView.getCountryPanel().editBtn.addActionListener(editListener);
 		geoView.getCityPanel().editBtn.addActionListener(editListener);
+		geoView.getPlacePanel().editBtn.addActionListener(editListener);
+		geoView.getPointPanel().editBtn.addActionListener(editListener);
 
 		/**Action Listeners for the menu items*/
 		

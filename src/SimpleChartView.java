@@ -53,8 +53,12 @@ public class SimpleChartView extends JFrame implements ActionListener {
         private String[] names;
         private long[] data;
         
+        private String toolTip;
+        private Rectangle[] rect;
+        private Point mousePoint = new Point();
+        
         public BarsPanel() {
-
+            addMouseMotionListener(new ml());
         }
         
         private void refreshData() {
@@ -68,6 +72,7 @@ public class SimpleChartView extends JFrame implements ActionListener {
             
             names = new String[numOfRegions];
             data = new long[numOfRegions];
+            rect = new Rectangle[numOfRegions];
             
             Iterator<Region> iter = regionsCopy.values().iterator();
             for (int i = 0; iter.hasNext(); i++) {
@@ -95,11 +100,35 @@ public class SimpleChartView extends JFrame implements ActionListener {
                 g.fillRect(i * barWidth,
                         getHeight() - barHeight[i] - 5,
                         barWidth,
-                        barHeight[i]);                
+                        barHeight[i]);
+                toolTip = names[i];
+                rect[i] = new Rectangle(i * barWidth,
+                        getHeight() - barHeight[i] - 5,
+                        barWidth,
+                        barHeight[i]);
             }
             // Separator bar
             g.setColor(Color.BLACK);
             g.fillRect(0, getHeight() - 5, getWidth(), 5);
+        }
+
+        private class ml implements MouseMotionListener
+        {
+        	@Override
+        	public void mouseMoved (MouseEvent me) {
+        		mousePoint = me.getPoint();
+        		setToolTipText("");
+                for (int i = 0; i < numOfRegions; i++) {
+            		if (rect[i].contains(mousePoint))
+                    	setToolTipText("<html>" + names[i].toUpperCase() + "<br>" +
+                    					dataType + ": " + data[i] + "</html>");
+                }
+        	}
+        	
+        	@Override
+        	public void mouseDragged (MouseEvent me) {
+        		mousePoint = me.getPoint();
+        	}
         }
     }
 }

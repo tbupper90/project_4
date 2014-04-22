@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>5</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>865</x>
+      <y>215</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Country
+--
+~cities: LinkedHashMap&lt;String, City&gt;
+~continent: Continent
+--
++Country(String name, String pop, String area, Continent continent): ctor
++getContinent(): Continent
++addCity(String name, City city): void
++dataQC(): boolean
++toString(): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>375</x>
+      <y>195</y>
+      <w>285</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>PointOfInterest
+--
+~description: String
+~location: Region
+~lat: String
+~lon: String
+~elev: String
+--
++PointOfInterest(String name, String description, String lat, String lon, String elev, Region location): ctor
++getName(): String
++getDescription(): String
++getLocation(): Region
++getLat(): String
++getLon(): String
++getElev(): String
++dataQC(): boolean
++toString(): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>180</x>
+      <y>105</y>
+      <w>145</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>/Region/
+--
+#name: String
+#pop: String
+#area: String
+~places: LinkedHashMap&lt;String, PlaceOfInterest&gt;
+~points: LinkedHashMap&lt;String, PointOfInterest&gt;
+--
++Region(): ctor
+~dataQC(): boolean
++addPlace(String name, PlaceOfInterest place): void
++addPoint(String name, PointOfInterest point): void
++getName(): String
++getPop(): String
++getArea(): String
++toString(): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>220</x>
+      <y>340</y>
+      <w>270</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>City
+--
+~country: Country
+-lat: String
+-lon: String
+-elev: String
+--
++City(String name, String pop, String area, Country country): ctor
++City(String name, String pop, String area, Country country, String lat, String lon, String elev): ctor
++dataQC(): boolean
++getCountry(): Country
++getLat(): String
++getLon(): String
++getElev(): String
++toString(): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>565</x>
+      <y>345</y>
+      <w>305</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>PlaceOfInterest
+--
+~description: String
+~locations: LinkedHashMap&lt;String, Region&gt;
+--
++PlaceOfInterest(String name, String area, String description, LinkedHashMap&lt;String, Region&gt; locations): ctor
++getName(): String
++getArea(): String
++getDescription(): String
++dataQC(): boolean
++getLocations(): LinkedHashMap&lt;String, Region&gt;
++toString(): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>590</x>
+      <y>500</y>
+      <w>245</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>Continent
+--
+~countries: LinkedHashMap&lt;String, Country&gt;
+--
++Continent(String name, String pop, String area): ctor
++addCountry(String name, Country country): void
++getCountries(): LinkedHashMap&lt;String, Country&gt;
++dataQC(): boolean
++toString(): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>120</x>
+      <y>225</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>AddEditView
+--
+~model: GeoModel
+~type: String
+~region: String
+--
++AddEditView(String region, String type, Region toEdit, GeoModel model): ctor
++getEditType(): String
++setModel(GeoModel model): void
+-setComponents(): void
+-addComponents(): void
++actionPerformed(ActionEvent e): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>690</x>
+      <y>220</y>
+      <w>130</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>GeoModel
+--
+-continents: LinkedHashMap&lt;String, Continent&gt;
+-countries: LinkedHashMap&lt;String, Country&gt;
+-cities: LinkedHashMap&lt;String, City&gt;
+-places: LinkedHashMap&lt;String, PlaceOfInterest&gt;
+-points: LinkedHashMap&lt;String, PointOfInterest&gt;
+--
++addRegion(Region r): void
++removeRegion(Region r): void
++qcAllData(): boolean
++searchAllData(String name): Region</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>370</x>
+      <y>100</y>
+      <w>130</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>GeoController
+--
+~model: GeoModel
+~geoView: GeoView
+~aeView: AddEditView
+--
++GeoController(): ctor
+-unsavedDialog(): void
++setView(GeoView newView): void
++setAddEditView(AddEditView newView): void
++setModel(GeoModel model): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>565</x>
+      <y>445</y>
+      <w>135</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>GeoDriver
+--
+-model: GeoModel
+-view: GeoView
+-controller: GeoController
+--
++GeoDriver(): ctor
++main(String[] args): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>0</x>
+      <y>25</y>
+      <w>110</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>GeoView
+--
+-model: GeoModel
+--
++GeoView(): ctor
++getContinentPanel(): ListPanel
++getCountryPanel(): ListPanel
++getCityPanel(): ListPanel
++getPlacePanel(): ListPanel
++getPointPanel(): ListPanel
++actionPerformed(ActionEvent e): void
++setModel(GeoModel newModel): void
++getModel(): GeoModel</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>15</x>
+      <y>325</y>
+      <w>150</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>ViewRegionView
+--
+-model: GeoModel
+-region: Region
+-type: String
+-viewPanel: JPanel
+-name: String
+-pop: String
+-area: String
+-description: String
+-lat: String
+-lon: String
+-elev: String
+-location: String
+--
++ViewRegionView(Region r, GeoModel newModel): ctor
++actionPerformed(ActionEvent e): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>465</x>
+      <y>35</y>
+      <w>290</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>MapView
+--
+-model: GeoModel
+-regions: LinkedHashMap&lt;String, Region&gt;
+-dataType: String
+-img: BufferedImage
+--
++MapView(String title, LinkedHashMap&lt;String, Region&gt; regions, String dataType, GeoModel newModel): ctor
++actionPerformed(ActionEvent e): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>610</x>
+      <y>105</y>
+      <w>310</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>SimpleChartView
+--
+-model: GeoModel
+-regions: LinkedHashMap&lt;String, Region&gt;
+-dataType: String
+--
++SimpleChartView(String title, LinkedHashMap&lt;String, Region&gt; regions, String dataType, GeoModel newModel): ctor
++actionPerformed(ActionEvent e): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>120</x>
+      <y>500</y>
+      <w>310</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>StackedChartView
+--
+-model: GeoModel
+-regions: LinkedHashMap&lt;String, Region&gt;
+-dataType: String
+--
++StackedChartView(String title, LinkedHashMap&lt;String, Region&gt; regions, String dataType, GeoModel newModel): ctor
++actionPerformed(ActionEvent e): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

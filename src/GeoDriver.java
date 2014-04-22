@@ -87,8 +87,4 @@ public class GeoDriver {
 
 	}
 	
-	public static void testStuff() {
-	    
-	}
-
 }

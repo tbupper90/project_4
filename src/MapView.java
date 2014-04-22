@@ -105,7 +105,7 @@ public class MapView extends JFrame implements ActionListener {
                 }
                 plotLon[i] = -1;
                 plotLat[i] = -1;
-                if (lonString != "" && latString != "") {
+                if (!(lonString.equals("") || latString.equals(""))) {
                     tempLon = (int)Float.parseFloat(lonString.substring(1));
                     tempLat = (int)Float.parseFloat(latString.substring(1));                    
                     // Convert GPS coordinates to something usable

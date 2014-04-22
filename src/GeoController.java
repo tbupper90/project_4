@@ -498,6 +498,62 @@ public class GeoController
 		
 	}//end Class
 	
+	public class ViewButtonListener implements ActionListener
+	{
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+	        String type = e.getActionCommand().substring(5);
+	        Region region;
+	        int[] i;
+	        ListModel<String> list;
+	        
+	        switch (type) {
+	        case "Continents":
+	            i = geoView.getContinentPanel().list.getSelectedIndices();
+	            list = geoView.getContinentPanel().list.getModel();
+	            for(int index : i) {
+	                region = model.getContinents().get(list.getElementAt(index));
+	                new ViewRegionView(region, model);
+	            }
+	            break;
+	        case "Countries":
+                i = geoView.getCountryPanel().list.getSelectedIndices();
+                list = geoView.getCountryPanel().list.getModel();
+                for(int index : i) {
+                    region = model.getCountries().get(list.getElementAt(index));
+                    new ViewRegionView(region, model);
+                }
+                break;
+	        case "Cities":
+                i = geoView.getCityPanel().list.getSelectedIndices();
+                list = geoView.getCityPanel().list.getModel();
+                for(int index : i) {
+                    region = model.getCities().get(list.getElementAt(index));
+                    new ViewRegionView(region, model);
+                }
+                break;
+	        case "Places of Interest":
+                i = geoView.getPlacePanel().list.getSelectedIndices();
+                list = geoView.getPlacePanel().list.getModel();
+                for(int index : i) {
+                    region = model.getPlaces().get(list.getElementAt(index));
+                    new ViewRegionView(region, model);
+                }
+                break;
+            case "Points of Interest":
+                i = geoView.getPointPanel().list.getSelectedIndices();
+                list = geoView.getPointPanel().list.getModel();
+                for(int index : i) {
+                    region = model.getPoints().get(list.getElementAt(index));
+                    new ViewRegionView(region, model);
+                }
+                break;
+	        }
+	        
+                            
+	    }
+	}
+	
 	private void unsavedDialog()
 	{
 		String[] options = new String[] {"Export", "Save", "Discard"};
@@ -868,6 +924,13 @@ public class GeoController
 		geoView.getPlacePanel().editBtn.addActionListener(editListener);
 		geoView.getPointPanel().editBtn.addActionListener(editListener);
 
+        ActionListener viewListener = new ViewButtonListener();
+        geoView.getContinentPanel().viewBtn.addActionListener(viewListener);
+        geoView.getCountryPanel().viewBtn.addActionListener(viewListener);
+        geoView.getCityPanel().viewBtn.addActionListener(viewListener);
+        geoView.getPlacePanel().viewBtn.addActionListener(viewListener);
+        geoView.getPointPanel().viewBtn.addActionListener(viewListener);
+		
 		/**Action Listeners for the menu items*/
 		
 		geoView.loadGeography.addActionListener(new LoadListener());

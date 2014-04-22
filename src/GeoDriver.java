@@ -58,7 +58,7 @@ public class GeoDriver {
         model.addRegion(point1);
         model.addRegion(point2);
 */
-		
+		/*
         try {
             model.readTextFile("continents.csv", "Continents");
             model.readTextFile("countries.csv", "Countries");
@@ -69,7 +69,7 @@ public class GeoDriver {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
+        */
         
         
 //        System.out.println(model.getContinents());

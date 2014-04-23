@@ -25,6 +25,7 @@ public class GeoView extends JFrame implements ActionListener
     JMenuItem importGeography = new JMenuItem("Import Geography");
     JMenuItem exportGeography = new JMenuItem("Export Geography");
     JMenuItem exit = new JMenuItem("Exit Program");
+   
     /**Graph menu*/
     JMenu graphMenu = new JMenu("Graph");
     

@@ -336,7 +336,7 @@ public class GeoModel {
     		if(cities.get(region).dataQC() == false)
     		{
     			System.out.println("Error in cities");
-//    			return false;
+    			return false;
     		}
     			
     	}
@@ -346,7 +346,7 @@ public class GeoModel {
     		if(places.get(region).dataQC() == false)
     		{
     			System.out.println("Error in places");
-//    			return false;
+    			return false;
     		}
     			
     	}
@@ -356,7 +356,7 @@ public class GeoModel {
     		if(points.get(region).dataQC() == false)
     		{
     			System.out.println("Error in poinst");
-//    			return false;
+    			return false;
     		}
     			
     	}
